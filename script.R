@@ -1,6 +1,7 @@
+rm(list = ls())
+
 library(tidyverse)
 library(rvest)
-library(DescTools)
 
 splitAt <- function(x, pos) {
   out <- list()
@@ -57,7 +58,7 @@ for (year in (2011:2021)) {
   thetext = strsplit(text, split = "\r\n\r\n\n\r\n\r\n\r")[[1]]
   (html_text = trimws(thetext[thetext != "\r"] %>% str_remove_all("\r"), "both"))
   
-  split_text <- str_split(html_text, "\n")
+  (split_text <- str_split(html_text, "\n"))
   for (s in 1:length(split_text)) {
     curr = split_text[[s]]
     (curr = trimws(curr[curr != "" &
@@ -67,11 +68,11 @@ for (year in (2011:2021)) {
     # Add a check if two bills caught
     if (length(which(curr == "History: Click for History")) != 1) {
       # need to split curr, add second to next element in list
-      split_indicies = which(str_detect(curr, "[A-Z]{2}[:space:][A-Z]{1,3}[:space:][0-9]+"))
+      split_indicies = which(str_detect(curr, "^[A-Z]{2}[:space:][A-Z]{1,4}[:space:][0-9]+"))
       if (length(split_indicies) > 1) {
         split <- splitAt(curr, split_indicies)
-        for (s in split) {
-          bill_database <- rbind(bill_database, extract_bill_info(s, year))
+        for (curr_split in split) {
+          bill_database <- rbind(bill_database, extract_bill_info(curr_split, year))
         }
       }
     } else{
@@ -79,3 +80,12 @@ for (year in (2011:2021)) {
     }
   }
 }
+
+save(bill_database, file = "scrape_dataset.RData")
+
+# Extract state
+bill_database$state <- str_sub(bill_database$ID,1,2)
+# Extract bill num
+bill_database$bill_num <- str_remove_all(str_sub(bill_database$ID,4)," ")
+# Extract result
+bill_database$final_status <- str_split_fixed(bill_database$status,"-",2)
