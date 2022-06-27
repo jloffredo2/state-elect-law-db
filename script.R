@@ -21,12 +21,18 @@ extract_bill_info <- function(curr, year) {
   authors = (curr[grepl(pattern = "^Author:", curr)] %>% str_trim %>% str_split("Additional Authors:"))[[1]]
   author = authors[1] %>% gsub("Author:", "", x = .) %>% str_trim
   coauthors = ifelse(length(authors) > 1, (authors[2] %>% str_split(";")), NA)[[1]]
-  coauthors = lapply(coauthors,trimws,"both")
+  coauthors = trimws(coauthors,"both")
   topics = (curr[grepl(pattern = "^Topics:", curr)] %>% gsub("Topics:", "", x = .) %>% str_trim %>% str_split(", "))[[1]]
   summary = curr[grepl(pattern = "^Summary:", curr)] %>% gsub("Summary:", "", x = .) %>% str_trim
   history_index = which(str_detect(curr, "^History:")) + 1
-  history = curr[history_index:length(curr)]
-  introduced_date = history[1] %>% str_sub(1, 10)
+  history = curr[history_index:length(curr)] %>% str_trim
+  # Check intro versus prefile date
+  prefiled_date = ifelse(sum(str_detect(history, "PREFILED")) > 0 ,
+                     history[str_detect(history, "PREFILED") == TRUE] %>% str_sub(1, 10),
+                     NA)
+  introduced_date = ifelse(sum(str_detect(history, "INTRODUCED")) > 0 ,
+                           history[str_detect(history, "INTRODUCED") == TRUE] %>% str_sub(1, 10),
+                           NA)
   last_action_date = history[length(history)] %>% str_sub(1, 10)
   
   return(
@@ -34,13 +40,14 @@ extract_bill_info <- function(curr, year) {
       year = year,
       ID = bill_id,
       status = status,
+      prefiled_date = prefiled_date,
       introduced_date = introduced_date,
       last_action_date = last_action_date,
       author = author,
-      coauthors = I(list(coauthors)),
+      coauthors = toJSON(coauthors),
       summary = summary,
-      topics = I(list(topics)),
-      history = I(list(history))
+      topics = toJSON(topics),
+      history = toJSON(history)
     )
   )
 }
