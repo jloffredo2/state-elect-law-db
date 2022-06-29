@@ -5,6 +5,7 @@ library(rvest)
 library(rjson)
 library(lubridate)
 
+# Function for splitting strings
 splitAt <- function(x, pos) {
   out <- list()
   for (i in seq_along(pos)) {
@@ -17,6 +18,7 @@ splitAt <- function(x, pos) {
   return(out)
 }
 
+# Function for scraping inidividual bill info
 extract_bill_info <- function(curr, year) {
   bill_id = curr[1]
   print(bill_id)
@@ -55,24 +57,29 @@ extract_bill_info <- function(curr, year) {
   )
 }
 
+# Function for setting values for topic binary indicators
 check_topics <- function(json,topic){
   return(ifelse(sum(str_detect(fromJSON(json),topic))>0,1,0))
 }
 
+# Function to count number of Dem coauthors (includes DFL in MN)
 count_dem_coauthors <- function(json){
   return(ifelse(!is.na(json),sum(str_detect(fromJSON(json),"\\(D\\)")) + sum(str_detect(fromJSON(json),"\\(DFL\\)")),NA))
 }
 
+# Function to count number of Rep coauthors
 count_rep_coauthors <- function(json){
   return(ifelse(!is.na(json),sum(str_detect(fromJSON(json),"\\(R\\)")),NA))
 }
 
+# Function to count total number of coauthors
 count_coauthors <- function(json){
   return(ifelse(!is.na(json),length(fromJSON(json)),NA))
 }
 
 bill_database <- data.frame()
 
+# Loop through each year's scraped html
 for (year in (2011:2021)) {
   print(year)
   input <- read_html(sprintf("input/ncsl/%i.html", year))
@@ -92,10 +99,10 @@ for (year in (2011:2021)) {
                           curr != sprintf(" %i", year) &
                           !str_detect(curr, "Associated Bills:") &
                           curr != "Bill Text Lookup" & !(curr %in% state.name)], "both"))
-    # Add a check if two bills caught
+    # Check if two bills caught
     if (length(which(curr == "History: Click for History")) != 1) {
-      # need to split curr, add second to next element in list
       split_indicies = which(str_detect(curr, "^[A-Z]{2}[:space:][A-Z]{1,4}[:space:][0-9]+"))
+      # If we catch multiple bills, split and extract bill info for each
       if (length(split_indicies) > 1) {
         split <- splitAt(curr, split_indicies)
         for (curr_split in split) {
@@ -108,9 +115,6 @@ for (year in (2011:2021)) {
   }
 }
 
-save(bill_database, file = "scrape_dataset.RData")
-
-load("scrape_dataset.RData")
 # Extract state
 bill_database$STATE <- str_sub(bill_database$ID,1,2)
 # Extract bill num
@@ -221,7 +225,9 @@ bill_database$VOTMQU = sapply(bill_database$TOPICS, check_topics, "Voters-Miscel
 bill_database$TECHSS = sapply(bill_database$TOPICS, check_topics, "Voting Equipment/Technology-Selection & Standards")
 bill_database$VSSCST = sapply(bill_database$TOPICS, check_topics, "Voting System Testing/Security/Storage")
 
+# Get columns for bill topics - helps sort these cols alphabetically 
 topic_cols = sort(colnames(bill_database)[21:109])
+# Produce final output
 state_elect_law_db <- bill_database %>%
   select(YEAR
          ,STATE
@@ -236,7 +242,7 @@ state_elect_law_db <- bill_database %>%
          ,NCOAUTHORS
          ,NDEMCOAUTHORS
          ,NREPCOAUTHORS
-         ,topic_cols
+         ,all_of(topic_cols)
          ,COAUTHORS
          ,HISTORY) %>%
   mutate(STATE = as.factor(STATE)
@@ -248,3 +254,4 @@ state_elect_law_db <- bill_database %>%
 
 write.csv(state_elect_law_db, file = "state_elect_law_db.csv",row.names = FALSE)
 save(state_elect_law_db, file = "state_elect_law_db.Rdata")
+
