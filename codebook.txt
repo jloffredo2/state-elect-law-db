@@ -28,6 +28,8 @@ NDEMCOAUTHORS 	Number of Democratic coauthors
 NREPCOAUTHORS 	Number of Republican coauthors
 
 * TOPICS *
+These categories are defined and assigned by NCSL. Each topic indictator takes the value 1 if NCSL has tagged the bill to a given topic, 0 otherwise.
+
 AUDITS 	"Audits-Post Election"
 AVAPPL 	"Absentee Voting-Application for"
 AVBDIS 	"Absentee Voting-Distributing Ballots"
@@ -119,6 +121,6 @@ VSSCST 	"Voting System Testing/Security/Storage"
 VTRCHA 	"Challenges to Voters"
 
 * MISC DATA *
-***** If using R, using rjson::fromJSON() to transform these values into an R vector *****
+***** If using R, use rjson::fromJSON() to transform these values into an R vector *****
 COAUTHORS 	JSON string listing all coauthors
 HISTORY 	JSON string of bill's history log
