@@ -48,7 +48,7 @@ If you are using this dataset, please cite it and provide NCSL with proper citat
 * `NDEMCOAUTHORS` Number of Democratic coauthors 
 * `NREPCOAUTHORS` Number of Republican coauthors
 
-###TOPICS
+### TOPICS
 *These categories are defined and assigned by NCSL. Each topic indictator takes the value 1 if NCSL has tagged the bill to a given topic, 0 otherwise.*
 * `AUDITS` 	Audits-Post Election
 * `AVAPPL` 	Absentee Voting-Application for
