@@ -6,7 +6,7 @@
 **Date**: 06/29/2022
 
 ## DESCRIPTION
-This dataset is the product of scraping the *National Council of State Legislature*'s "State Elections Legislation Database". The code for producing this dataset can be found in this GitHub repo: https://github.com/jloffredo2/state-elect-law-db. See `script.R`.
+This dataset is the product of scraping the *National Conference of State Legislature*'s "State Elections Legislation Database". The code for producing this dataset can be found in this GitHub repo: https://github.com/jloffredo2/state-elect-law-db. See `script.R`.
 
 If you are using this dataset, please cite it and provide NCSL with proper citation as follows:
 
