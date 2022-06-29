@@ -12,6 +12,10 @@ If you are using this dataset, please cite it and provide NCSL with proper citat
 
 > National Conference of State Legislatures. 2022. *State Elections Legislation Database*. www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx (June 7, 2022).
 
+*If you wish to use the NCSL State Elections Legislation Database, the following two files are avaiable for use:*
+* `state_elect_law_db.csv`
+* `state_elect_law_db.Rdata`
+
 ## COLUMN MAPPINGS
 ### IDENTIFICATION
 * `YEAR` Year NCSL has tagged bill
