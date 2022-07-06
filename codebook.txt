@@ -1,7 +1,7 @@
 NCSL STATE ELECTIONS LEGISLATION DATABASE (2011-2021)
 Author: Joseph Loffredo
 Institution: MIT
-Date: 06/29/2022
+Date: 07/06/2022
 
 *** DESCRIPTION ***
 This dataset is the product of scraping the National Conference of State Legislature's State Election Legislation Database.
