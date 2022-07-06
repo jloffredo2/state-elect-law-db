@@ -5,6 +5,9 @@ library(rvest)
 library(rjson)
 library(lubridate)
 
+# load scraper fxn
+source("scrape_ncsl.R")
+
 # Function for splitting strings
 splitAt <- function(x, pos) {
   out <- list()
@@ -80,13 +83,9 @@ count_coauthors <- function(json){
 bill_database <- data.frame()
 
 # Loop through each year's scraped html
-for (year in (2011:2021)) {
+for (year in (2011:year(Sys.Date()))) {
   print(year)
-  input <- read_html(sprintf("input/ncsl/%i.html", year))
-  
-  text <- input %>%
-    html_elements("#dnn_ctr71252_StateNetDB_linkList") %>%
-    html_text2()
+  text <- scrape_ncsl(year)
   
   (text = gsub(pattern = "[ ]+", replacement = " ", text))
   thetext = strsplit(text, split = "\r\n\r\n\n\r\n\r\n\r")[[1]]
