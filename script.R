@@ -255,3 +255,11 @@ state_elect_law_db <- bill_database %>%
 write.csv(state_elect_law_db, file = "state_elect_law_db.csv",row.names = FALSE)
 save(state_elect_law_db, file = "state_elect_law_db.Rdata")
 
+# Edit codebook and readme
+codebook = readLines("codebook.txt")
+codebook[4] = sprintf("Date: %s",today())
+writeLines(codebook, "codebook.txt")
+
+readme = readLines("README.md")
+readme[6] = sprintf("**Date**: %s", today())
+writeLines(readme, "README.md")

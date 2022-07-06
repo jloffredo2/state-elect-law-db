@@ -3,7 +3,7 @@
 
 **Institution**: MIT
 
-**Date**: 07/06/2022
+**Date**: 2022-07-06
 
 ## DESCRIPTION
 This dataset is the product of scraping the *National Conference of State Legislature*'s "State Elections Legislation Database". The code for producing this dataset can be found in this GitHub repo: https://github.com/jloffredo2/state-elect-law-db. See `script.R`.
