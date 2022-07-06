@@ -250,8 +250,7 @@ state_elect_law_db <- bill_database %>%
          ,AUTHORPARTY = as.factor(AUTHORPARTY)
          ,PREFILEDDATE = mdy(PREFILEDDATE)
          ,INTRODUCEDDATE = mdy(INTRODUCEDDATE)
-         ,LASTACTIONDATE = mdy(LASTACTIONDATE)) %>%
-  filter(!(STATE %in% c("H","HR","S")))
+         ,LASTACTIONDATE = mdy(LASTACTIONDATE))
 
 write.csv(state_elect_law_db, file = "state_elect_law_db.csv",row.names = FALSE)
 save(state_elect_law_db, file = "state_elect_law_db.Rdata")
