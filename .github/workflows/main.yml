@@ -17,6 +17,7 @@ jobs:
         run: |
           install.packages('remotes')
           install.packages("renv")
+          system("sudo apt-get install libcurl4-openssl-dev")
         shell: Rscript {0}
         
       - uses: actions/cache@v2 # Cache packages so won't be compiled everytime job is run
