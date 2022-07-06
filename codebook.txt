@@ -1,4 +1,4 @@
-NCSL STATE ELECTIONS LEGISLATION DATABASE (2011-2021)
+NCSL STATE ELECTIONS LEGISLATION DATABASE (2011-2022)
 Author: Joseph Loffredo
 Institution: MIT
 Date: 2022-07-06
@@ -7,7 +7,7 @@ Date: 2022-07-06
 This dataset is the product of scraping the National Conference of State Legislature's State Election Legislation Database.
 The code for producing this dataset can be found in this GitHub repo: https://github.com/jloffredo2/state-elect-law-db. See `script.r`.
 If you are using this dataset, please cite it and provide NCSL with proper citation as follows:
-  National Conference of State Legislatures, State Elections Legislation Database, www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx.
+  National Conference of State Legislatures. 2022. *State Elections Legislation Database*. www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx (June 7, 2022)
 
 *** COLUMN MAPPINGS ***
 * IDENTIFICATION *

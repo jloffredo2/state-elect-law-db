@@ -258,8 +258,10 @@ save(state_elect_law_db, file = "state_elect_law_db.Rdata")
 # Edit codebook and readme
 codebook = readLines("codebook.txt")
 codebook[4] = sprintf("Date: %s",today())
+codebook[10] = sprintf("  National Conference of State Legislatures. 2022. *State Elections Legislation Database*. www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx (%s)",(stamp("March 1, 1999")(today())))
 writeLines(codebook, "codebook.txt")
 
 readme = readLines("README.md")
 readme[6] = sprintf("**Date**: %s", today())
+readme[13] = sprintf("> National Conference of State Legislatures. 2022. *State Elections Legislation Database*. www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx (%s).",(stamp("March 1, 1999")(today())))
 writeLines(readme, "README.md")
