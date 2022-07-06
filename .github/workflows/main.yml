@@ -1,5 +1,5 @@
 name: Update-data
-on: workflow_call
+on: workflow_dispatch
 #on:
 #  schedule:
 #    - cron: "0 9 * * 6" # Every Saturday at 9 am
