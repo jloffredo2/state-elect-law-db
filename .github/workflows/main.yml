@@ -1,8 +1,7 @@
 name: Update-data
-on: workflow_dispatch
-#on:
-#  schedule:
-#    - cron: "0 9 * * 6" # Every Saturday at 9 am
+on:
+  schedule:
+    - cron: "0 22 * * 2" # Every Tuesday at 10pm
 
 jobs:
   generate-data:
