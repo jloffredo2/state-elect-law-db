@@ -1,3 +1,63 @@
+## FUNCTIONS FOR SCRAPING NCSL
+
+# Function for setting values for topic binary indicators
+ncsl_check_topics <- function(json,topic){
+  return(ifelse(sum(str_detect(fromJSON(json),topic))>0,1,0))
+}
+
+# Function to count number of Dem coauthors (includes DFL in MN)
+ncsl_count_dem_coauthors <- function(json){
+  return(ifelse(!is.na(json),sum(str_detect(fromJSON(json),"\\(D\\)")) + sum(str_detect(fromJSON(json),"\\(DFL\\)")),NA))
+}
+
+# Function to count number of Rep coauthors
+ncsl_count_rep_coauthors <- function(json){
+  return(ifelse(!is.na(json),sum(str_detect(fromJSON(json),"\\(R\\)")),NA))
+}
+
+# Function to count total number of coauthors
+ncsl_count_coauthors <- function(json){
+  return(ifelse(!is.na(json),length(fromJSON(json)),NA))
+}
+
+ncsl_extract_bill_info <- function(curr, year) {
+  bill_id = curr[1]
+  print(bill_id)
+  status = curr[grepl(pattern = "^Status:", curr)] %>% gsub("Status:", "", x = .) %>% str_trim
+  authors = (curr[grepl(pattern = "^Author:", curr)] %>% str_trim %>% str_split("Additional Authors:"))[[1]]
+  author = authors[1] %>% gsub("Author:", "", x = .) %>% str_trim
+  coauthors = ifelse(length(authors) > 1, (authors[2] %>% str_split(";")), NA)[[1]]
+  coauthors = trimws(coauthors,"both")
+  topics = (curr[grepl(pattern = "^Topics:", curr)] %>% gsub("Topics:", "", x = .) %>% str_trim %>% str_split(", "))[[1]]
+  summary = curr[grepl(pattern = "^Summary:", curr)] %>% gsub("Summary:", "", x = .) %>% str_trim
+  history_index = which(str_detect(curr, "^History:")) + 1
+  history = curr[history_index:length(curr)] %>% str_trim
+  # Check intro versus prefile date
+  prefiled_date = ifelse(sum(str_detect(history, "PREFILED")) > 0 ,
+                         history[str_detect(history, "PREFILED") == TRUE] %>% str_sub(1, 10),
+                         NA)
+  introduced_date = ifelse(sum(str_detect(history, "INTRODUCED")) > 0 ,
+                           history[str_detect(history, "INTRODUCED") == TRUE] %>% str_sub(1, 10),
+                           NA)
+  last_action_date = ifelse(str_detect(history[length(history)],".*[0-9].*"),history[length(history)] %>% str_sub(1, 10),history[length(history)-1] %>% str_sub(1, 10))
+  
+  return(
+    data.frame(
+      YEAR = year,
+      ID = bill_id,
+      STATUS = status,
+      PREFILEDDATE = prefiled_date,
+      INTRODUCEDDATE = introduced_date,
+      LASTACTIONDATE = last_action_date,
+      AUTHOR = author,
+      COAUTHORS = toJSON(coauthors),
+      SUMMARY = summary,
+      TOPICS = toJSON(topics),
+      HISTORY = toJSON(history)
+    )
+  )
+}
+
 scrape_ncsl <- function(year){
   print("scraping webform")
   URL <- "https://www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx"
