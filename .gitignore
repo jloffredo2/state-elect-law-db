@@ -52,3 +52,4 @@ rsconnect/
 .idea*
 
 /*.DS_Store
+*.sublime-workspace
