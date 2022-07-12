@@ -167,6 +167,7 @@ scrape_vrl <- function(year){
       ,AVEVIP = case_when(
         str_detect(`Tags.21AbsenteeVtg`, "InPrsnWthExcsCrtExpn") ~ 1
         ,str_detect(`Tags.21AbsenteeVtg`, "InPrsnWthExcsElmRstr") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"ApplcblApplsErlyVtng") ~ 1
       )
       ,AVMISC = case_when(
         str_detect(`Tags.21AbsenteeVtg`, "Other") ~ 1
@@ -310,14 +311,34 @@ scrape_vrl <- function(year){
       ,POLWAT = case_when(
         str_detect(`Tags.21ElctnCrms`, "ApplcblPollWtchrs") ~ 1
         ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PPnlzOvsghtPollWtchrs") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"PllWtchrNmbrAuthObsr") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"PllWtchrObsrvtnPrcss") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"PllWtchrObsrvrQlfctn") ~ 1
       )
       ,PRIMIS = case_when(
         str_detect(`Tags.21VtrRgstrn`,"PrmryVtngMinorChng") ~ 1
         ,str_detect(`Tags.21VtrRgstrn`,"PrmryVtngMinorCrts") ~ 1
         ,str_detect(`Tags.21VtrRgstrn`,"PrmryVtngMinorElmnts") ~ 1
       )
+      ,PROVOT = case_when(
+        str_detect(`Tags.21InPrsnVtng`,"PrvsnlVtngGrnds") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"PrvsnlVtngBlltVrfctn") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"PrvsnlVtngPrcss") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"PrvsnlVtngNtfctRsltn") ~ 1
+      )
+      ,PWCOMP = case_when(
+        str_detect(`Tags.21InPrsnVtng`,"PllWrkrCmpstnChngUI") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"PllWrkCmpstnDcrss") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"PllWrkCmpstnIncrss") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"PllWrkCmpstnChgBnft") ~ 1
+      )
       ,PWMISC = case_when(
         str_detect(`Tags.21IntrfrncElctnAdmin`,"RskVoterWrkrIntmdtn") ~ 1
+      )
+      ,PWQUAL = case_when(
+        str_detect(`Tags.21InPrsnVtng`,"PllWrkQlfctnCrtStrng") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"PllWrkQlfctnElmntRlx") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"PllWrkRcrtmtStratgs") ~ 1
       )
       ,REGAGY = case_when(
         str_detect(`Tags.21VtrRgstrn`,"RegAgncyAddAgncy") ~ 1
@@ -410,6 +431,9 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "AcsblPhysDisablty") ~ 1
         ,str_detect(`Tags.21VtrRgstrn`, "AcsblLanguage") ~ 1
         ,str_detect(`Tags.21VtrRgstrn`, "AcsblPhysDisablty") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`, "AcsblLanguage") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`, "AcsblPhysDisablty") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"AcsblThdPtyAsstnce") ~ 1
       )
       ,VOTFVR = case_when(
         str_detect(`Tags.21AbsenteeVtg`, "IncarceratedVoting") ~ 1
@@ -430,6 +454,26 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21SDR`, "PrfIDCrtExpndRqPht") ~ 1
         ,str_detect(`Tags.21SDR`, "PrfIDElmntRlxRqrmnts") ~ 1
         ,str_detect(`Tags.21SDR`, "PrfIDNewSDRNotRqrd") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"VtrRqrmntIDCrtExpnd") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"VtrRqrmntIDElmntRlx") ~ 1
+        ,str_detect(`Tags.21VoterID`,"AltsCrtsExpnds") ~ 1
+        ,str_detect(`Tags.21VoterID`,"AltsElmntsRstrcts") ~ 1
+        ,str_detect(`Tags.21VoterID`,"AltsPrvBlltChngPrcss") ~ 1
+        ,str_detect(`Tags.21VoterID`,"ApplcbltyAbsntVtng") ~ 1
+        ,str_detect(`Tags.21VoterID`,"ApplcbltyErlyVtng") ~ 1
+        ,str_detect(`Tags.21VoterID`,"ApplcbltyElctnDyVtng") ~ 1
+        ,str_detect(`Tags.21VoterID`,"BOPhotoIDNotRqrd") ~ 1
+        ,str_detect(`Tags.21VoterID`,"BOPhotoIDRqrd") ~ 1
+        ,str_detect(`Tags.21VoterID`,"IDRqrmntCrts") ~ 1
+        ,str_detect(`Tags.21VoterID`,"FreeIDCrtsExpnds") ~ 1
+        ,str_detect(`Tags.21VoterID`,"FreeIDElmntRstrct") ~ 1
+        ,str_detect(`Tags.21VoterID`,"Other") ~ 1
+        ,str_detect(`Tags.21VoterID`,"IDRqrmntRpls") ~ 1
+        ,str_detect(`Tags.21VoterID`,"TypeAccptdAdds") ~ 1
+        ,str_detect(`Tags.21VoterID`,"TypeAccptdElmnts") ~ 1
+        ,str_detect(`Tags.21VoterID`,"ApplcbltyVBMElctns") ~ 1
+        ,str_detect(`Tags.21VoterID`,"IDNmbrRqrmntCrts") ~ 1
+        ,str_detect(`Tags.21VoterID`,"IDNmbrRqrmntCrts") ~ 1
       )
       ,VTDROP = case_when(
         str_detect(`Tags.21BlltRtrnVfctnCure`,'BlltRtrnDOLAvlExpnd') ~ 1
@@ -444,6 +488,8 @@ scrape_vrl <- function(year){
       ,VTRCHA = case_when(
         str_detect(`Tags.21BlltRtrnVfctnCure`,'VrfCntBlltChllgPrcss') ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`,'VrfCntBlltChllgGrnds') ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"ChllngChllngPrcss") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`,"ChllngGrnds") ~ 1
       )
     )
   
