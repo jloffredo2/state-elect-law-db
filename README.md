@@ -3,14 +3,14 @@
 
 **Institution**: MIT
 
-**Date**: 2022-07-06
+**Date**: 2022-07-12
 
 ## DESCRIPTION
 This dataset is the product of scraping the *National Conference of State Legislature*'s "State Elections Legislation Database". The code for producing this dataset can be found in this GitHub repo: https://github.com/jloffredo2/state-elect-law-db. See `script.R`.
 
 If you are using this dataset, please cite it and provide NCSL with proper citation as follows:
 
-> National Conference of State Legislatures. 2022. *State Elections Legislation Database*. www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx (July 06, 2022).
+> National Conference of State Legislatures. 2022. *State Elections Legislation Database*. www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx (July 12, 2022).
 
 *If you wish to use the NCSL State Elections Legislation Database, the following two files are avaiable for use:*
 * `state_elect_law_db.csv`
