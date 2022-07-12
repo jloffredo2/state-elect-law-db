@@ -174,6 +174,29 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21AbsenteeVtg`, "VtInPrsAftrBltCrtExp") ~ 1
         ,str_detect(`Tags.21AbsenteeVtg`, "VtInPrsAftrBltElmRst") ~ 1
       )
+      ,AVPERM = case_when(
+        str_detect(`Tags.21PAVL`,"AppAddRgstrnApp") ~ 1
+        ,str_detect(`Tags.21PAVL`,"AppDdlnErlr") ~ 1
+        ,str_detect(`Tags.21PAVL`,"AppDdlnLtr") ~ 1
+        ,str_detect(`Tags.21PAVL`,"AppOnlnCrtOnlnPrtl") ~ 1
+        ,str_detect(`Tags.21PAVL`,"AppOnlnCrtPrntOnln") ~ 1
+        ,str_detect(`Tags.21PAVL`,"AppOnlnCrtPrntHrdCp") ~ 1
+        ,str_detect(`Tags.21PAVL`,"AppOtherChng") ~ 1
+        ,str_detect(`Tags.21PAVL`,"AvlbltyBOAllVoters") ~ 1
+        ,str_detect(`Tags.21PAVL`,"AvlbltyBOCrtnVoters") ~ 1
+        ,str_detect(`Tags.21PAVL`,"AvlbltyCreates") ~ 1
+        ,str_detect(`Tags.21PAVL`,"AvlbltyEliminates") ~ 1
+        ,str_detect(`Tags.21PAVL`,"AvlbltyExpands") ~ 1
+        ,str_detect(`Tags.21PAVL`,"AvlbltyRestricts") ~ 1
+        ,str_detect(`Tags.21PAVL`,"Other") ~ 1
+        ,str_detect(`Tags.21PAVL`,"PrmntLstAppBOAllVtr") ~ 1
+        ,str_detect(`Tags.21PAVL`,"PrmntLstAppBOCrtnVt") ~ 1
+        ,str_detect(`Tags.21PAVL`,"PrmntLstAppCrtExpnd") ~ 1
+        ,str_detect(`Tags.21PAVL`,"PrmntLstAppElmtRstr") ~ 1
+        ,str_detect(`Tags.21PAVL`,"RmvlFrmLstMksEsr") ~ 1
+        ,str_detect(`Tags.21PAVL`,"RmvlFrmLstMksHrdr") ~ 1
+        ,str_detect(`Tags.21PAVL`,"AvlbltyProhibits") ~ 1
+      )
       ,BACURE = case_when(
         str_detect(`Tags.21BlltRtrnVfctnCure`, "NtcCrChngExstPrcss") ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "NtcCrCrtsNewPrcss") ~ 1
@@ -188,16 +211,94 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "NtcCrNtfctnRcvsErlr") ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "NtcCrNtfctnRcvsLtr") ~ 1
       )
-      ,CRIMES = ifelse(str_length(`Tags.21ElctnCrms`) > 0, 1, 0)
+      ,CRIMES = case_when(
+        str_length(`Tags.21ElctnCrms`) > 0 ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"IssueRprtInvstgEnfrc") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"InvstPrsctPrprtdCrms") ~ 1
+      )
       ,DATART = case_when(
         str_detect(`Tags.21AbsenteeVtg`, "BlltTrckngCrtsExpnds") ~ 1
         ,str_detect(`Tags.21AbsenteeVtg`, "BlltTrckngElmntRstrt") ~ 1
+      )
+      ,ELAUTH = case_when(
+        str_detect(`Tags.21ShftInElctnAthrty`,"IssueRprtInvstgEnfrc") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrGainAttrnyGeneral") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrGainLegislature") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrLossJudiciary") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"IssueLtgtnAuthrOvrst") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"IssueEmrgncyAuthrty") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrLossChfElctnOffcl") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrGainStateBoard") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrGainChfElctnOffcl") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrLossGovernor") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrLossOthrOffcl") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"OffclSlctAuthrtyPrcs") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"OffclSlctAppntToElct") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrLossAttrnyGeneral") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"OffclSlctAppntToElct") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrGainGovernor") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrLossStateBoard") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrGainJudiciary") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrLossLegislature") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrGainOthrOffcl") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"OffclSlctElctToAppnt") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"IssueOthrChgElctAdmn") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrGainPoltclPrties") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrGainIndvdlsVtrs") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrLossPolltclPrties") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrLossIndvdlsVtrs") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PowerGrabLegislature") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"StiflingEmrgncyPwrs") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"IntrfrncMgmtLitigatn") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"ElxnRvwLedByNonExprt") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"ElxnRvwLckClrtyPrcss") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PnlzOffclLawfulPrctc") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"BfrctnSttFdrlElx") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PrtsnAptmntElxnOffcl") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"UnjstfdBrdnsOnOffcls") ~ 1
+      )
+      ,EMEDIS = case_when(
+        str_detect(`Tags.21AbsenteeVtg`,"EmrgVtngFacilitates") ~ 1
+        ,str_detect(`Tags.21AbsenteeVtg`,"EmrgVtngRestricts") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"IssueEmrgncyAuthrty") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"StiflingEmrgncyPwrs") ~ 1
       )
       ,EOLOCA = case_when(
         str_detect(`Tags.21ElctnCrms`, "ApplcblElctnOffcl") ~ 1
         ,str_detect(`Tags.21ElctnCrms`, "OtcmElxOffclIncrsCrm") ~ 1
         ,str_detect(`Tags.21ElctnCrms`, "OtcmElxOffclDcrsCrm") ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "VrfCntSgntrTraining") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrGainLocalOffcls") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"IssueOvrstLoclOffcls") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"OffclSlctAuthrtyPrcs") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"OffclSlctAppntToElct") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"OffclSlctElctToAppnt") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"IntrfrncLocalAmdmins") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PnlzJobPrfrmnc") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PnlzOffclLawfulPrctc") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"RskVoterWrkrIntmdtn") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PnlzListMntncInfrctn") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PrtsnAptmntElxnOffcl") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"UnjstfdBrdnsOnOffcls") ~ 1
+      )
+      ,EOSTWD = case_when(
+        str_detect(`Tags.21ShftInElctnAthrty`,"PwrLossChfElctnOffcl") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrGainStateBoard") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrGainChfElctnOffcl") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrLossOthrOffcl") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"OffclSlctAppntToElct") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"PwrLossStateBoard") ~ 1
+        ,str_detect(`Tags.21ShftInElctnAthrty`,"OffclSlctElctToAppnt") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"UsurpngSttElxnAdmin") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PnlzJobPrfrmnc") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"StiflingEmrgncyPwrs") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"IntrfrncMgmtLitigatn") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"ElxnRvwLedByNonExprt") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"ElxnRvwLckClrtyPrcss") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PnlzOffclLawfulPrctc") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"BfrctnSttFdrlElx") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PrtsnAptmntElxnOffcl") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"UnjstfdBrdnsOnOffcls") ~ 1
       )
       ,INVOTE = case_when(
         str_detect(`Tags.21BlltRtrnVfctnCure`, "OnlnVtngAvlblAllVtrs") ~ 1
@@ -206,8 +307,89 @@ scrape_vrl <- function(year){
       ,MAILVO = case_when(
         str_detect(`Tags.21BlltRtrnVfctnCure`, "ApplcbltyVBMElctn") ~ 1
       )
-      ,POLWAT = case_when(str_detect(`Tags.21ElctnCrms`, "ApplcblPollWtchrs") ~ 1)
+      ,POLWAT = case_when(
+        str_detect(`Tags.21ElctnCrms`, "ApplcblPollWtchrs") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PPnlzOvsghtPollWtchrs") ~ 1
+      )
+      ,PRIMIS = case_when(
+        str_detect(`Tags.21VtrRgstrn`,"PrmryVtngMinorChng") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"PrmryVtngMinorCrts") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"PrmryVtngMinorElmnts") ~ 1
+      )
+      ,PWMISC = case_when(
+        str_detect(`Tags.21IntrfrncElctnAdmin`,"RskVoterWrkrIntmdtn") ~ 1
+      )
+      ,REGAGY = case_when(
+        str_detect(`Tags.21VtrRgstrn`,"RegAgncyAddAgncy") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"RegAgncyChngPrcssDMV") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"RegAgncyChngPrcsOthr") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"RegAgncyRmvsAgncy") ~ 1
+      )
+      ,REGAPP = case_when(
+        str_detect(`Tags.21VtrRgstrn`,"FrmCntntDsgn") ~ 1
+      )
       ,REGATO = ifelse(str_length(Tags.21AVR) > 0, 1, 0)
+      ,REGDRV = case_when(
+        str_detect(`Tags.21VtrRgstrn`,"RegDrvAsstncAuthrzs") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"RegDrvAsstncChngRq") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"RegDrvAsstncPrhbt") ~ 1
+      )
+      ,REGDTE = case_when(
+        str_detect(`Tags.21VtrRgstrn`,"DdlnNewRgstrnErlr") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"DdlnNewRgstrnLtr") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"DdlnUpdtPltcAfflErlr") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"DdlnUpdtPltcAfflLtr") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"DdlnUpdtRgstrnErlr") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"DdlnUpdtRgstrnLtr") ~ 1
+      ),
+      REGEDY = case_when(
+        str_detect(`Tags.21SDR`,"AvlEVCrtsExpnds") ~ 1
+        ,str_detect(`Tags.21SDR`,"AvlEVElmntRstrct") ~ 1
+        ,str_detect(`Tags.21SDR`,"AvlElctDyCrtExpnd") ~ 1
+        ,str_detect(`Tags.21SDR`,"AvlElctDyElmntRstrct") ~ 1
+        ,str_detect(`Tags.21SDR`,"LngthRsdncRqCrtLngth") ~ 1
+        ,str_detect(`Tags.21SDR`,"LngthRsdncRqElmShrtn") ~ 1
+        ,str_detect(`Tags.21SDR`,"LctnChngDrngEV") ~ 1
+        ,str_detect(`Tags.21SDR`,"LctnChngElctnDy") ~ 1
+        ,str_detect(`Tags.21SDR`,"Other") ~ 1
+        ,str_detect(`Tags.21SDR`,"PrfIDCrtExpndRqNnPht") ~ 1
+        ,str_detect(`Tags.21SDR`,"PrfIDCrtExpndRqPht") ~ 1
+        ,str_detect(`Tags.21SDR`,"PrfIDElmntRlxRqrmnts") ~ 1
+        ,str_detect(`Tags.21SDR`,"PrfIDNewSDRNotRqrd") ~ 1
+        ,str_detect(`Tags.21SDR`,"PrfRsdncCrtExpndRqr") ~ 1
+        ,str_detect(`Tags.21SDR`,"PrfRsdncElmntRlxRqr") ~ 1
+        ,str_detect(`Tags.21SDR`,"PrfRsdncNewSDRNotRqr") ~ 1
+        ,str_detect(`Tags.21SDR`,"VrfctnAllwCstRegBllt") ~ 1
+        ,str_detect(`Tags.21SDR`,"VrfctnChngPrcss") ~ 1
+        ,str_detect(`Tags.21SDR`,"VrfctnRqrCstPrvBllt") ~ 1
+      )
+      ,REGELE = case_when(
+        str_detect(`Tags.21VtrRgstrn`,"OVRAllwUpdtOnlyChng") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"OVRAllwUpdtOnlyNew") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"OVRBODMVRcrdNotRqrd") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"OVRBODMVRcrdRqrd") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"OVRChngExstngSystm") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"OVRCrtsNewSystm") ~ 1
+      )
+      ,REGLST = case_when(
+        str_detect(`Tags.21ShftInElctnAthrty`,"IssueVoterListMntnc") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PnlzListMntncInfrctn") ~ 1
+      )
+      ,REGMSC = case_when(
+        str_detect(`Tags.21VtrRgstrn`,"AddrssCnfdntltyPrgms") ~ 1
+      )
+      ,REGPRE = case_when(
+        str_detect(`Tags.21VtrRgstrn`,"PreRgstrMinorChng") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"PreRgstrMinorCrt") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"PreRgstrMinorElmn") ~ 1
+      )
+      ,REPRES = case_when(
+        str_detect(`Tags.21ShftInElctnAthrty`,"IssueElctnRslts") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"IntrfrncCrtfctnRslts") ~ 1
+      )
+      ,REGSDL = case_when(
+        str_detect(`Tags.21VtrRgstrn`,"RulesSaleDstrbVtrLst") ~ 1
+      )
       ,VCOUNT = case_when(
         str_detect(`Tags.21BlltRtrnVfctnCure`, "VrfCntGrndsRjctnChng") ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "VrfCntGrndsRjctnCrt") ~ 1
@@ -217,6 +399,7 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "VrfCntObsrvrQlfctn") ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "VrfCntTmlnCntngLssTm") ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "VrfCntTmlnCntngMrTm") ~ 1
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PrhbtUseTabulators") ~ 1
       )
       ,VOTAST = case_when(
         str_detect(`Tags.21ElctnCrms`, "ApplcblThrdPrty") ~ 1
@@ -225,10 +408,17 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "Acsbl3dPtyAsstBltCmp") ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "AcsblLanguage") ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "AcsblPhysDisablty") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`, "AcsblLanguage") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`, "AcsblPhysDisablty") ~ 1
       )
       ,VOTFVR = case_when(
         str_detect(`Tags.21AbsenteeVtg`, "IncarceratedVoting") ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "IncarceratedVoting") ~ 1
+      )
+      ,VOTMQU = case_when(
+        str_detect(`Tags.21VtrRgstrn`,"VtrRqrInfoRqrmnts") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"VtrRqrRsdncyRqrmnts") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`,"VtrRqrDcmntnRqrmnts") ~ 1
       )
       ,VOTRID = case_when(
         str_detect(`Tags.21AbsenteeVtg`, "AppRqIDCrtExpnd") ~ 1
@@ -236,6 +426,10 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "BlltRtrnInPrsnIDRqrs") ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "VtrReqIDCrtExpnd") ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "VtrReqIDElmntRlx") ~ 1
+        ,str_detect(`Tags.21SDR`, "PrfIDCrtExpndRqNnPht") ~ 1
+        ,str_detect(`Tags.21SDR`, "PrfIDCrtExpndRqPht") ~ 1
+        ,str_detect(`Tags.21SDR`, "PrfIDElmntRlxRqrmnts") ~ 1
+        ,str_detect(`Tags.21SDR`, "PrfIDNewSDRNotRqrd") ~ 1
       )
       ,VTDROP = case_when(
         str_detect(`Tags.21BlltRtrnVfctnCure`,'BlltRtrnDOLAvlExpnd') ~ 1
