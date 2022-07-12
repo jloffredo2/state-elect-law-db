@@ -31,7 +31,7 @@ jobs:
         shell: Rscript {0}
   
       - name: Generate data # Run the script
-        run: source("script.R")
+        run: source("code/script.R")
         shell: Rscript {0}
       
       - name: Commit files # Commit changes
