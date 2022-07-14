@@ -1,0 +1,825 @@
+"id","name","label","group","group_id","group_label","trashed"
+127,"Anti-voter","Restricts Voter Access / Election Administration","-Impact",1,"Bill Impact",FALSE
+130,"Neutral","Neutral","-Impact",1,"Bill Impact",FALSE
+131,"Pro-voter","Improves Voter Access / Election Administration","-Impact",1,"Bill Impact",FALSE
+648,"Mixed_Unclear","Mixed or Unclear","-Impact",1,"Bill Impact",FALSE
+936,"Mixed_Pro-voter","","-Impact",1,"Bill Impact",TRUE
+959,"Mixed_Anti-voter","mm","-Impact",1,"Bill Impact",TRUE
+1025,"zMixed_Anti-voter","zMixed_Anti-voter","-Impact",1,"Bill Impact",TRUE
+406,"Enacted","Enacted","-Stage",2,"Stage",FALSE
+407,"Failed","Failed","-Stage",2,"Stage",FALSE
+408,"Introduced","Introduced","-Stage",2,"Stage",FALSE
+409,"Pssd1stChmbr","Passed 1st Chamber","-Stage",2,"Stage",FALSE
+410,"Pssd1stChmbrCmmtt","Passed 1st Chamber Committee","-Stage",2,"Stage",TRUE
+411,"Pssd2ndChmbr","Passed 2nd Chamber","-Stage",2,"Stage",FALSE
+412,"Pssd2ndChmbrCmmtt","Passed 2nd Chamber Committee","-Stage",2,"Stage",FALSE
+604,"Prefiled","Prefiled","-Stage",2,"Stage",FALSE
+814,"Vetoed","Vetoed","-Stage",2,"Stage",FALSE
+1,"AppContentOrFormat","Absentee > Application > Content or Format","21AbsenteeVtg",3,"Absentee Voting",FALSE
+2,"AppDdlnErlr","Absentee > Application > Deadline > Earlier","21AbsenteeVtg",3,"Absentee Voting",FALSE
+3,"AppDdlnLtr","Absentee > Application > Deadline > Later","21AbsenteeVtg",3,"Absentee Voting",FALSE
+4,"AppRqIDCrtExpnd","Absentee > Application > Requirements - ID or ID Number > Creates or Expands","21AbsenteeVtg",3,"Absentee Voting",FALSE
+5,"AppRqIDElmntRlx","Absentee > Application > Requirements - ID or ID Number > Eliminates or Relaxes","21AbsenteeVtg",3,"Absentee Voting",FALSE
+6,"AppMailedAutoProhbts","Absentee > Application > Mailed Automatically > Prohibits Auto Mailing","21AbsenteeVtg",3,"Absentee Voting",FALSE
+7,"AppMailedAutoAllVtr","Absentee > Application > Mailed Automatically > To All Voters","21AbsenteeVtg",3,"Absentee Voting",FALSE
+8,"AppMailedAutoCrtnVtr","Absentee > Application > Mailed Automatically > To Certain Voters","21AbsenteeVtg",3,"Absentee Voting",FALSE
+9,"AppRqNtryWtnsCrtExp","Absentee > Application > Requirements - Notary or Witness > Creates or Expands","21AbsenteeVtg",3,"Absentee Voting",FALSE
+10,"AppRqNtryWtnsElmRlx","Absentee > Application > Requirements - Notary or Witness > Eliminates or Relaxes","21AbsenteeVtg",3,"Absentee Voting",FALSE
+11,"AppOnlnCrtOnlnPrtl","Absentee > Application > Online > Creates - Completed Through Online Portal","21AbsenteeVtg",3,"Absentee Voting",FALSE
+12,"AppOnlnCrtPrntOnln","Absentee > Application > Online > Creates - Print and Return Electronically","21AbsenteeVtg",3,"Absentee Voting",FALSE
+13,"AppOnlnCrtPrntHrdCpy","Absentee > Application > Online > Creates - Print and Return Hard Copy","21AbsenteeVtg",3,"Absentee Voting",FALSE
+14,"AppOnlnOthr","Absentee > Application > Online > Other Change to Online Application","21AbsenteeVtg",3,"Absentee Voting",FALSE
+15,"AppRqOthrInfoChng","Absentee > Application > Requirements - Other > Changes","21AbsenteeVtg",3,"Absentee Voting",FALSE
+16,"AppRqOthrInfoCrt","Absentee > Application > Requirements - Other > Creates","21AbsenteeVtg",3,"Absentee Voting",FALSE
+17,"AppRqOthrInfoElmn","Absentee > Application > Requirements - Other > Eliminates","21AbsenteeVtg",3,"Absentee Voting",FALSE
+18,"BlltDlvrInPrsPckpExp","Absentee > Ballot Delivery > In-Person Ballot Pickup > Expands","21AbsenteeVtg",3,"Absentee Voting",FALSE
+19,"BlltDlvrInPrsPckpRst","Absentee > Ballot Delivery > In-Person Ballot Pickup > Restricts","21AbsenteeVtg",3,"Absentee Voting",FALSE
+22,"BlltDlvrTmlnEarlier","Absentee > Ballot Delivery > TImeline > Earlier","21AbsenteeVtg",3,"Absentee Voting",FALSE
+23,"BlltDlvrTmlnLater","Absentee > Ballot Delivery > Timeline > Later","21AbsenteeVtg",3,"Absentee Voting",FALSE
+24,"BlltRtrnVrfctnCure","Absentee > Ballot Return, Verification or Cure","21AbsenteeVtg",3,"Absentee Voting",FALSE
+25,"ElgblExcsAccptExpnd","Absentee > Eligibility > Excuses Accepted > Expands","21AbsenteeVtg",3,"Absentee Voting",FALSE
+26,"ElgblExcsAccptNrrw","Absentee > Eligibility > Excuses Accepted > Narrows","21AbsenteeVtg",3,"Absentee Voting",FALSE
+27,"ElgblNoExcsVtngCrts","Absentee > Eligibility > No-Excuse Voting > Creates","21AbsenteeVtg",3,"Absentee Voting",FALSE
+28,"ElgblNoExcsVtngElmnt","Absentee > Eligibility > No-Excuse Voting > Eliminates","21AbsenteeVtg",3,"Absentee Voting",FALSE
+29,"EmrgVtngFacilitates","Absentee > Emergency Voting > Facilitates","21AbsenteeVtg",3,"Absentee Voting",FALSE
+30,"EmrgVtngRestricts","Absentee > Emergency Voting > Restricts","21AbsenteeVtg",3,"Absentee Voting",FALSE
+31,"InPrsnWthExcsCrtExpn","Absentee > In-Person With Excuse > Creates or Expands","21AbsenteeVtg",3,"Absentee Voting",FALSE
+32,"InPrsnWthExcsElmRstr","Absentee > In-Person With Excuse > Eliminates or Restricts","21AbsenteeVtg",3,"Absentee Voting",FALSE
+33,"IncarceratedVoting","Absentee > Incarcerated Voting","21AbsenteeVtg",3,"Absentee Voting",FALSE
+34,"Other","Absentee > Other Policy","21AbsenteeVtg",3,"Absentee Voting",FALSE
+35,"-Anti-Voter","Absentee > Policy Impact > Restricts Voter Access / Election Administration","21AbsenteeVtg",3,"Absentee Voting",FALSE
+37,"-Mixed_Unclear","Absentee > Policy Impact > Mixed or Unclear","21AbsenteeVtg",3,"Absentee Voting",FALSE
+38,"-Neutral","Absentee > Policy Impact > Neutral","21AbsenteeVtg",3,"Absentee Voting",FALSE
+39,"-Pro-Voter","Absentee > Policy Impact > Improves Voter Access / Election Administration","21AbsenteeVtg",3,"Absentee Voting",FALSE
+40,"RplcmntBlltRules","Absentee > Replacement Ballot Rules","21AbsenteeVtg",3,"Absentee Voting",FALSE
+41,"RsdntlFacilities","Absentee > Residential Facilities","21AbsenteeVtg",3,"Absentee Voting",FALSE
+42,"UOCAVA","Absentee > Uniformed and Overseas Voters (UOCAVA)","21AbsenteeVtg",3,"Absentee Voting",FALSE
+43,"VtInPrsAftrBltCrtExp","Absentee > Voting in Person After Requesting Mail Ballot > Creates or Expands","21AbsenteeVtg",3,"Absentee Voting",FALSE
+44,"VtInPrsAftrBltElmRst","Absentee > Voting in Person After Requesting Mail Ballot > Eliminates or Restricts","21AbsenteeVtg",3,"Absentee Voting",FALSE
+607,"AcsblPhysDisablty","Absentee > Accessibility > Physical or Disability Accessibility","21AbsenteeVtg",3,"Absentee Voting",FALSE
+610,"AcsblThrdPrtyAsstnc","Absentee > Accessibility > Third Party Assistance","21AbsenteeVtg",3,"Absentee Voting",FALSE
+617,"AcsblLanguage","Absentee > Accessibility > Language Accessibility","21AbsenteeVtg",3,"Absentee Voting",FALSE
+667,"App3dPrtyMailDistr","Absentee > Application > Third Party Mailing or Distribution","21AbsenteeVtg",3,"Absentee Voting",FALSE
+815,"BlltDlvrOnlnAvlblAll","Absentee > Ballot Delivery > Online Delivery > Available to All Voters","21AbsenteeVtg",3,"Absentee Voting",FALSE
+852,"AppApplsToFwrElctns","Absentee > Application > Applies to Fewer Elections","21AbsenteeVtg",3,"Absentee Voting",FALSE
+853,"AppApplsToMoreElctns","Absentee > Application > Applies to More Elections","21AbsenteeVtg",3,"Absentee Voting",FALSE
+854,"BlltDlvrOnlnAvlblSm","Absentee > Ballot Delivery > Online Delivery > Available to Some Voters","21AbsenteeVtg",3,"Absentee Voting",FALSE
+900,"AppRtrnPstgPdByGov","Absentee > Application > Return Postage > Paid by Government","21AbsenteeVtg",3,"Absentee Voting",FALSE
+901,"AppRtrnPstgPdByVtr","Absentee > Application > Return Postage > Paid by Voter","21AbsenteeVtg",3,"Absentee Voting",FALSE
+934,"AppIDRqrmntElmntRlx","","21AbsenteeVtg",3,"Absentee Voting",TRUE
+938,"-Mixed_Pro-Voter","","21AbsenteeVtg",3,"Absentee Voting",TRUE
+940,"AppIDRqrmntCrtExpnd","","21AbsenteeVtg",3,"Absentee Voting",TRUE
+952,"BlltDlvrThrdPrtyExpn","","21AbsenteeVtg",3,"Absentee Voting",TRUE
+963,"AppVtrInfoRqrmntCrt","","21AbsenteeVtg",3,"Absentee Voting",TRUE
+979,"-Mixed_Anti-Voter","","21AbsenteeVtg",3,"Absentee Voting",TRUE
+980,"AppVtrInfoRqrmntElmn","","21AbsenteeVtg",3,"Absentee Voting",TRUE
+982,"AppVtrInfoRqrmntChng","","21AbsenteeVtg",3,"Absentee Voting",TRUE
+984,"BlltDlvrThrdPrtyRstr","","21AbsenteeVtg",3,"Absentee Voting",TRUE
+1014,"AppNtryWtnsRqrElmRlx","","21AbsenteeVtg",3,"Absentee Voting",TRUE
+45,"ChngInfoRqrmnts","AVR > Change to Existing AVR > Information Requirements","21AVR",4,"Automatic Voter Registration",FALSE
+46,"ChngOptOutPrcss","AVR > Change to Existing AVR > Opt-Out Process","21AVR",4,"Automatic Voter Registration",FALSE
+47,"ChngOptOutTmngErlr","AVR > Change to Existing AVR > Opt-Out Timing > Earlier","21AVR",4,"Automatic Voter Registration",FALSE
+48,"ChngOptOutTmngLtr","AVR > Change to Existing AVR > Opt-Out Timing > Later","21AVR",4,"Automatic Voter Registration",FALSE
+49,"ChngOther","AVR > Change to Existing AVR > Other Change","21AVR",4,"Automatic Voter Registration",FALSE
+50,"ChngPrtcptAgncyAdds","AVR > Change to Existing AVR > Participating Agencies > Adds","21AVR",4,"Automatic Voter Registration",FALSE
+51,"ChngPrtcptAgncyRmvs","AVR > Change to Existing AVR > Participating Agencies > Removes","21AVR",4,"Automatic Voter Registration",FALSE
+52,"ChngREALIDCtznshpPrf","AVR > Change to Existing AVR > REAL ID or Citizenship Documentation Requirements","21AVR",4,"Automatic Voter Registration",FALSE
+53,"CrtAvlblDMV","AVR > Creates AVR > Availability  > DMV","21AVR",4,"Automatic Voter Registration",FALSE
+54,"CrtAvlblOthrGovAgncy","AVR > Creates AVR > Availability  > Other Government Agencies","21AVR",4,"Automatic Voter Registration",FALSE
+55,"CrtOptOutTmngAftrTrn","AVR > Creates AVR > Opt-Out Timing > By Notification After Transaction","21AVR",4,"Automatic Voter Registration",FALSE
+56,"CrtOptOutTmngDrngTrn","AVR > Creates AVR > Opt-Out Timing > During Agency Transaction","21AVR",4,"Automatic Voter Registration",FALSE
+57,"CrtREALIDCtznshpPrf","AVR > Creates AVR > REAL ID or Citizenship Documentation Requirements","21AVR",4,"Automatic Voter Registration",FALSE
+58,"CrtAVR","AVR > Creates AVR","21AVR",4,"Automatic Voter Registration",FALSE
+59,"EliminatesAVR","AVR > Eliminates AVR","21AVR",4,"Automatic Voter Registration",FALSE
+60,"-Anti-Voter","AVR > Policy Impact > Restricts Voter Access / Election Administration","21AVR",4,"Automatic Voter Registration",FALSE
+62,"-Mixed_Unclear","AVR > Policy Impact > Mixed or Unclear","21AVR",4,"Automatic Voter Registration",FALSE
+63,"-Neutral","AVR > Policy Impact > Neutral","21AVR",4,"Automatic Voter Registration",FALSE
+64,"-Pro-Voter","AVR > Policy Impact > Improves Voter Access / Election Administration","21AVR",4,"Automatic Voter Registration",FALSE
+1010,"-Mixed_Pro-Voter","","21AVR",4,"Automatic Voter Registration",TRUE
+1023,"ChngREALIDOnly","","21AVR",4,"Automatic Voter Registration",TRUE
+65,"ApplcbltyAbsntVtng","Ballot Return, Verification, and Cure > Applicability > Applies to Absentee Voting","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+66,"ApplcbltyVBMElctn","Ballot Return, Verification, and Cure > Applicability > Applies to VBM Elections","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+67,"BlltRtrnDdlnEarlier","Ballot Return, Verification, and Cure > Ballot Return > Deadline > Earlier","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+68,"BlltRtrnDdlnLater","Ballot Return, Verification, and Cure > Ballot Return > Deadline > Later","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+69,"BlltRtrnDOLAvlExpnd","Ballot Return, Verification, and Cure > Ballot Return > Drop-Off Locations > Availability - Expands","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+70,"BlltRtrnDOLAvlRstrct","Ballot Return, Verification, and Cure > Ballot Return > Drop-Off Locations > Availability - Restricts","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+71,"BlltRtrnDOLDysHrsOps","Ballot Return, Verification, and Cure > Ballot Return > Drop-Off Locations > Days or Hours of Operation","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+72,"BlltRtrnDOLDrpBxScty","Ballot Return, Verification, and Cure > Ballot Return > Drop-Off Locations > Drop Box Security","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+73,"BlltRtrnDOLLctnRqrmt","Ballot Return, Verification, and Cure > Ballot Return > Drop-Off Locations > Location Requirements","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+74,"BlltRtrnDOLNmbrRqrmt","Ballot Return, Verification, and Cure > Ballot Return > Drop-Off Locations > Number Requirements","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+75,"BlltRtrnDOLUnofDrpBx","Ballot Return, Verification, and Cure > Ballot Return > Drop-Off Locations > Unofficial Drop Boxes","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+76,"BlltRtrnInPrsnIDRqrs","Ballot Return, Verification, and Cure > Ballot Return > In-Person Return > ID Requirements","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+77,"BlltRtrnPstgPdByGov","Ballot Return, Verification, and Cure > Ballot Return > Postage > Paid by Government","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+78,"BlltRtrnPstgPdByVtr","Ballot Return, Verification, and Cure > Ballot Return > Postage > Paid by Voter","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+79,"BlltRtrnThrdPrtyExpd","Ballot Return, Verification, and Cure > Ballot Return > Third-Party Return > Expands","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+80,"BlltRtrnThrdPrtyRstr","Ballot Return, Verification, and Cure > Ballot Return > Third-Party Return > Restricts","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+81,"BlltTrckngCrtsExpnds","Ballot Return, Verification, and Cure > Ballot Tracking > Creates or Expands","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+82,"BlltTrckngElmntRstrt","Ballot Return, Verification, and Cure > Ballot Tracking > Eliminates or Restricts","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+83,"IncarceratedVoting","Ballot Return, Verification, and Cure > Incarcerated Voting","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+84,"NtcCrChngExstPrcss","Ballot Return, Verification, and Cure > Notice and Cure Process > Changes Existing Process","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+85,"NtcCrCrtsNewPrcss","Ballot Return, Verification, and Cure > Notice and Cure Process > Creates New Process","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+86,"NtcCrCrblDfctExpnLst","Ballot Return, Verification, and Cure > Notice and Cure Process > Curable Defects > Expands List","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+87,"NtcCrCrblDfctRstrLst","Ballot Return, Verification, and Cure > Notice and Cure Process > Curable Defects > Restricts List","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+88,"NtcCrDdlnMvsEarlier","Ballot Return, Verification, and Cure > Notice and Cure Process > Cure Deadline > Moves Earlier","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+89,"NtcCrDdlnMvsLater","Ballot Return, Verification, and Cure > Notice and Cure Process > Cure Deadline > Moves Later","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+90,"NtcCrMthdsExpnds","Ballot Return, Verification, and Cure > Notice and Cure Process > Cure Methods > Expands","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+91,"NtcCrMthdsRstrcts","Ballot Return, Verification, and Cure > Notice and Cure Process > Cure Methods > Restricts","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+92,"NtcCrElmntPrcss","Ballot Return, Verification, and Cure > Notice and Cure Process > Eliminates Process","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+93,"NtcCrNtfctnChngMthd","Ballot Return, Verification, and Cure > Notice and Cure Process > Notification > Changes Notification Methods","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+94,"NtcCrNtfctnRcvsErlr","Ballot Return, Verification, and Cure > Notice and Cure Process > Notification > Voter Receives Notice Earlier","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+95,"NtcCrNtfctnRcvsLtr","Ballot Return, Verification, and Cure > Notice and Cure Process > Notification > Voter Receives Notice Later","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+96,"Other","Ballot Return, Verification, and Cure > Other Policy","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+97,"-Anti-Voter","Ballot Return, Verification, and Cure > Policy Impact > Restricts Voter Access / Election Administration","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+99,"-Mixed_Unclear","Ballot Return, Verification, and Cure > Policy Impact > Mixed or Unclear","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+100,"-Neutral","Ballot Return, Verification, and Cure > Policy Impact > Neutral","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+101,"-Pro-Voter","Ballot Return, Verification, and Cure > Policy Impact > Improves Voter Access / Election Administration","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+102,"RsdntlFacilities","Ballot Return, Verification, and Cure > Residential Facilities","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+103,"UOCAVA","Ballot Return, Verification, and Cure > Uniformed and Overseas Citizens Absentee Voting Act (UOCAVA)","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+104,"VrfCntBlltChllgPrcss","Ballot Return, Verification, and Cure > Verification and Counting > Ballot Challenges > Challenge Process","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+105,"VrfCntBlltChllgGrnds","Ballot Return, Verification, and Cure > Verification and Counting > Ballot Challenges > Grounds for Challenge","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+106,"VrfCntGrndsRjctnChng","Ballot Return, Verification, and Cure > Verification and Counting > Grounds for Ballot Rejection > Changes","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+107,"VrfCntGrndsRjctnCrt","Ballot Return, Verification, and Cure > Verification and Counting > Grounds for Ballot Rejection > Creates","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+108,"VrfCntGrndsRjctnElmn","Ballot Return, Verification, and Cure > Verification and Counting > Grounds for Ballot Rejection > Eliminates","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+109,"VtrReqIDCrtExpnd","Ballot Return, Verification, and Cure > Voter Requirements > ID or ID Number > Creates or Expands","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+110,"VtrReqIDElmntRlx","Ballot Return, Verification, and Cure > Voter Requirements > ID or ID Number > Eliminates or Relaxes","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+111,"VtrReqNtryWtnsCrtExp","Ballot Return, Verification, and Cure > Voter Requirements > Notary or Witness > Creates or Expands","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+112,"VtrReqNtryWtnsElmRlx","Ballot Return, Verification, and Cure > Voter Requirements > Notary or Witness > Eliminates or Relaxes","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+113,"VrfCntObsrvrNmbr","Ballot Return, Verification, and Cure > Verification and Counting > Observers > Number of Observers","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+114,"VrfCntObsrvrPrcss","Ballot Return, Verification, and Cure > Verification and Counting > Observers > Observation Process","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+115,"VrfCntObsrvrQlfctn","Ballot Return, Verification, and Cure > Verification and Counting > Observers > Observer Qualifications","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+116,"VtrReqOtherCrtExpn","Ballot Return, Verification, and Cure > Voter Requirements > Other > Creates or Expands","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+117,"VtrReqOtherElmRlx","Ballot Return, Verification, and Cure > Voter Requirements > Other > Eliminates or Relaxes","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+118,"VrfCntSgntrMtchAuto","Ballot Return, Verification, and Cure > Verification and Counting > Signature Matching > Automated Signature Matching","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+119,"VrfCntSgntrChng","Ballot Return, Verification, and Cure > Verification and Counting > Signature Matching > Changes","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+120,"VrfCntSgntrCrt","Ballot Return, Verification, and Cure > Verification and Counting > Signature Matching > Creates","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+121,"VrfCntSgntrElmnt","Ballot Return, Verification, and Cure > Verification and Counting > Signature Matching > Eliminates","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+122,"VrfCntSgntrTraining","Ballot Return, Verification, and Cure > Verification and Counting > Signature Matching > Training","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+123,"VrfCntTmlnCntngLssTm","Ballot Return, Verification, and Cure > Verification and Counting > Timeline for Counting > Less Time","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+124,"VrfCntTmlnCntngMrTm","Ballot Return, Verification, and Cure > Verification and Counting > Timeline for Counting > More Time","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+125,"VrfCntTmlnVrfctLssTm","Ballot Return, Verification, and Cure > Verification and Counting > Timeline for Verification > Less Time","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+126,"VrfCntTmlnVrfctnMrTm","Ballot Return, Verification, and Cure > Verification and Counting > Timeline for Verification > More Time","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+614,"Acsbl3dPtyAsstBltCmp","Ballot Return, Verification, and Cure > Accessibility > Third Party Assistance With Ballot Completion","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+618,"AcsblLanguage","Ballot Return, Verification, and Cure > Accessibility > Language Accessibility","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+619,"AcsblPhysDisablty","Ballot Return, Verification, and Cure > Accessibility > Physical or Disability Accessibility","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+816,"OnlnVtngAvlblAllVtrs","Ballot Return, Verification, and Cure > Online Voting > Available to All Voters","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+855,"OnlnVtngAvlblSmVtrs","Ballot Return, Verification, and Cure > Online Voting > Available to Some Voters","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",FALSE
+945,"VrfCntIDRqrCrtExpnd","","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",TRUE
+960,"-Mixed_Pro-Voter","","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",TRUE
+975,"VrfCntNtryWtnsElmRlx","","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",TRUE
+987,"VrfCntNtryWtnsCrtExp","","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",TRUE
+989,"-Mixed_Anti-Voter","","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",TRUE
+1002,"VrfCntOtherRqrElmRlx","","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",TRUE
+1004,"VrfCntOthrRqrCrtExpn","","21BlltRtrnVfctnCure",5,"Ballot Return, Verification, and Cure",TRUE
+132,"AvlbBOEDStyleEV","EV > Availability > Bill Outcome > Election-Day Style EV","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+133,"AvlbBOInPrsnNoExc","EV > Availability > Bill Outcome > In-Person No-Excuse Absentee Voting","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+134,"AvlbBOJrsdctnOptn","EV > Availability > Bill Outcome > Jurisdictional Option for EV","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+135,"AvlbBOMndtrySttwd","EV > Availability > Bill Outcome > Mandatory Statewide EV","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+136,"AvlbBOAllElctns","EV > Availability > Bill Outcome > EV for All Elections","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+137,"AvlbBOCrtnElctns","EV > Availability > Bill Outcome > EV for Certain Elections","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+138,"AvlbCreates","EV > Availability > Creates EV","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+141,"AvlbEliminates","EV > Availability > Eliminates EV","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+142,"AvlbExpndsFcilitates","EV > Availability > Expands or Facilitates EV","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+145,"AvlbRestricts","EV > Availability > Restricts EV","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+146,"IncarceratedVoting","EV > Incarcerated Voting","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+148,"LctnDrvThruOutdrVtng","EV > Locations > Drive-Through or Outdoor Voting","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+149,"LctnEmrgClsrRlct","EV > Locations > Emergency Closure or Relocation","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+152,"LctnHghCpctyVtCntr","EV > Locations > High-Capacity Vote Centers","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+160,"LctnVtrEdctn","EV > Locations > Voter Education","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+161,"Other","EV > Other Policy","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+162,"-Anti-Voter","EV > Policy Impact > Restricts Voter Access / Election Administration","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+164,"-Mixed_Unclear","EV > Policy Impact > Mixed or Unclear","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+165,"-Neutral","EV > Policy Impact > Neutral","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+166,"-Pro-Voter","EV > Policy Impact > Improves Voter Access / Election Administration","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+167,"ResFcltyCrtChngPrcss","EV > Residential Facilities > Creates or Changes EV Process","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+168,"TmngDdlnSttngDysHrs","EV > Timing > Deadline for Setting Voting Days or Hours","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+169,"TmngEVPrdLgnthns","EV > Timing > EV Period > Lengthens","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+170,"TmngEVPrdShrtns","EV > Timing > EV Period > Shortens","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+171,"TmngFrstDyMvsErlr","EV > Timing > First Day >  Moves Earlier","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+172,"TmngFrstDyMvsLtr","EV > Timing > First Day > Moves Later","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+173,"TmngLstDyMvsErlr","EV > Timing > Last Day > Moves Earlier","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+174,"TmngLstDyMvsLtr","EV > Timing > Last Day > Moves Later","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+175,"TmngSatVtngCrtExpnd","EV > Timing > Saturday Voting > Creates or Expands","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+176,"TmngSatVtngElmntNrrw","EV > Timing > Saturday Voting > Eliminates or Narrows","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+177,"TmngSunVtngCrtExpnd","EV > Timing > Sunday Voting > Creates or Expands","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+178,"TmngSunVtngElmntNrrw","EV > Timing > Sunday Voting > Eliminates or Narrows","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+179,"TmngVtngHoursExpnds","EV > Timing > Voting Hours  > Expands","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+180,"TmngVtngHoursRdcs","EV > Timing > Voting Hours  > Reduces","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+181,"VtrBlltAppRqrmnts","EV > Voter Requirements > Ballot Application Requirements","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+625,"LctnAccsbltyRqrmnts","EV > Locations > Accessibility Requirements","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+640,"LctnLctnCharCrtria","EV > Locations > Location Characteristics or Criteria","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+641,"LctnNmbrLctns","EV > Locations > Number of Locations","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+662,"LctnWaitTimes","EV > Locations > Wait Times","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+663,"LctnSlctnPrcssTmln","EV > Locations > Selection Process or Timeline","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+665,"LctnVtgMchnsStations","EV > Locations > Number of Voting Machines or Stations","21ErlyVtngAvlblty",6,"Early Voting Availability",FALSE
+813,"AvlbBOCrtnElctns","EV > Availability > Bill Outcome > EV for Certain Elections","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+941,"AvlbBOCrtInPrsnNoExc","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+942,"AvlbBOCrtMndtrySttwd","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+946,"AvlbBOCrtEDStyleEV","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+947,"AvlbExpands","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+948,"LctnLctnRqrmnts","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+949,"LctnLctnTypAdd","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+950,"LctnNmbrRqrdLctns","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+955,"AVlbBOCrtnElctns","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+956,"LctnLctnTypRmvs","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+957,"-Mixed_Pro-Voter","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+958,"AvlbBOCrtJrsdctnOptn","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+966,"LctnSlctnPrcssCrtria","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+986,"LctnSlctnTmln","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+991,"LctnCpctyRqrmnts","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+1020,"LctnEmrgClsrRlctDdln","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+1027,"VtrBlltAppElmnStrmln","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+1032,"-Pro-Voter, AvlbBOAllElctns, AvlbBOEDStyleEV, AvlbBOMndtrySttwd, AvlbExpndsFcilitates, TmngSatVtngCrtExpnd, TmngSatVtngCrtExpnd, TmngSunVtngCrtExpnd","","21ErlyVtngAvlblty",6,"Early Voting Availability",TRUE
+182,"ApplcblElctnOffcl","Criminal and Civil Enforcement > Applicability > Targets Election Officials/Workers","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+183,"ApplcblThrdPrty","Criminal and Civil Enforcement > Applicability > Targets People Assisting Voters","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+184,"ApplcblVoters","Criminal and Civil Enforcement > Applicability > Targets Voters","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+185,"CrtsExpndsFelony","Criminal and Civil Enforcement > Creates or Expands Crime > Felony","21ElctnCrms",7,"Criminal and Civil Enforcement",TRUE
+186,"CrtsExpndsMsdemeanor","Criminal and Civil Enforcement > Creates or Expands Crime > Misdemeanor","21ElctnCrms",7,"Criminal and Civil Enforcement",TRUE
+187,"Other","Criminal and Civil Enforcement > Other Policy","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+188,"PnltyDcrsSvrtyPnlty","Criminal and Civil Enforcement > Penalties > Decreases Severity of Penalties","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+189,"PnltyIncrsSvrtyPnlty","Criminal and Civil Enforcement > Penalties > Increases Severity of Penalties","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+190,"-Anti-Voter","Criminal and Civil Enforcement > Policy Impact > Restricts Voter Access / Election Administration","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+192,"-Mixed_Unclear","Criminal and Civil Enforcement > Policy Impact > Mixed or Unclear","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+193,"-Neutral","Criminal and Civil Enforcement > Policy Impact > Neutral","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+194,"-Pro-Voter","Criminal and Civil Enforcement > Policy Impact > Improves Voter Access / Election Administration","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+605,"ElmntsNrrwsCrm","Criminal and Civil Enforcement > Eliminates or Narrows Crime","21ElctnCrms",7,"Criminal and Civil Enforcement",TRUE
+884,"CrtsExpndsCivilPnlty","Criminal and Civil Enforcement > Creates or Expands Civil Penalty","21ElctnCrms",7,"Criminal and Civil Enforcement",TRUE
+889,"InvstgtnOrEnfrcmnt","Criminal and Civil Enforcement > Investigation or Enforcement","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+899,"IElmntsNrrwsCivlPnltyntrfrncOther","Criminal and Civil Enforcement > Eliminates or Narrows Civil Penalty","21ElctnCrms",7,"Criminal and Civil Enforcement",TRUE
+906,"FelonyCreates","Criminal and Civil Enforcement > Felonies > Creates Felony","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+907,"OtcmAsstVtrsIncrsCrm","Criminal and Civil Enforcement > Outcome > People Assisting Voters > Increase Criminalization","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+908,"zCrtsExpndsFelony","Criminal and Civil Enforcement > Creates or Expands Crime > Felony","21ElctnCrms",7,"Criminal and Civil Enforcement",TRUE
+909,"zCrtsExpndsMsdemeano","Criminal and Civil Enforcement > Creates or Expands Crime > Misdemeanor","21ElctnCrms",7,"Criminal and Civil Enforcement",TRUE
+910,"zCrtsExpndsCivilPnlt","Criminal and Civil Enforcement > Creates or Expands Crime > Civil Penalty","21ElctnCrms",7,"Criminal and Civil Enforcement",TRUE
+911,"MisdemeanorElmntNrrw","Criminal and Civil Enforcement > Misdemeanors > Eliminates or Narrows Misdemeanor","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+912,"zElmntsNrrwsCrm","Criminal and Civil Enforcement > Eliminates or Narrows Crime","21ElctnCrms",7,"Criminal and Civil Enforcement",TRUE
+913,"ApplcblGnrllyApplcbl","Criminal and Civil Enforcement > Applicability > Generally Applicable","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+914,"FelonyExpands","Criminal and Civil Enforcement > Felonies > Expands Felony","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+915,"MisdemeanorCreates","Criminal and Civil Enforcement > Misdemeanors > Creates Misdemeanor","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+917,"CivilPenaltiesExpnds","Criminal and Civil Enforcement > Civil Penalties > Expands Civil Penalty","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+918,"CivilPenaltiesCrts","Criminal and Civil Enforcement > Civil Penalties > Creates Civil Penalty","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+919,"OtcmElxOffclIncrsCrm","Criminal and Civil Enforcement > Outcome > Election Officials/Workers > Increase Criminalization","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+920,"OtcmVotersIncrsCrm","Criminal and Civil Enforcement > Outcome > Voters > Increase Criminalization","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+921,"CivilPenaltiesElmNrw","Criminal and Civil Enforcement > Civil Penalties > Eliminates or Narrows Civil Penalty","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+922,"MisdemeanorExpnds","Criminal and Civil Enforcement > Misdemeanors > Expands Misdemeanor","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+928,"FelonyElmntNrrw","Criminal and Civil Enforcement > Felonies > Eliminates or Narrows Felony","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+929,"OtcmAsstVtrsDcrsCrm","Criminal and Civil Enforcement > Outcome > People Assisting Voters > Decrease Criminalization","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+930,"OtcmVotersDrcsCrm","Criminal and Civil Enforcement > Outcome > Voters > Decrease Criminalization","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+932,"OtcmElxOffclDcrsCrm","Criminal and Civil Enforcement > Outcome > Election Officials/Workers > Decrease Criminalization","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+933,"ApplcblPollWtchrs","Criminal and Civil Enforcement > Applicability > Targets Poll Watchers","21ElctnCrms",7,"Criminal and Civil Enforcement",FALSE
+943,"NewCrimeFelony","","21ElctnCrms",7,"Criminal and Civil Enforcement",TRUE
+953,"NewCrimeMisdemeanor","","21ElctnCrms",7,"Criminal and Civil Enforcement",TRUE
+978,"-Mixed_Pro-Voter","","21ElctnCrms",7,"Criminal and Civil Enforcement",TRUE
+994,"-Mixed_Anti-Voter","","21ElctnCrms",7,"Criminal and Civil Enforcement",TRUE
+1029,"-Mixed_Unclear, Other","","21ElctnCrms",7,"Criminal and Civil Enforcement",TRUE
+1035,"EBTest0420","EBTest0420 Label","21ElctnCrms",7,"Criminal and Civil Enforcement",TRUE
+197,"LctnEmrgClsrRlct","Election Day > Locations > Emergency Consolidation or Relocation","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+200,"VtCtrHghCpctyVtCntr","Election Day > Vote Centers > High-Capacity Vote Centers","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+204,"LctnNmbrRqrdDcrs","Election Day > Locations > Number of Required Locations > Decreases","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+205,"LctnNmbrRqrdIncr","Election Day > Locations > Number of Required Locations > Increases","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+209,"LctnVoterEducation","Election Day > Locations > Voter Education","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+210,"Other","Election Day > Other Policy","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+211,"-Anti-Voter","Election Day > Policy Impact > Restricts Voter Access / Election Administration","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+213,"-Mixed_Unclear","Election Day > Policy Impact > Mixed or Unclear","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+214,"-Neutral","Election Day > Policy Impact > Neutral","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+215,"-Pro-Voter","Election Day > Policy Impact > Improves Voter Access / Election Administration","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+216,"PrcnctMpCnsldtnPrcss","Election Day > Precinct Maps > Consolidating Precincts > Changes Process","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+217,"PrcnctMpCnsldtnTmln","Election Day > Precinct Maps > Consolidating Precincts > Changes Timeline","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+218,"PrcnctMpDrwngPrcss","Election Day > Precinct Maps > Drawing Maps > Changes Process","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+219,"PrcnctMpDrwngTmln","Election Day > Precinct Maps > Drawing Maps > Changes Timeline","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+220,"PrcnctMpSpltChngPrcs","Election Day > Precinct Maps > Splitting Precincts > Changes Process","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+221,"PrcnctMpSpltChngTmln","Election Day > Precinct Maps > Splitting Precincts > Changes Timeline","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+222,"PrcnctBsdPllPlcCrts","Election Day > Precinct-Based Polling Places > Creates","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+223,"PrcnctBsdPllPlcElmnt","Election Day > Precinct-Based Polling Places > Eliminates","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+224,"VtCtrBORqAuthAllElx","Election Day > Vote Centers > Bill Outcome > Required or Authorized for All Elections","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+225,"VtCtrBORqAuthCrtnElx","Election Day > Vote Centers > Bill Outcome > Required or Authorized for Certain Elections","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+226,"VtCtrBORqAuthCrtnJdx","Election Day > Vote Centers > Bill Outcome > Required or Authorized in Certain Jurisdictions","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+227,"VtCtrBORqAuthSttwd","Election Day > Vote Centers > Bill Outcome > Required or Authorized Statewide","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+228,"VtCtrCrts","Election Day > Vote Centers > Creates","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+229,"VtCtrElxRqrAllwExpnd","Election Day > Vote Centers > Elections Allowed or Required to Have Vote Centers > Expands","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+230,"VtCtrElxRqrAllwRstrc","Election Day > Vote Centers > Elections Allowed or Required to Have Vote Centers > Restricts","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+231,"VtCtrEliminates","Election Day > Vote Centers > Eliminates","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+232,"VtCtrJdxRqrAllwExpnd","Election Day > Vote Centers > Jurisdictions Allowed or Required to Have Vote Centers > Expands","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+233,"VtCtrJdxRqrAllwRstrc","Election Day > Vote Centers > Jurisdictions Allowed or Required to Have Vote Centers > Restricts","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+234,"VtHrsChngPrcssExtnd","Election Day > Voting Hours > Changes Process for Extending Voting Hours","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+235,"VtHrsExpnds","Election Day > Voting Hours > Expands","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+236,"VtHrsRdcs","Election Day > Voting Hours > Reduces","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+626,"LctnAccsbltyRqrmnts","Election Day > Locations > Accessibility Requirements","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+642,"LctnSlctnPrcssTmln","Election Day > Locations > Selection Process or Timeline","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+646,"LctnVtgMchnsStations","Election Day > Locations > Number of Voting Machines or Stations","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+650,"LctnWaitTimes","Election Day > Locations > Wait Times","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+660,"LctnDrvThruOutdrVtng","Election Day > Locations > Drive-Through or Outdoor Voting Locations","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+661,"LctnLctnCharCrtria","Election Day > Locations > Location Characteristics or Criteria","21ElctnDyVtngSts",8,"Election Day Voting Sites",FALSE
+935,"LctnLctnReqrmnts","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+951,"LctnLctnTypesRemoves","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+965,"LctnSlctnPrcssCrtria","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+973,"LctnLctnTypesAdds","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+976,"-Mixed_Anti-Voter","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+977,"LctnEmrgClsrRlctDdln","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+981,"-Mixed_Pro-Voter","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+990,"LctnCapacityReqrmnts","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1013,"LctnSlctnTmln","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1021,"LctnDrvThruVtngLctns","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1022,"LctnOutdoorVtngLctns","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1024,"LctnEmrgClsrPrcssCrt","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1038,"ApplcblElctnOffcl","ApplcblElctnOffcl","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1039,"FelonyCreates","FelonyCreates","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1040,"OtcmElxOffclIncrsCrm","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1041,"MisdemeanorCreates","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1042,"ApplcblGnrllyApplcbl","ApplcblGnrllyApplcbl","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1043,"MisdemeanorExpnds","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1044,"PnltyIncrsSvrtyPnlty","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1045,"CivilPenaltiesCrts","CivilPenaltiesCrts","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1046,"InvstgtnOrEnfrcmnt","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1047,"ApplcblVoters","ApplcblVoters","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1048,"OtcmVotersIncrsCrm","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1049,"ApplcblThrdPrty","ApplcblThrdPrty","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1050,"OtcmAsstVtrsIncrsCrm","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1051,"FelonyElmntNrrw","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+1052,"OtcmAsstVtrsDcrsCrm","","21ElctnDyVtngSts",8,"Election Day Voting Sites",TRUE
+608,"ShiftsElctnAuthority","ShiftsElctnAuthority","21EmergingIssues",9,"Emerging Issues",TRUE
+612,"RstrctPrvtGrantMoney","Emerging Issues > Restrictions on Grant Money","21EmergingIssues",9,"Emerging Issues",TRUE
+613,"PreclearanceRqmts","Emerging Issues > Preclearance Requirements","21EmergingIssues",9,"Emerging Issues",TRUE
+627,"-Anti-Voter","Emerging Issues > Policy Impact > Restricts Voter Access / Election Administration","21EmergingIssues",9,"Emerging Issues",FALSE
+629,"-Mixed_Unclear","Emerging Issues > Policy Impact > Mixed or Unclear","21EmergingIssues",9,"Emerging Issues",FALSE
+630,"-Neutral","Emerging Issues > Policy Impact > Neutral","21EmergingIssues",9,"Emerging Issues",FALSE
+631,"-Pro-Voter","Emerging Issues > Policy Impact > Improves Voter Access / Election Administration","21EmergingIssues",9,"Emerging Issues",FALSE
+671,"SpprtOppFedLeg","Emerging Issues > Support/Opposition of Federal Legislation","21EmergingIssues",9,"Emerging Issues",FALSE
+817,"RvwCrtfd2020ElctRslt","Emerging Issues > Reviews of Certified 2020 Election Results","21EmergingIssues",9,"Emerging Issues",TRUE
+863,"BfrctnSttFdrlElx","Emerging Issues > Bifurcation of State and Federal Elections","21EmergingIssues",9,"Emerging Issues",TRUE
+869,"ElctnRvwBllsOfCncrn","Emerging Issues > Election Review Bills of Concern","21EmergingIssues",9,"Emerging Issues",TRUE
+890,"ElxnWrkrPrtctns","Emerging Issues > Election Worker Protections","21EmergingIssues",9,"Emerging Issues",FALSE
+902,"StateVtngRghtsPrtctn","Emerging Issues > State Voting Rights Protections","21EmergingIssues",9,"Emerging Issues",FALSE
+1017,"-Mixed_Anti-Voter","","21EmergingIssues",9,"Emerging Issues",TRUE
+237,"MailAppAvlbltyExpnd","Incarcerated Voting > Mail Voting > Application Availability > Expands","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+239,"MailAppAvlbltyRstrct","Incarcerated Voting > Mail Voting > Application Availability > Restricts","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+240,"MailAppPrcssRstrcts","Incarcerated Voting > Mail Voting > Application Process > Restricts","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+241,"MailAppPrcssFcltates","Incarcerated Voting > Mail Voting > Application Process > Facilitates","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+242,"MailBlltDlvryFcltate","Incarcerated Voting > Mail Voting > Ballot Delivery > Facilitates","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+244,"MailBlltDlvryRstrcts","Incarcerated Voting > Mail Voting > Ballot Delivery > Restricts","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+246,"MailBlltRtrnFcltates","Incarcerated Voting > Mail Voting > Ballot Return > Facilitates","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+248,"MailBlltRtrnRstrcts","Incarcerated Voting > Mail Voting > Ballot Return > Restricts","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+249,"MailElgbltyCrtExp","Incarcerated Voting > Mail Voting > Eligibility Based on Incarceration > Creates or Expands","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+250,"MailElgbltyElmnRstr","Incarcerated Voting > Mail Voting > Eligibility Based on Incarceration > Eliminates or Restricts","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+251,"MailEmrgRqstCrtExpnd","Incarcerated Voting > Mail Voting > Emergency Ballot Request > Creates or Expands Process for Incarcerated Voters","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+252,"MailEmrgRqstElmRstrc","Incarcerated Voting > Mail Voting > Emergency Ballot Request > Eliminates or Restricts Process for Incarcerated Voters","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+253,"MailNtryWtnssRqFcltt","Incarcerated Voting > Mail Voting > Notary or Witness Requirements > Facilitates Compliance","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+254,"MailNotcCureFcltates","Incarcerated Voting > Mail Voting > Notice and Cure Process > Facilitates Cure by Incarcerated Voters","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+255,"OnStBOAthrzdCrtnLoc","Incarcerated Voting > On-Site Voting > Bill Outcome > Authorized in Certain Locations","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+256,"OnStBOAthrzdSttwd","Incarcerated Voting > On-Site Voting > Bill Outcome > Authorized Statewide","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+257,"OnStBOAvlErlyVtng","Incarcerated Voting > On-Site Voting > Bill Outcome > Available During Early Voting","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+258,"OnStBOAvlAllElctn","Incarcerated Voting > On-Site Voting > Bill Outcome > Available for All Elections","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+259,"OnStBOAvlSpcfcElctn","Incarcerated Voting > On-Site Voting > Bill Outcome > Available for Specific Elections","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+260,"OnStBOAvlElctnDay","Incarcerated Voting > On-Site Voting > Bill Outcome > Available on Election Day","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+261,"OnStBOMndtrySttwd","Incarcerated Voting > On-Site Voting > Bill Outcome > Mandatory Statewide","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+262,"OnStBORqrdCrtnLoc","Incarcerated Voting > On-Site Voting > Bill Outcome > Required in Certain Locations","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+263,"OnStCrtExpnd","Incarcerated Voting > On-Site Voting > Creates or Expands","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+264,"OnStElmntRstrct","Incarcerated Voting > On-Site Voting > Eliminates or Restricts","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+265,"Other","Incarcerated Voting > Other Policy","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+266,"-Anti-Voter","Incarcerated Voting > Policy Impact > Restricts Voter Access / Election Administration","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+268,"-Mixed_Unclear","Incarcerated Voting > Policy Impact > Mixed or Unclear","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+269,"-Neutral","Incarcerated Voting > Policy Impact > Neutral","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+270,"-Pro-Voter","Incarcerated Voting > Policy Impact > Improves Voter Access / Election Administration","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+272,"RgstrJlPrsnRgstAgncy","Incarcerated Voting > Registration > Designates Jails or Prisons as Voter Registration Agencies","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+273,"RgstrFrmAvlbltyExpnd","Incarcerated Voting > Registration > Form Availability > Expands","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+275,"RgstrFrmAvlbltyRstrc","Incarcerated Voting > Registration > Form Availability > Restricts","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+276,"RgstrPrcssFcltate","Incarcerated Voting > Registration > Process > Facilitates","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+277,"RgstrPrcssRstrct","Incarcerated Voting > Registration > Process > Restricts","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+278,"RgstrRsdncyRls","Incarcerated Voting > Registration > Residency Rules for Incarcerated Voters","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+279,"VoterEducation","Incarcerated Voting > Voter Education","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+280,"VtIDRqrAddJlPrsnID","Incarcerated Voting > Voter ID Requirements > Adds Jail/Prison IDs to List of Acceptable IDs","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+281,"VtIDRqrExmptIDRqr","Incarcerated Voting > Voter ID Requirements > Exempts from ID Requirement","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+282,"VtIDRqrPrvdsCmplntID","Incarcerated Voting > Voter ID Requirements > Requires Provision of Compliant IDs","21IncrcrtdVtng",10,"Incarcerated Voting",FALSE
+1005,"MailBlltDlvryOrgDlvr","","21IncrcrtdVtng",10,"Incarcerated Voting",TRUE
+1006,"MailBlltOrgCollectn","","21IncrcrtdVtng",10,"Incarcerated Voting",TRUE
+1009,"RgstrFrmAvlbltyAuto","","21IncrcrtdVtng",10,"Incarcerated Voting",TRUE
+1018,"MailAppAvlbltyAuto","","21IncrcrtdVtng",10,"Incarcerated Voting",TRUE
+1019,"RgstrAllwRqrRgstDrv","","21IncrcrtdVtng",10,"Incarcerated Voting",TRUE
+283,"AppAddRgstrnApp","PAVL > Application > Adds to Registration Application","21PAVL",11,"Permanent Absentee Voting",FALSE
+284,"AppDdlnErlr","PAVL > Application > Deadline > Earlier","21PAVL",11,"Permanent Absentee Voting",FALSE
+285,"AppDdlnLtr","PAVL > Application > Deadline > Later","21PAVL",11,"Permanent Absentee Voting",FALSE
+286,"AppOnlnCrtOnlnPrtl","PAVL > Application > Online > Creates - Completed Through Online Portal","21PAVL",11,"Permanent Absentee Voting",FALSE
+287,"AppOnlnCrtPrntOnln","PAVL > Application > Online > Creates - Print and Return Electronically","21PAVL",11,"Permanent Absentee Voting",FALSE
+288,"AppOnlnCrtPrntHrdCpy","PAVL > Application > Online > Creates - Print and Return Hard Copy","21PAVL",11,"Permanent Absentee Voting",FALSE
+289,"AppOtherChng","PAVL > Application > Other Change","21PAVL",11,"Permanent Absentee Voting",FALSE
+290,"AvlbltyBOAllVoters","PAVL > Availability > Bill Outcome > Available to All Voters","21PAVL",11,"Permanent Absentee Voting",FALSE
+291,"AvlbltyBOCrtnVoters","PAVL > Availability > Bill Outcome > Available to Certain Voters","21PAVL",11,"Permanent Absentee Voting",FALSE
+292,"AvlbltyCreates","PAVL > Availability > Creates PAVL","21PAVL",11,"Permanent Absentee Voting",FALSE
+293,"AvlbltyEliminates","PAVL > Availability > Eliminates PAVL","21PAVL",11,"Permanent Absentee Voting",FALSE
+294,"AvlbltyExpands","PAVL > Availability > Expands","21PAVL",11,"Permanent Absentee Voting",FALSE
+295,"AvlbltyRestricts","PAVL > Availability > Restricts","21PAVL",11,"Permanent Absentee Voting",FALSE
+296,"Other","PAVL > Other Policy","21PAVL",11,"Permanent Absentee Voting",FALSE
+297,"PrmntLstAppBOAllVtr","PAVL > Permanent List to Receive Ballot Applications > Bill Outcome > Available to All Voters","21PAVL",11,"Permanent Absentee Voting",FALSE
+298,"PrmntLstAppBOCrtnVtr","PAVL > Permanent List to Receive Ballot Applications > Bill Outcome > Available to Certain Voters","21PAVL",11,"Permanent Absentee Voting",FALSE
+299,"PrmntLstAppCrtExpnd","PAVL > Permanent List to Receive Ballot Applications > Creates or Expands","21PAVL",11,"Permanent Absentee Voting",FALSE
+300,"PrmntLstAppElmtRstr","PAVL > Permanent List to Receive Ballot Applications > Eliminates or Restricts","21PAVL",11,"Permanent Absentee Voting",FALSE
+301,"-Anti-Voter","PAVL > Policy Impact > Restricts Voter Access / Election Administration","21PAVL",11,"Permanent Absentee Voting",FALSE
+303,"-Mixed_Unclear","PAVL > Policy Impact > Mixed or Unclear","21PAVL",11,"Permanent Absentee Voting",FALSE
+304,"-Neutral","PAVL > Policy Impact > Neutral","21PAVL",11,"Permanent Absentee Voting",FALSE
+305,"-Pro-Voter","PAVL > Policy Impact > Improves Voter Access / Election Administration","21PAVL",11,"Permanent Absentee Voting",FALSE
+306,"RmvlFrmLstMksEsr","PAVL > Removal from List > Makes Easier","21PAVL",11,"Permanent Absentee Voting",FALSE
+307,"RmvlFrmLstMksHrdr","PAVL > Removal from List > Makes Harder","21PAVL",11,"Permanent Absentee Voting",FALSE
+868,"AvlbltyProhibits","PAVL > Availability > Prohibits PAVL","21PAVL",11,"Permanent Absentee Voting",FALSE
+1012,"-Mixed_Anti-Voter","","21PAVL",11,"Permanent Absentee Voting",TRUE
+308,"ChngRqrmnt","Proof of Citizenship > Changes Requirement","21PrfCtznshp",12,"Proof of Citizenship",FALSE
+309,"CrtRqrmnt","Proof of Citizenship > Creates Requirement","21PrfCtznshp",12,"Proof of Citizenship",FALSE
+310,"ElmntRqrmnt","Proof of Citizenship > Eliminates Requirement","21PrfCtznshp",12,"Proof of Citizenship",FALSE
+311,"-Anti-Voter","Proof of Citizenship > Policy Impact > Restricts Voter Access / Election Administration","21PrfCtznshp",12,"Proof of Citizenship",FALSE
+313,"-Mixed_Unclear","Proof of Citizenship > Policy Impact > Mixed or Unclear","21PrfCtznshp",12,"Proof of Citizenship",FALSE
+314,"-Neutral","Proof of Citizenship > Policy Impact > Neutral","21PrfCtznshp",12,"Proof of Citizenship",FALSE
+315,"-Pro-Voter","Proof of Citizenship > Policy Impact > Improves Voter Access / Election Administration","21PrfCtznshp",12,"Proof of Citizenship",FALSE
+668,"Other","Proof of Citizenship > Other Policy","21PrfCtznshp",12,"Proof of Citizenship",FALSE
+316,"ApplcbltyFedCngrsDst","Redistricting > Applicability > Federal Congressional Districts","21Rdstrctng",13,"Redistricting",TRUE
+317,"ApplcbltyMncplLclDst","Redistricting > Applicability > Municipal or Local Districts","21Rdstrctng",13,"Redistricting",TRUE
+318,"ApplcbltySttLgDstrct","Redistricting > Applicability > State Legislative Districts","21Rdstrctng",13,"Redistricting",TRUE
+319,"CrtrDataUsePrtsnData","Redistricting > Criteria > Data Use > Partisan Data","21Rdstrctng",13,"Redistricting",TRUE
+320,"CrtrDataUseRaceData","Redistricting > Criteria > Data Use > Racial Data","21Rdstrctng",13,"Redistricting",TRUE
+322,"CrtrMndtryPrmsvCrt","Redistricting > Criteria > Mandatory or Permissive > Creates or Changes","21Rdstrctng",13,"Redistricting",TRUE
+323,"CrtrMndtryPrmsvElmnt","Redistricting > Criteria > Mandatory or Permissive > Eliminates","21Rdstrctng",13,"Redistricting",TRUE
+325,"CrtrPrhbtdCrt","Redistricting > Criteria > Prohibited > Creates or Changes","21Rdstrctng",13,"Redistricting",TRUE
+326,"CrtrPrhbtdElmnt","Redistricting > Criteria > Prohibited > Eliminates","21Rdstrctng",13,"Redistricting",TRUE
+327,"CrtrRanking","Redistricting > Criteria > Ranking","21Rdstrctng",13,"Redistricting",TRUE
+328,"CrtrTpcCmmntsOfIntrs","Redistricting > Criteria > Topic > Communities of Interest","21Rdstrctng",13,"Redistricting",TRUE
+329,"CrtrTpcCmpctnss","Redistricting > Criteria > Topic > Compactness","21Rdstrctng",13,"Redistricting",TRUE
+330,"CrtrTpcCmptvnss","Redistricting > Criteria > Topic > Competitiveness","21Rdstrctng",13,"Redistricting",TRUE
+331,"CrtrTpcCntgty","Redistricting > Criteria > Topic > Contiguity","21Rdstrctng",13,"Redistricting",TRUE
+332,"CrtrTpcCorePriorDstr","Redistricting > Criteria > Topic > Cores of Prior Districts","21Rdstrctng",13,"Redistricting",TRUE
+333,"CrtrTpcIncmbncy","Redistricting > Criteria > Topic > Incumbency","21Rdstrctng",13,"Redistricting",TRUE
+334,"CrtrTpcNesting","Redistricting > Criteria > Topic > Nesting","21Rdstrctng",13,"Redistricting",TRUE
+335,"CrtrTpcOther","Redistricting > Criteria > Topic > Other","21Rdstrctng",13,"Redistricting",TRUE
+336,"CrtrTpcPrtyOrCnddt","Redistricting > Criteria > Topic > Party or Candidate","21Rdstrctng",13,"Redistricting",TRUE
+337,"CrtrTpcPltclSbdvsn","Redistricting > Criteria > Topic > Political Subdivisions","21Rdstrctng",13,"Redistricting",TRUE
+338,"CrtrTpcPpltn","Redistricting > Criteria > Topic > Population","21Rdstrctng",13,"Redistricting",TRUE
+339,"CrtrTpcPrprtnlty","Redistricting > Criteria > Topic > Proportionality","21Rdstrctng",13,"Redistricting",TRUE
+340,"IncrCntNonRsdFedPrsn","Redistricting > Incarcerated Residents > Changes Counting Rules > Nonresidents in Federal Prisons","21Rdstrctng",13,"Redistricting",TRUE
+341,"IncrCntNonRsdSttPrsn","Redistricting > Incarcerated Residents > Changes Counting Rules > Nonresidents in State Prisons","21Rdstrctng",13,"Redistricting",TRUE
+342,"IncrCntSttRsdFedPrsn","Redistricting > Incarcerated Residents > Changes Counting Rules > State Residents in Federal Prisons","21Rdstrctng",13,"Redistricting",TRUE
+343,"IncrCntSttRsdSttPrsn","Redistricting > Incarcerated Residents > Changes Counting Rules > State Residents in State Prisons","21Rdstrctng",13,"Redistricting",TRUE
+344,"IncrRllctnPrcssCrtCh","Redistricting > Incarcerated Residents > Reallocation Process > Creates or Changes","21Rdstrctng",13,"Redistricting",TRUE
+346,"Other","Redistricting > Other Policy","21Rdstrctng",13,"Redistricting",TRUE
+347,"-Anti-Voter","Redistricting > Policy Impact > Restricts Voter Access / Election Administration","21Rdstrctng",13,"Redistricting",TRUE
+349,"-Mixed_Unclear","Redistricting > Policy Impact > Mixed or Unclear","21Rdstrctng",13,"Redistricting",TRUE
+350,"-Neutral","Redistricting > Policy Impact > Neutral","21Rdstrctng",13,"Redistricting",TRUE
+351,"-Pro-Voter","Redistricting > Policy Impact > Improves Voter Access / Election Administration","21Rdstrctng",13,"Redistricting",TRUE
+366,"PrcsBckupPrcssElmnt","Redistricting > Process > Backup Process > Eliminates","21Rdstrctng",13,"Redistricting",TRUE
+367,"PrcsBprtAprvCrtStrRq","Redistricting > Process > Bipartisan Approval > Creates or Strengthens Requirement","21Rdstrctng",13,"Redistricting",TRUE
+368,"PrcsBprtAprvElmWknRq","Redistricting > Process > Bipartisan Approval > Eliminates or Weakens Requirement","21Rdstrctng",13,"Redistricting",TRUE
+369,"PrcsGovVetoCrtExpnd","Redistricting > Process > Gubernatorial Veto > Creates or Expands","21Rdstrctng",13,"Redistricting",TRUE
+370,"PrcsGovVetoElmnRstrc","Redistricting > Process > Gubernatorial Veto > Eliminates or Restricts","21Rdstrctng",13,"Redistricting",TRUE
+371,"PrcsJdclRvwCrtExpnd","Redistricting > Process > Judicial Review or Oversight > Creates or Expands","21Rdstrctng",13,"Redistricting",TRUE
+372,"PrcsJdclRvwElmRstrc","Redistricting > Process > Judicial Review or Oversight > Eliminates or Restricts","21Rdstrctng",13,"Redistricting",TRUE
+373,"PrcsLegSprmjCrtStrRq","Redistricting > Process > Legislative Supermajority > Creates or Strengthens Requirement","21Rdstrctng",13,"Redistricting",TRUE
+374,"PrcsLegSprmjElmWknRq","Redistricting > Process > Legislative Supermajority > Eliminates or Weakens Requirement","21Rdstrctng",13,"Redistricting",TRUE
+376,"PblcAccsPrtcptCrtExp","Redistricting > Public Access and Participation > Creates or Expands","21Rdstrctng",13,"Redistricting",TRUE
+377,"PblcAccsPrtcptElmRst","Redistricting > Public Access and Participation > Eliminates or Restricts","21Rdstrctng",13,"Redistricting",TRUE
+378,"TmlnIntrmFnlDldnErlr","Redistricting > Timelines > Interim or Final Deadlines > Earlier","21Rdstrctng",13,"Redistricting",TRUE
+379,"TmlnIntrmFnlDldnLtr","Redistricting > Timelines > Interim or Final Deadlines > Later","21Rdstrctng",13,"Redistricting",TRUE
+380,"TmlnStrtPrcsErlr","Redistricting > Timelines > Start of Process > Earlier","21Rdstrctng",13,"Redistricting",TRUE
+381,"TmlnStrtPrcsLtr","Redistricting > Timelines > Start of Process > Later","21Rdstrctng",13,"Redistricting",TRUE
+606,"MapDrawingLegisltn","Redistricting > Map-Drawing Legislation","21Rdstrctng",13,"Redistricting",TRUE
+615,"ApplcbltyOther","Redistricting > Applicability > Other Districts","21Rdstrctng",13,"Redistricting",TRUE
+643,"AuthCmsnCrtsExpds","Redistricting > Authority  > Independent Commission > Creates or Expands Authority","21Rdstrctng",13,"Redistricting",TRUE
+644,"AuthLegElmRstrAuth","Redistricting > Authority  > Legislature > Eliminates or Restricts Authority","21Rdstrctng",13,"Redistricting",TRUE
+645,"AuthLegCrtExpAuth","Redistricting > Authority  > Legislature > Creates or Expands Authority","21Rdstrctng",13,"Redistricting",TRUE
+647,"AuthCmsnChgMbrApt","Redistricting > Authority  > Independent Commission > Changes Membership or Appointment Process","21Rdstrctng",13,"Redistricting",TRUE
+651,"AuthBOLegAprvsMps","Redistricting > Authority > Bill Outcome > Legislature Approves Maps","21Rdstrctng",13,"Redistricting",TRUE
+652,"AuthBOLegDrwsMps","Redistricting > Authority > Bill Outcome > Legislature Draws Maps","21Rdstrctng",13,"Redistricting",TRUE
+653,"AuthBOCmsnDrwsMps","Redistricting > Authority > Bill Outcome > Commission Draws Maps","21Rdstrctng",13,"Redistricting",TRUE
+654,"PrcsBckupPrcssLeg","Redistricting > Process > Backup Process > Creates or Changes - Legislative","21Rdstrctng",13,"Redistricting",TRUE
+655,"AuthBOCmsnAprvsMps","Redistricting > Authority > Bill Outcome > Commission Approves Maps","21Rdstrctng",13,"Redistricting",TRUE
+656,"PrcsBckupPrcssJdcl","Redistricting > Process > Backup Process > Creates or Changes - Judicial","21Rdstrctng",13,"Redistricting",TRUE
+657,"PrcsBckupPrcssCmsn","Redistricting > Process > Backup Process > Creates or Changes - Commission","21Rdstrctng",13,"Redistricting",TRUE
+658,"AuthBOVtrsAprvMps","Redistricting > Authority > Bill Outcome > Voters Approve Maps","21Rdstrctng",13,"Redistricting",TRUE
+664,"AuthCmsnElmRst","Redistricting > Authority  > Independent Commission > Eliminates or Restricts Authority","21Rdstrctng",13,"Redistricting",TRUE
+964,"MapDarwingLegisltn","","21Rdstrctng",13,"Redistricting",TRUE
+967,"PrcsBckupPrcssCrts","","21Rdstrctng",13,"Redistricting",TRUE
+968,"PrmryAuthCmmssCrtExp","","21Rdstrctng",13,"Redistricting",TRUE
+974,"-Mixed_Pro-Voter","","21Rdstrctng",13,"Redistricting",TRUE
+983,"PrmryAuthLegCrtExpnd","","21Rdstrctng",13,"Redistricting",TRUE
+985,"PrcsAdvsryCmssnCrt","","21Rdstrctng",13,"Redistricting",TRUE
+992,"PrcsBckupPrcssChng","","21Rdstrctng",13,"Redistricting",TRUE
+993,"-Mixed_Anti-Voter","","21Rdstrctng",13,"Redistricting",TRUE
+995,"PrmryAuthLegElmnRstr","","21Rdstrctng",13,"Redistricting",TRUE
+1000,"PrmryAuthLegChng","","21Rdstrctng",13,"Redistricting",TRUE
+1001,"PrmryAuthCmmssMbrApt","","21Rdstrctng",13,"Redistricting",TRUE
+1007,"PrcssOthrChng","","21Rdstrctng",13,"Redistricting",TRUE
+1015,"CrtrMndtryPrmsvChng","","21Rdstrctng",13,"Redistricting",TRUE
+382,"AvlEVCrtsExpnds","SDR > Availability > During Early Voting > Creates or Expands","21SDR",14,"Same Day Registration",FALSE
+383,"AvlEVElmntRstrct","SDR > Availability > During Early Voting > Eliminates or Restricts","21SDR",14,"Same Day Registration",FALSE
+384,"AvlElctDyCrtExpnd","SDR > Availability > On Election Day > Creates or Expands","21SDR",14,"Same Day Registration",FALSE
+385,"AvlElctDyElmntRstrct","SDR > Availability > On Election Day > Eliminates or Restricts","21SDR",14,"Same Day Registration",FALSE
+386,"LngthRsdncRqCrtLngth","SDR > Length of Residency Requirements > Creates or Lengthens","21SDR",14,"Same Day Registration",FALSE
+387,"LngthRsdncRqElmShrtn","SDR > Length of Residency Requirements > Eliminates or Shortens","21SDR",14,"Same Day Registration",FALSE
+388,"LctnChngDrngEV","SDR > Locations > Changes > During Early Voting","21SDR",14,"Same Day Registration",FALSE
+389,"LctnChngElctnDy","SDR > Locations > Changes > On Election Day","21SDR",14,"Same Day Registration",FALSE
+390,"Other","SDR > Other Policy","21SDR",14,"Same Day Registration",FALSE
+391,"-Anti-Voter","SDR > Policy Impact > Restricts Voter Access / Election Administration","21SDR",14,"Same Day Registration",FALSE
+393,"-Mixed_Unclear","SDR > Policy Impact > Mixed or Unclear","21SDR",14,"Same Day Registration",FALSE
+394,"-Neutral","SDR > Policy Impact > Neutral","21SDR",14,"Same Day Registration",FALSE
+395,"-Pro-Voter","SDR > Policy Impact > Improves Voter Access / Election Administration","21SDR",14,"Same Day Registration",FALSE
+396,"PrfIDCrtExpndRqNnPht","SDR > Proof of Identity > Creates or Expands Requirement > Requires Non-Photo ID","21SDR",14,"Same Day Registration",FALSE
+397,"PrfIDCrtExpndRqPht","SDR > Proof of Identity > Creates or Expands Requirement > Requires Photo ID","21SDR",14,"Same Day Registration",FALSE
+398,"PrfIDElmntRlxRqrmnts","SDR > Proof of Identity > Eliminates or Relaxes Requirement","21SDR",14,"Same Day Registration",FALSE
+399,"PrfIDNewSDRNotRqrd","SDR > Proof of Identity > New SDR - No Proof Required to Register","21SDR",14,"Same Day Registration",FALSE
+400,"PrfRsdncCrtExpndRqr","SDR > Proof of Residency > Creates or Expands Requirement","21SDR",14,"Same Day Registration",FALSE
+401,"PrfRsdncElmntRlxRqr","SDR > Proof of Residency > Eliminates or Relaxes Requirement","21SDR",14,"Same Day Registration",FALSE
+402,"PrfRsdncNewSDRNotRqr","SDR > Proof of Residency > New SDR - No Proof Required to Register","21SDR",14,"Same Day Registration",FALSE
+403,"VrfctnAllwCstRegBllt","SDR > Verification of Eligibility or Identity > Allows Some or All Registrants to Cast Regular Ballots","21SDR",14,"Same Day Registration",FALSE
+404,"VrfctnChngPrcss","SDR > Verification of Eligibility or Identity > Changes Process","21SDR",14,"Same Day Registration",FALSE
+405,"VrfctnRqrCstPrvBllt","SDR > Verification of Eligibility or Identity > Requires Some or All Registrants to Cast Provisional Ballots","21SDR",14,"Same Day Registration",FALSE
+1011,"-Mixed_Anti-Voter","","21SDR",14,"Same Day Registration",TRUE
+1028,"-Pro-Voter, AvlElctDyCrtExpnd, PrfRsdncCrtExpndRqr, VrfctnAllwCstRegBllt","","21SDR",14,"Same Day Registration",TRUE
+418,"ApplcblApplsErlyVtng","In-Person Voting > Applicability > Applies to Early Voting","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+419,"ApplcblApplsElctnDay","In-Person Voting > Applicability > Applies to Election Day Voting","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+420,"ChllngChllngPrcss","In-Person Voting > Challenges > Challenge Process","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+421,"ChllngGrnds","In-Person Voting > Challenges > Grounds for Challenge","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+422,"-Anti-Voter","In-Person Voting > Policy Impact > Restricts Voter Access / Election Administration","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+424,"-Mixed_Unclear","In-Person Voting > Policy Impact > Mixed or Unclear","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+425,"-Neutral","In-Person Voting > Policy Impact > Neutral","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+426,"-Pro-Voter","In-Person Voting > Policy Impact > Improves Voter Access / Election Administration","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+427,"PllWtchrNmbrAuthObsr","In-Person Voting > Poll Watchers > Number of Authorized Observers","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+428,"PllWtchrObsrvtnPrcss","In-Person Voting > Poll Watchers > Observation Process","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+429,"PllWtchrObsrvrQlfctn","In-Person Voting > Poll Watchers > Observer Qualifications","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+430,"PllWrkrCmpstnChngUI","In-Person Voting > Poll Workers > Compensation > Changes Impact on Benefits or Taxes","21InPrsnVtng",15,"The In-Person Voting Process",TRUE
+431,"PllWrkCmpstnDcrss","In-Person Voting > Poll Workers > Compensation > Decreases","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+432,"PllWrkCmpstnIncrss","In-Person Voting > Poll Workers > Compensation > Increases","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+433,"PllWrkQlfctnCrtStrng","In-Person Voting > Poll Workers > Qualifications > Creates or Strengthens Requirements","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+434,"PllWrkQlfctnElmntRlx","In-Person Voting > Poll Workers > Qualifications > Eliminates or Relaxes Requirements","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+435,"PllWrkRcrtmtStratgs","In-Person Voting > Poll Workers > Recruitment Strategies","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+436,"PrvsnlVtngGrnds","In-Person Voting > Provisional Voting > Grounds for Provisional Voting","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+437,"PrvsnlVtngBlltVrfctn","In-Person Voting > Provisional Voting > Provisional Ballot Verification","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+438,"PrvsnlVtngPrcss","In-Person Voting > Provisional Voting > Provisional Voting Process","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+439,"PrvsnlVtngNtfctRsltn","In-Person Voting > Provisional Voting > Voter Notification of Resolution","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+440,"VtrRqrmntIDCrtExpnd","In-Person Voting > Voter Requirements > ID Requirements > Creates or Expands","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+441,"VtrRqrmntIDElmntRlx","In-Person Voting > Voter Requirements > ID Requirements > Eliminates or Relaxes","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+442,"VtrRqrmntOthrCrtExpn","In-Person Voting > Voter Requirements > Other Requirements > Creates or Expands","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+443,"VtrRqrmntOthrElmnRlx","In-Person Voting > Voter Requirements > Other Requirements > Eliminates or Relaxes","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+609,"AcsblThdPtyAsstnce","In-Person Voting > Accessibility > Third Party Assistance","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+611,"AcsblLanguage","In-Person Voting > Accessibility > Language Accessibility","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+632,"AcsblPhysDisablty","In-Person Voting > Accessibility > Physical or Disability Accessibility","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+903,"PllWrkCmpstnChgBnft","In-Person Voting > Poll Workers > Compensation > Changes Impact on Benefits or Taxes","21InPrsnVtng",15,"The In-Person Voting Process",FALSE
+905,"PllWrkCmpstnChgBnft","In-Person Voting > Poll Workers > Compensation > Changes Impact on Benefits or Taxes","21InPrsnVtng",15,"The In-Person Voting Process",TRUE
+939,"AcsblOther","","21InPrsnVtng",15,"The In-Person Voting Process",TRUE
+962,"AcsbltyCrbsdCrtExpnd","","21InPrsnVtng",15,"The In-Person Voting Process",TRUE
+969,"-Mixed_Pro-Voter","","21InPrsnVtng",15,"The In-Person Voting Process",TRUE
+970,"AcsblThdPtyAsstCrtEx","","21InPrsnVtng",15,"The In-Person Voting Process",TRUE
+971,"AcsblThdPtyAsstElmRs","","21InPrsnVtng",15,"The In-Person Voting Process",TRUE
+988,"-Mixed_Anti-Voter","","21InPrsnVtng",15,"The In-Person Voting Process",TRUE
+1031,"-Pro-Voter, ApplcblApplsElctnDay, PllWrkQlfctnElmntRlx","","21InPrsnVtng",15,"The In-Person Voting Process",TRUE
+444,"AvlBOAllElctn","VBM > Availability > Bill Outcome > Applies to All Elections","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+445,"AvlBOSpcfcElctns","VBM > Availability > Bill Outcome > Applies to Specific Elections","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+446,"AvlBOJdxOptn","VBM > Availability > Bill Outcome > Jurisdictional Option","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+447,"AvlBOMndtrySttwd","VBM > Availability > Bill Outcome > Mandatory Statewide","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+448,"AvlCrtVBM","VBM > Availability > Creates VBM","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+449,"AvlElxAllwRqrVBMExpn","VBM > Availability > Elections Allowed or Required to be VBM > Expands","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+450,"AvlElxAllwRqrVBMNrrw","VBM > Availability > Elections Allowed or Required to be VBM Elections > Narrows","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+451,"AvlEliminatesVBM","VBM > Availability > Eliminates VBM","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+452,"AvlJdxAllwRqrVBMExpn","VBM > Availability > Jurisdictions Allowed or Required to be VBM > Expands","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+453,"AvlJdxAllwRqrVBMNrrw","VBM > Availability > Jurisdictions Allowed or Required to be VBM Elections > Narrows","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+454,"AvlPilotProject","VBM > Availability > Pilot Project","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+455,"AvlProhibitsSmAllVBM","VBM > Availability > Prohibits Some or All VBM","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+456,"BlltDlvrAltrntAddrss","VBM > Ballot Delivery > Alternate Address","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+461,"BlltDlvrTmlnEarlier","VBM > Ballot Delivery > Timeline > Earlier","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+462,"BlltDlvrTmlnLater","VBM > Ballot Delivery > Timeline > Later","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+463,"BlltRtrnVrfctnCure","VBM > Ballot Return, Verification or Cure","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+464,"InPrsnVtngOptnCrtExp","VBM > In-Person Voting Options > Creates or Expands","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+465,"InPrsnVtngOptnElmRst","VBM > In-Person Voting Options > Eliminates or Restricts","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+466,"IncarceratedVoting","VBM > Incarcerated Voting","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+467,"Other","VBM > Other Policy","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+468,"-Anti-Voter","VBM > Policy Impact > Restricts Voter Access / Election Administration","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+470,"-Mixed_Unclear","VBM > Policy Impact > Mixed or Unclear","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+471,"-Neutral","VBM > Policy Impact > Neutral","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+472,"-Pro-Voter","VBM > Policy Impact > Improves Voter Access / Election Administration","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+473,"RplcmntBlltRules","VBM > Replacement Ballot Rules","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+474,"RsdntlFacilities","VBM > Residential Facilities","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+475,"UOCAVA","VBM > Uniformed and Overseas Voters (UOCAVA)","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+476,"VoteCenterRqrmnts","VBM > Vote Center Requirements","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+633,"AcsblLanguage","VBM > Accessibility > Language Accessibility","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+634,"AcsblPhysDisablty","VBM > Accessibility > Physical or Disability Accessibility","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+635,"AcsblThirdPrtyAsst","VBM > Accessibility > Third Party Assistance","21VBMElections",16,"Vote-By-Mail Elections",FALSE
+961,"AvlProhibitsVBM","","21VBMElections",16,"Vote-By-Mail Elections",TRUE
+996,"-Mixed_Pro-Voter","","21VBMElections",16,"Vote-By-Mail Elections",TRUE
+997,"-Mixed_Anti-Voter","","21VBMElections",16,"Vote-By-Mail Elections",TRUE
+1008,"AvlBOCrtJdxOptn","","21VBMElections",16,"Vote-By-Mail Elections",TRUE
+477,"AltsCrtsExpnds","Voter ID > Alternatives to ID > Creates Or Expands","21VoterID",17,"Voter ID",FALSE
+478,"AltsElmntsRstrcts","Voter ID > Alternatives to ID > Eliminates Or Restricts","21VoterID",17,"Voter ID",FALSE
+479,"AltsPrvBlltChngPrcss","Voter ID > Alternatives to ID > Provisional Voting > Creates or Changes Process","21VoterID",17,"Voter ID",FALSE
+481,"ApplcbltyAbsntVtng","Voter ID > Applicability > Applies to Absentee Voting","21VoterID",17,"Voter ID",FALSE
+482,"ApplcbltyErlyVtng","Voter ID > Applicability > Applies to Early Voting","21VoterID",17,"Voter ID",FALSE
+483,"ApplcbltyElctnDyVtng","Voter ID > Applicability > Applies to Election Day Voting","21VoterID",17,"Voter ID",FALSE
+484,"ApplcbltyThrdPrtyRtr","Voter ID > Applicability > Applies to Third Party Ballot Pickup or Return","21VoterID",17,"Voter ID",FALSE
+485,"BOPhotoIDNotRqrd","Voter ID > Bill Outcome > Photo ID Not Required","21VoterID",17,"Voter ID",FALSE
+486,"BOPhotoIDRqrd","Voter ID > Bill Outcome > Photo ID Required","21VoterID",17,"Voter ID",FALSE
+487,"IDRqrmntCrts","Voter ID > ID Requirement > Creates","21VoterID",17,"Voter ID",FALSE
+488,"FreeIDCrtsExpnds","Voter ID > Free IDs > Creates Or Expands","21VoterID",17,"Voter ID",FALSE
+489,"FreeIDElmntRstrct","Voter ID > Free IDs > Eliminates or Restricts","21VoterID",17,"Voter ID",FALSE
+490,"Other","Voter ID > Other Policy","21VoterID",17,"Voter ID",FALSE
+491,"-Anti-Voter","Voter ID > Policy Impact > Restricts Voter Access / Election Administration","21VoterID",17,"Voter ID",FALSE
+493,"-Mixed_Unclear","Voter ID > Policy Impact > Mixed or Unclear","21VoterID",17,"Voter ID",FALSE
+494,"-Neutral","Voter ID > Policy Impact > Neutral","21VoterID",17,"Voter ID",FALSE
+495,"-Pro-Voter","Voter ID > Policy Impact > Improves Voter Access / Election Administration","21VoterID",17,"Voter ID",FALSE
+496,"IDRqrmntRpls","Voter ID > ID Requirement > Repeals","21VoterID",17,"Voter ID",FALSE
+497,"TypeAccptdAdds","Voter ID > Types Accepted > Adds","21VoterID",17,"Voter ID",FALSE
+498,"TypeAccptdElmnts","Voter ID > Types Accepted > Eliminates","21VoterID",17,"Voter ID",FALSE
+616,"ApplcbltyVBMElctns","Voter ID > Applicability > Applies to Vote-by-Mail Elections","21VoterID",17,"Voter ID",FALSE
+669,"IDNmbrRqrmntCrts","Voter ID > ID Number Requirement > Creates","21VoterID",17,"Voter ID",FALSE
+670,"IDNmbrRqrmntRpls","Voter ID > ID Number Requirement > Repeals","21VoterID",17,"Voter ID",FALSE
+944,"CrtsIDRqrmnt","","21VoterID",17,"Voter ID",TRUE
+1003,"RplsIDRqrmnt","","21VoterID",17,"Voter ID",TRUE
+499,"ChngPrcssDataSrcs","List Maintenance > Changes Process > Data Sources","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+500,"ChngPrcssMtchngCrtr","List Maintenance > Changes Process > Matching Criteria","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+501,"ChngPrcssNtcRmvl","List Maintenance > Changes Process > Notice of Removal","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+502,"ChngPrcssOffclOvrsng","List Maintenance > Changes Process > Official or Entity Overseeing List Maintenance","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+503,"ChngPrcssRmdyImpRmvl","List Maintenance > Changes Process > Remedying Improper Removal","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+504,"ChngPrcssRmvlTmng","List Maintenance > Changes Process > Removal Timing","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+505,"IntrsttPgmCrssChckJn","List Maintenance > Interstate List Maintenance Programs > Crosscheck > Joins","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+506,"IntrsttPgmCrssChckLv","List Maintenance > Interstate List Maintenance Programs > Crosscheck > Leaves","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+507,"IntrsttPgmERICJn","List Maintenance > Interstate List Maintenance Programs > ERIC > Joins","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+508,"IntrsttPgmERICLv","List Maintenance > Interstate List Maintenance Programs > ERIC > Leaves","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+509,"IntrsttPgmOthr","List Maintenance > Interstate List Maintenance Programs > Other","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+510,"Other","List Maintenance > Other Policy","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+511,"-Anti-Voter","List Maintenance > Policy Impact > Restricts Voter Access / Election Administration","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+513,"-Mixed_Unclear","List Maintenance > Policy Impact > Mixed or Unclear","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+514,"-Neutral","List Maintenance > Policy Impact > Neutral","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+515,"-Pro-Voter","List Maintenance > Policy Impact > Improves Voter Access / Election Administration","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+516,"RsnRmvlChngAddrss","List Maintenance > Reason for Removal > Change of Address","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+517,"RsnRmvlCtznshpStts","List Maintenance > Reason for Removal > Citizenship Status","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+518,"RsnRmvlDth","List Maintenance > Reason for Removal > Death","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+519,"RsnRmvlFlnyCnvctn","List Maintenance > Reason for Removal > Felony Conviction","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+520,"RsnRmvlMntlIncpcty","List Maintenance > Reason for Removal > Mental Incapacity","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+521,"RsnRmvlNonFlnyCvctn","List Maintenance > Reason for Removal > Non-Felony Conviction","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+522,"RsnRmvlNonVtng","List Maintenance > Reason for Removal > Non-Voting","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",FALSE
+972,"-Mixed_Anti-Voter","","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",TRUE
+999,"-Mixed_Pro-Voter","","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",TRUE
+1033,"-Pro-Voter, IntrsttPgmERICJn","","21VtrLstMntncPrgs",18,"Voter List Maintenance and Purges",TRUE
+523,"AddrssCnfdntltyPrgms","Registration > Address Confidentiality Programs","21VtrRgstrn",19,"Voter Registration - General",FALSE
+524,"DdlnNewRgstrnErlr","Registration > Deadlines > New Registration > Earlier","21VtrRgstrn",19,"Voter Registration - General",FALSE
+525,"DdlnNewRgstrnLtr","Registration > Deadlines > New Registration > Later","21VtrRgstrn",19,"Voter Registration - General",FALSE
+526,"DdlnUpdtPltcAfflErlr","Registration > Deadlines > Updating Political Affiliation > Earlier","21VtrRgstrn",19,"Voter Registration - General",FALSE
+527,"DdlnUpdtPltcAfflLtr","Registration > Deadlines > Updating Political Affiliation > Later","21VtrRgstrn",19,"Voter Registration - General",FALSE
+528,"DdlnUpdtRgstrnErlr","Registration > Deadlines > Updating Registration > Earlier","21VtrRgstrn",19,"Voter Registration - General",FALSE
+529,"DdlnUpdtRgstrnLtr","Registration > Deadlines > Updating Registration > Later","21VtrRgstrn",19,"Voter Registration - General",FALSE
+530,"FrmCntntDsgn","Registration > Form Content or Design","21VtrRgstrn",19,"Voter Registration - General",FALSE
+531,"OVRAllwUpdtOnlyChng","Registration > Online Voter Registration > Allows Updates Only > Changes Existing System","21VtrRgstrn",19,"Voter Registration - General",FALSE
+532,"OVRAllwUpdtOnlyNew","Registration > Online Voter Registration > Allows Updates Only > Creates New System","21VtrRgstrn",19,"Voter Registration - General",FALSE
+533,"OVRBODMVRcrdNotRqrd","Registration > Online Voter Registration > Bill Outcome > DMV Record Not Required","21VtrRgstrn",19,"Voter Registration - General",FALSE
+534,"OVRBODMVRcrdRqrd","Registration > Online Voter Registration > Bill Outcome > DMV Record Required","21VtrRgstrn",19,"Voter Registration - General",FALSE
+535,"OVRChngExstngSystm","Registration > Online Voter Registration > Changes Existing System","21VtrRgstrn",19,"Voter Registration - General",FALSE
+536,"OVRCrtsNewSystm","Registration > Online Voter Registration > Creates New System","21VtrRgstrn",19,"Voter Registration - General",FALSE
+537,"Other","Registration > Other Policy","21VtrRgstrn",19,"Voter Registration - General",FALSE
+538,"-Anti-Voter","Registration > Policy Impact > Restricts Voter Access / Election Administration","21VtrRgstrn",19,"Voter Registration - General",FALSE
+540,"-Mixed_Unclear","Registration > Policy Impact > Mixed or Unclear","21VtrRgstrn",19,"Voter Registration - General",FALSE
+541,"-Neutral","Registration > Policy Impact > Neutral","21VtrRgstrn",19,"Voter Registration - General",FALSE
+542,"-Pro-Voter","Registration > Policy Impact > Improves Voter Access / Election Administration","21VtrRgstrn",19,"Voter Registration - General",FALSE
+543,"PreRgstrMinorChng","Registration > Pre-Registration for Minors > Changes","21VtrRgstrn",19,"Voter Registration - General",FALSE
+544,"PreRgstrMinorCrt","Registration > Pre-Registration for Minors > Creates","21VtrRgstrn",19,"Voter Registration - General",FALSE
+545,"PreRgstrMinorElmn","Registration > Pre-Registration for Minors > Eliminates","21VtrRgstrn",19,"Voter Registration - General",FALSE
+546,"PrmryVtngMinorChng","Registration > Primary Voting for Minors > Changes","21VtrRgstrn",19,"Voter Registration - General",FALSE
+547,"PrmryVtngMinorCrts","Registration > Primary Voting for Minors > Creates","21VtrRgstrn",19,"Voter Registration - General",FALSE
+548,"PrmryVtngMinorElmnts","Registration > Primary Voting for Minors > Eliminates","21VtrRgstrn",19,"Voter Registration - General",FALSE
+549,"RegAgncyAddAgncy","Registration > Registration Agencies > Adds Agency","21VtrRgstrn",19,"Voter Registration - General",FALSE
+550,"RegAgncyChngPrcssDMV","Registration > Registration Agencies > Changes Registration Options or Process > At DMV","21VtrRgstrn",19,"Voter Registration - General",FALSE
+551,"RegAgncyChngPrcsOthr","Registration > Registration Agencies > Changes Registration Options or Process > At Other Agency","21VtrRgstrn",19,"Voter Registration - General",FALSE
+552,"RegAgncyRmvsAgncy","Registration > Registration Agencies > Removes Agency","21VtrRgstrn",19,"Voter Registration - General",FALSE
+553,"RegDrvAsstncAuthrzs","Registration > Registration Drives and Third-Party Assistance > Authorizes","21VtrRgstrn",19,"Voter Registration - General",FALSE
+554,"RegDrvAsstncChngRq","Registration > Registration Drives and Third-Party Assistance > Changes Requirements","21VtrRgstrn",19,"Voter Registration - General",FALSE
+555,"RegDrvAsstncPrhbt","Registration > Registration Drives and Third-Party Assistance > Prohibits","21VtrRgstrn",19,"Voter Registration - General",FALSE
+556,"RegInfoSbgrpCollege","Registration > Registration Info or Opportunities for Subgroups > College Students","21VtrRgstrn",19,"Voter Registration - General",FALSE
+557,"RegInfoSbgrpFrrmOwnr","Registration > Registration Info or Opportunities for Subgroups > Firearm Owners","21VtrRgstrn",19,"Voter Registration - General",FALSE
+558,"RegInfoSbgrpHSStdnts","Registration > Registration Info or Opportunities for Subgroups > High School Students","21VtrRgstrn",19,"Voter Registration - General",FALSE
+559,"RegInfoSbgrpIncrctd","Registration > Registration Info or Opportunities for Subgroups > Incarcerated or Returning Citizens","21VtrRgstrn",19,"Voter Registration - General",FALSE
+560,"RegInfoSbgrpOthr","Registration > Registration Info or Opportunities for Subgroups > Other Group","21VtrRgstrn",19,"Voter Registration - General",FALSE
+561,"RegInfoSbgrpRenters","Registration > Registration Info or Opportunities for Subgroups > Renters","21VtrRgstrn",19,"Voter Registration - General",FALSE
+562,"RulesSaleDstrbVtrLst","Registration > Rules Regarding Sale, Distribution or Use of Voter Lists","21VtrRgstrn",19,"Voter Registration - General",FALSE
+563,"VtrRqrDcmntnRqrmnts","Registration > Voter Requirements > Documentation Requirements","21VtrRgstrn",19,"Voter Registration - General",FALSE
+564,"VtrRqrInfoRqrmnts","Registration > Voter Requirements > Information Requirements","21VtrRgstrn",19,"Voter Registration - General",FALSE
+565,"VtrRqrRsdncyRqrmnts","Registration > Voter Requirements > Residency Requirements","21VtrRgstrn",19,"Voter Registration - General",FALSE
+636,"AcsblLanguage","Registration > Accessibility > Language Accessibility","21VtrRgstrn",19,"Voter Registration - General",FALSE
+637,"AcsblPhysDisablty","Registration > Accessibility > Physical or Disability Accessibility","21VtrRgstrn",19,"Voter Registration - General",FALSE
+937,"-Mixed_Anti-Voter","","21VtrRgstrn",19,"Voter Registration - General",TRUE
+954,"-Mixed_Pro-Voter","","21VtrRgstrn",19,"Voter Registration - General",TRUE
+1030,"-Pro-Voter, DdlnNewRgstrnLtr, DdlnUpdtRgstrnLtr","","21VtrRgstrn",19,"Voter Registration - General",TRUE
+566,"BOAutoAftrIncrcrtn","Restoration > Bill Outcome > Automatic Restoration > After Incarceration","21VtngRstrtn",20,"Voting Restoration",FALSE
+567,"BOAutoAftrPrlPrbtn","Restoration > Bill Outcome > Automatic Restoration > After Parole or Probation","21VtngRstrtn",20,"Voting Restoration",FALSE
+568,"BOAutoAftrPyFncOblg","Restoration > Bill Outcome > Automatic Restoration > After Payment of Financial Obligations","21VtngRstrtn",20,"Voting Restoration",FALSE
+569,"BOAutoAftrWtngPrd","Restoration > Bill Outcome > Automatic Restoration > After Waiting Period","21VtngRstrtn",20,"Voting Restoration",FALSE
+570,"BOAutoAftrNoExcptns","Restoration > Bill Outcome > Automatic Restoration > No Exceptions","21VtngRstrtn",20,"Voting Restoration",FALSE
+571,"BOAutoAftrWExcptns","Restoration > Bill Outcome > Automatic Restoration > With Exceptions","21VtngRstrtn",20,"Voting Restoration",FALSE
+572,"ChgMthdApp2Auto","Restoration > Changes Restoration Method > Application Process to Automatic","21VtngRstrtn",20,"Voting Restoration",FALSE
+573,"ChgMthdAuto2App","Restoration > Changes Restoration Method > Automatic to Application Process","21VtngRstrtn",20,"Voting Restoration",FALSE
+574,"DsnfrnchCnvctsExpnd","Restoration > Disenfranchisement > Disenfranchising Convictions > Expands","21VtngRstrtn",20,"Voting Restoration",FALSE
+575,"DsnfrnchCnvctsNrrws","Restoration > Disenfranchisement > Disenfranchising Convictions > Narrows","21VtngRstrtn",20,"Voting Restoration",FALSE
+576,"DsnfrnchEndAllCnvcts","Restoration > Disenfranchisement > Ends Disenfranchisement","21VtngRstrtn",20,"Voting Restoration",FALSE
+577,"ExcptExpndInlgbCnvct","Restoration > Exceptions to Primary Restoration Process > Expands List of Ineligible Convictions","21VtngRstrtn",20,"Voting Restoration",FALSE
+578,"ExcptNrrwInlgbCnvct","Restoration > Exceptions to Primary Restoration Process > Narrows List of Ineligible Convictions","21VtngRstrtn",20,"Voting Restoration",FALSE
+579,"FnclRqAltInbltyToPy","Restoration > Financial Requirements > Alternatives Based on Inability to Pay","21VtngRstrtn",20,"Voting Restoration",FALSE
+580,"FnclRqPrcsIdntfyOblg","Restoration > Financial Requirements > Creates or Changes Process to Identify Outstanding Obligations","21VtngRstrtn",20,"Voting Restoration",FALSE
+581,"FnclRqCrtExpnd","Restoration > Financial Requirements > Creates or Expands","21VtngRstrtn",20,"Voting Restoration",FALSE
+582,"FnclRqNrrwElmnt","Restoration > Financial Requirements > Narrows or Eliminates","21VtngRstrtn",20,"Voting Restoration",FALSE
+583,"FnclRqPrvdCnfrmPymen","Restoration > Financial Requirements > Provides Confirmation of Payment","21VtngRstrtn",20,"Voting Restoration",FALSE
+584,"FnclRqRstrOnPymntPln","Restoration > Financial Requirements > Restores Eligibility While on Payment Plan","21VtngRstrtn",20,"Voting Restoration",FALSE
+585,"FnclRqThrdPrtyPymnt","Restoration > Financial Requirements > Third-Party Payment of Financial Obligations","21VtngRstrtn",20,"Voting Restoration",FALSE
+586,"Other","Restoration > Other Policy","21VtngRstrtn",20,"Voting Restoration",FALSE
+587,"-Anti-Voter","Restoration > Policy Impact > Restricts Voter Access / Election Administration","21VtngRstrtn",20,"Voting Restoration",FALSE
+589,"-Mixed_Unclear","Restoration > Policy Impact > Mixed or Unclear","21VtngRstrtn",20,"Voting Restoration",FALSE
+590,"-Neutral","Restoration > Policy Impact > Neutral","21VtngRstrtn",20,"Voting Restoration",FALSE
+591,"-Pro-Voter","Restoration > Policy Impact > Improves Voter Access / Election Administration","21VtngRstrtn",20,"Voting Restoration",FALSE
+592,"PrcssChngAppPrcss","Restoration > Process > Changes Application Process","21VtngRstrtn",20,"Voting Restoration",FALSE
+593,"PrcssDataShrngAgncs","Restoration > Process > Data-Sharing Among Agencies","21VtngRstrtn",20,"Voting Restoration",FALSE
+594,"PrcssPreRgstrn","Restoration > Process > Pre-Registration","21VtngRstrtn",20,"Voting Restoration",FALSE
+595,"PrcssPrfRgCrtStrngRq","Restoration > Process > Proof of Restoration to Register > Creates or Strengthens Requirement","21VtngRstrtn",20,"Voting Restoration",FALSE
+596,"PrcssPrfRgElmntRlxRq","Restoration > Process > Proof of Restoration to Register > Eliminates or Relaxes Requirement","21VtngRstrtn",20,"Voting Restoration",FALSE
+597,"PrcssPrvdRstRegInfo","Restoration > Process > Provides Restoration or Registration Info to Returning Citizens","21VtngRstrtn",20,"Voting Restoration",FALSE
+598,"TmngErlrRntryPrcss","Restoration > Timing > Moves Earlier in Reentry Process","21VtngRstrtn",20,"Voting Restoration",FALSE
+599,"TmngLtrRntryPrcss","Restoration > Timing > Moves Later in Reentry Process","21VtngRstrtn",20,"Voting Restoration",FALSE
+600,"TmngWtngPrdCrtLngthn","Restoration > Timing > Waiting Period > Creates or Lengthens","21VtngRstrtn",20,"Voting Restoration",FALSE
+601,"TmngWtngPrdElmntShrt","Restoration > Timing > Waiting Period > Eliminates or Shortens","21VtngRstrtn",20,"Voting Restoration",FALSE
+998,"-Mixed_Pro-Voter","","21VtngRstrtn",20,"Voting Restoration",TRUE
+602,"2021","2021","-YearsActive",21,"",FALSE
+603,"2020","2020","-YearsActive",21,"",FALSE
+857,"2022","2022","-YearsActive",21,"",FALSE
+620,"-Anti-Voter","COVID-19 and States of Emergency > Policy Impact > Restricts Voter Access / Election Administration","21COVIDSttsEmrgncy",22,"COVID-19 and States of Emergency",FALSE
+622,"-Mixed_Unclear","COVID-19 and States of Emergency > Policy Impact > Mixed or Unclear","21COVIDSttsEmrgncy",22,"COVID-19 and States of Emergency",FALSE
+623,"-Neutral","COVID-19 and States of Emergency > Policy Impact > Neutral","21COVIDSttsEmrgncy",22,"COVID-19 and States of Emergency",FALSE
+624,"-Pro-Voter","COVID-19 and States of Emergency > Policy Impact > Improves Voter Access / Election Administration","21COVIDSttsEmrgncy",22,"COVID-19 and States of Emergency",FALSE
+1016,"-Mixed_Anti-Voter","","21COVIDSttsEmrgncy",22,"COVID-19 and States of Emergency",TRUE
+798,"21AntiVtrRgstrtn","21AntiVtrRgstrtn","-Viz",31,"",FALSE
+799,"21ProMailCurePrcss","21ProMailCurePrcss","-Viz",31,"",FALSE
+800,"21ProCrmJstcRstrtn","21ProCrmJstcRstrtn","-Viz",31,"",FALSE
+801,"21ProCrmJstcIncrcrtd","21ProCrmJstcIncrcrtd","-Viz",31,"",FALSE
+802,"21ProErlyVtngNwExpnd","21ProErlyVtngNwExpnd","-Viz",31,"",FALSE
+803,"21ProMailBlltDrpOff","21ProMailBlltDrpOff","-Viz",31,"",FALSE
+804,"21AntiMailDrpBxs","21AntiMailDrpBxs","-Viz",31,"",FALSE
+805,"21AntiMailVrfctnRq","21AntiMailVrfctnRq","-Viz",31,"",FALSE
+806,"21AntiInPrsnErlyVtg","21AntiInPrsnErlyVtg","-Viz",31,"",FALSE
+807,"21ProRegAVR","21ProRegAVR","-Viz",31,"",FALSE
+808,"21AntiInPrsnVtrID","21AntiInPrsnVtrID","-Viz",31,"",FALSE
+809,"21ProMailNoExcAbsn","21ProMailNoExcAbsn","-Viz",31,"",FALSE
+810,"21ProRegSDR","21ProRegSDR","-Viz",31,"",FALSE
+811,"21AntiMailAbsntElg","21AntiMailAbsntElg","-Viz",31,"",FALSE
+812,"21ProMailNwExpndVBM","21ProMailNwExpndVBM","-Viz",31,"",FALSE
+1053,"TESTTEST","TESTEST","-Viz",31,"",TRUE
+818,"IssueRprtInvstgEnfrc","Shifts in Election Authority > Issue Areas > Reporting, Investigation, or Enforcement of Election Law","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+819,"PwrGainAttrnyGeneral","Shifts in Election Authority > Power - Gain > Attorney General","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+820,"PwrGainLegislature","Shifts in Election Authority > Power - Gain > Legislature","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+821,"PwrLossJudiciary","Shifts in Election Authority > Power - Lose > Judiciary","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+822,"IssueLtgtnAuthrOvrst","Shifts in Election Authority > Issue Areas > Litigation Authority or Oversight","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+823,"IssueEmrgncyAuthrty","Shifts in Election Authority > Issue Areas > Emergency Authority","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+824,"PwrLossChfElctnOffcl","Shifts in Election Authority > Power - Lose > Chief Election Official","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+825,"PwrGainStateBoard","Shifts in Election Authority > Power - Gain > State Board","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+826,"PwrGainChfElctnOffcl","Shifts in Election Authority > Power - Gain > Chief Election Official","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+827,"PwrLossGovernor","Shifts in Election Authority > Power - Lose > Governor","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+828,"PwrGainLocalOffcls","Shifts in Election Authority > Power - Gain > Local Officials","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+829,"PwrLossOthrOffcl","Shifts in Election Authority > Power - Lose > Other Official or Entity","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+830,"PwrLossLocalOffcls","Shifts in Election Authority > Power - Lose > Local Officials","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+831,"IssueOvrstLoclOffcls","Shifts in Election Authority > Issue Areas > Oversight of Local Officials","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+832,"IssueElctnRslts","Shifts in Election Authority > Issue Areas > Election Results","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+833,"IssueVoterListMntnc","Shifts in Election Authority > Issue Areas > Voter List Maintenance","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+834,"PwrLossAttrnyGeneral","Shifts in Election Authority > Power - Lose > Attorney General","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+835,"OffclSlctAppntToElct","Shifts in Election Authority > Election Official Selection > Appointed to Elected","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+836,"PwrGainGovernor","Shifts in Election Authority > Power - Gain > Governor","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+837,"PwrLossStateBoard","Shifts in Election Authority > Power - Lose > State Board","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+838,"OffclSlctAuthrtyPrcs","Shifts in Election Authority > Election Official Selection > Changes Appointment Authority or Process","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+839,"PwrGainJudiciary","Shifts in Election Authority > Power - Gain > Judiciary","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+840,"PwrLossLegislature","Shifts in Election Authority > Power - Lose > Legislature","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+841,"PwrGainOthrOffcl","Shifts in Election Authority > Power - Gain > Other Official or Entity","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+842,"OffclSlctElctToAppnt","Shifts in Election Authority > Election Official Selection > Elected to Appointed","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+843,"-Anti-Voter","Shifts in Election Authority > Policy Impact > Restricts Voter Access / Election Administration","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+844,"-Mixed_Unclear","Shifts in Election Authority > Policy Impact > Mixed or Unclear","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+845,"-Neutral","Shifts in Election Authority > Policy Impact > Neutral","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+846,"-Pro-Voter","Shifts in Election Authority > Policy Impact > Improves Voter Access / Election Administration","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+856,"Other","Shifts in Election Authority > Other Policy","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+858,"IssueOthrChgElctAdmn","Shifts in Election Authority > Issue Areas > Other Change to Election Administration","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+859,"PwrGainPoltclPrties","Shifts in Election Authority > Power - Gain > Political Parties","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+860,"PwrGainIndvdlsVtrs","Shifts in Election Authority > Power - Gain > Individuals/Voters","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+861,"PwrLossPolltclPrties","Shifts in Election Authority > Power - Lose > Political Parties","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+862,"PwrLossIndvdlsVtrs","Shifts in Election Authority > Power - Lose > Individuals/Voters","21ShftInElctnAthrty",32,"Shifts in Election Authority",FALSE
+870,"InvstPrsctPrprtdCrms","Interference with Election Administration > Increases Investigation or Prosecution of Purported Election Crimes","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+871,"PowerGrabLegislature","Interference with Election Administration > Power Grab by Legislature","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+872,"UsurpngSttElxnAdmin","Interference with Election Administration > Usurping the Role of State Election Administrators","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+873,"IntrfrncLocalAmdmins","Interference with Election Administration > Interference with Local Election Administrators","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+874,"PnlzJobPrfrmnc","Interference with Election Administration > Penalizing Election Officials > May Penalize Good Faith Job Performance","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+875,"ElxnRvwTrgts2020Elxn","Interference with Election Administration > Problematic Election Reviews > Targets 2020 Election","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+876,"StiflingEmrgncyPwrs","Interference with Election Administration > Stifling Emergency Powers","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+877,"IntrfrncMgmtLitigatn","Interference with Election Administration > Interference with Management of Election Litigation","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+878,"ElxnRvwLedByNonExprt","Interference with Election Administration > Problematic Election Reviews > Led by Non-Elections Expert","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+879,"ElxnRvwTrgtsJrsdxn","Interference with Election Administration > Problematic Election Reviews > Targets Specific Jurisdictions or Elections","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+880,"ElxnRvwLckClrtyPrcss","Interference with Election Administration > Problematic Election Reviews > Lacks Clarity on Process","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+881,"PnlzOffclLawfulPrctc","Interference with Election Administration > Penalizing Election Officials > Penalizes Officials for Pro-Voter Practices Allowed Under Existing Law","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+882,"RskVoterWrkrIntmdtn","Interference with Election Administration > Risks Voter or Election Worker Intimidation","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+883,"IntrfrncPrsdntlElctr","Interference with Election Administration > Interference with Selection of Presidential Electors","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+885,"PnlzListMntncInfrctn","Interference with Election Administration > Penalizing Election Officials > Penalizes List Maintenance Infractions","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+886,"ElxnRvwUnfndInvstgtn","Interference with Election Administration > Problematic Election Reviews > Unfounded Investigations of Irregularities","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+887,"PrhbtUseTabulators","Interference with Election Administration > Unjustified Burdens on Officials > Prohibits Use of Tabulators","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+888,"IntrfrncCrtfctnRslts","Interference with Election Administration > Interference with Certification of Results","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+891,"PnlzOvsghtPollWtchrs","Interference with Election Administration > Penalizing Election Officials > May Penalize Good Faith Oversight of Poll Watchers","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+892,"-Anti-Voter","Interference with Election Administration > Policy Impact > Restricts Voter Access / Election Administration","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+893,"-Pro-Voter","Interference with Election Administration > Policy Impact > Improves Voter Access / Election Administration","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+894,"-Mixed_Unclear","Interference with Election Administration > Policy Impact > Mixed or Unclear","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+895,"-Neutral","Interference with Election Administration > Policy Impact > Neutral","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+896,"BfrctnSttFdrlElx","Interference with Election Administration > Bifurcation of State and Federal Elections","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+897,"PrtsnAptmntElxnOffcl","Interference with Election Administration > Increased Partisanship in Appointment of Election Officials","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+898,"IntrfrncOther","Interference with Election Administration > Other","21IntrfrncElctnAdmin",33,"Interference with Election Administration",TRUE
+916,"UnjstfdBrdnsOnOffcls","Interference with Election Administration > Unjustified Burdens on Officials > Other","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+1036,"RstrctGrantMoney","Interference with Election Administration > Unjustified Burdens on Officials > Restrictions on Grant Money","21IntrfrncElctnAdmin",33,"Interference with Election Administration",FALSE
+1037,"ZRstrctGrantMoney","ZInterference with Election Administration > Restrictions on Grant Money","21IntrfrncElctnAdmin",33,"Interference with Election Administration",TRUE
+1026,"Legal_1_Review","","-Review",34,"",FALSE

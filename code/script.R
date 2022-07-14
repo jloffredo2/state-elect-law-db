@@ -5,16 +5,16 @@ library(rvest)
 library(lubridate)
 
 # load scraper fxns
-source("misc_fxns.R")
-source("ncsl.R")
+source("code/misc_fxns.R")
+source("code/ncsl.R")
 
 # Build scraped datasets
 ncsl_bill_database <- build_ncsl_bill_database()
 
 # Save outputs
-write.csv(ncsl_bill_database, file = "ncsl_bill_database.csv",row.names = FALSE)
-save(ncsl_bill_database, file = "ncsl_bill_database.Rdata")
-save(ncsl_bill_database, file = "state_elect_law_db.Rdata")
+write.csv(ncsl_bill_database, file = "output/ncsl_bill_database.csv",row.names = FALSE)
+save(ncsl_bill_database, file = "output/ncsl_bill_database.Rdata")
+save(ncsl_bill_database, file = "output/state_elect_law_db.Rdata")
 
 # Edit codebook and readme
 codebook = readLines("codebook.txt")
