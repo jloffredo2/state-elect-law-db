@@ -1,4 +1,4 @@
-
+## FUNCTIONS FOR SCRAPING VOTING RIGHTS LAB LEG TRACKER
 # Function to count number of Dem coauthors (includes DFL in MN)
 vrl_count_dem_coauthors <- function(json){
   return(ifelse(!is.na(json),sum(str_detect(rjson::fromJSON(json),"\\(D\\)")) + sum(str_detect(rjson::fromJSON(json),"\\(DFL\\)")),NA))
@@ -14,20 +14,20 @@ vrl_count_coauthors <- function(json){
   return(ifelse(!is.na(json),length(rjson::fromJSON(json)),NA))
 }
 
-scrape_vrl <- function(year){
+build_vrl_bill_database <- function(){
   print("scraping VRL storage json")
   bills <- jsonlite::fromJSON(readLines("https://tracker.votingrightslab.org/storage/bills.json"))$data
   tags <- jsonlite::fromJSON(readLines("https://tracker.votingrightslab.org/storage/tags.json"))$data
-  topics <- jsonlite::fromJSON(readLines("https://tracker.votingrightslab.org/storage/topics.json"))$data %>% select(id, label = name, parent_id = parent)
-  bucket_topics <- jsonlite::fromJSON(readLines("https://tracker.votingrightslab.org/storage/bucket_topics.json"))$data %>% select(id, label = text)
-  
+
   #### Match up VRL with NCSL
   vrl_bill_database <- bills
   # Rename and change date to date type
   vrl_bill_database <- vrl_bill_database %>%
     rename(ACTNUM = chapter_number
            ,PREFILEDDATE = prefile_date
-           ,INTRODUCEDDATE = intro_date) %>%
+           ,INTRODUCEDDATE = intro_date
+           ,BILLTEXTURL = text_url
+           ,BILLSUMMARY = summary) %>%
     mutate(PREFILEDDATE = mdy(PREFILEDDATE)
            ,INTRODUCEDDATE = mdy(INTRODUCEDDATE))
   # Recode
@@ -43,9 +43,13 @@ scrape_vrl <- function(year){
   vrl_bill_database$AUTHORPARTY = str_remove_all(str_extract(vrl_bill_database$author,"\\([A-Z]{1,3}\\)"),"[()]")
   vrl_bill_database$LASTACTIONDATE = mdy(lapply(vrl_bill_database$status_actions, function(x){tail(x,1) %>% str_sub(1, 10)}))
   vrl_bill_database$HISTORY = lapply(vrl_bill_database$status_actions, rjson::toJSON)
+  vrl_bill_database$HISTORY = unlist(vrl_bill_database$HISTORY)
+  vrl_bill_database$HISTORY[vrl_bill_database$HISTORY=="\"NA\""] = NA
   
   vrl_bill_database$COAUTHORS = lapply(str_split(vrl_bill_database$addl_auths,";"),rjson::toJSON)
+  vrl_bill_database$COAUTHORS = unlist(vrl_bill_database$COAUTHORS)
   vrl_bill_database$COAUTHORS[vrl_bill_database$COAUTHORS=="\"NA\""] = NA
+
   vrl_bill_database$NCOAUTHORS = sapply(vrl_bill_database$COAUTHORS,vrl_count_coauthors)
   vrl_bill_database$NDEMCOAUTHORS = sapply(vrl_bill_database$COAUTHORS,vrl_count_dem_coauthors)
   vrl_bill_database$NREPCOAUTHORS = sapply(vrl_bill_database$COAUTHORS,vrl_count_rep_coauthors)
@@ -87,7 +91,7 @@ scrape_vrl <- function(year){
     ))
                                        
   # Topic dummies
-  vrl_bill_database2 <- vrl_bill_database %>%
+  vrl_bill_database <- vrl_bill_database %>%
     mutate(across(starts_with("Tags."), .fns = str_remove_all, "null")) %>%
     mutate(
       AVAPPL = case_when(
@@ -262,6 +266,10 @@ scrape_vrl <- function(year){
       ,DATART = case_when(
         str_detect(`Tags.21AbsenteeVtg`, "BlltTrckngCrtsExpnds") ~ 1
         ,str_detect(`Tags.21AbsenteeVtg`, "BlltTrckngElmntRstrt") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrDataUsePrtsnData") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrDataUseRaceData") ~ 1
+        ,str_detect(`Tags.21VtrLstMntncPrgs`, "ChngPrcssDataSrcs") ~ 1
+        ,str_detect(`Tags.21VtngRstrtn`, "PrcssDataShrngAgncs") ~ 1
       )
       ,ELAUTH = case_when(
         str_detect(`Tags.21ShftInElctnAthrty`,"IssueRprtInvstgEnfrc") ~ 1
@@ -306,6 +314,7 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21ShftInElctnAthrty`,"IssueEmrgncyAuthrty") ~ 1
         ,str_detect(`Tags.21IntrfrncElctnAdmin`,"StiflingEmrgncyPwrs") ~ 1
         ,str_length(`Tags.21COVIDSttsEmrgncy`) > 0 ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"LctnEmrgClsrRlct") ~ 1
       )
       ,EOLOCA = case_when(
         str_detect(`Tags.21ElctnCrms`, "ApplcblElctnOffcl") ~ 1
@@ -323,7 +332,7 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21IntrfrncElctnAdmin`,"RskVoterWrkrIntmdtn") ~ 1
         ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PnlzListMntncInfrctn") ~ 1
         ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PrtsnAptmntElxnOffcl") ~ 1
-        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"UnjstfdBrdnsOnOffcls") ~ 1,
+        ,str_detect(`Tags.21IntrfrncElctnAdmin`,"UnjstfdBrdnsOnOffcls") ~ 1
         ,str_detect(`Tags.21EmergingIssues`, "ElxnWrkrPrtctns") ~ 1
       )
       ,EOSTWD = case_when(
@@ -401,6 +410,11 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21InPrsnVtng`,"PllWtchrObsrvtnPrcss") ~ 1
         ,str_detect(`Tags.21InPrsnVtng`,"PllWtchrObsrvrQlfctn") ~ 1
       )
+      ,PPACES = case_when(
+        str_detect(`Tags.21InPrsnVtng`, "AcsblPhysDisablty") ~ 1
+        ,str_detect(`Tags.21ErlyVtngAvlblty`, "LctnAccsbltyRqrmnts")~1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"LctnAccsbltyRqrmnts") ~ 1
+      )
       ,PPLOCA = case_when(
         str_detect(`Tags.21ErlyVtngAvlblty`, "LctnDrvThruOutdrVtng")~1
         ,str_detect(`Tags.21ErlyVtngAvlblty`, "LctnEmrgClsrRlct")~1
@@ -412,6 +426,61 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21ErlyVtngAvlblty`, "LctnWaitTimes")~1
         ,str_detect(`Tags.21ErlyVtngAvlblty`, "LctnSlctnPrcssTmln")~1
         ,str_detect(`Tags.21ErlyVtngAvlblty`, "LctnVtgMchnsStations")~1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"LctnEmrgClsrRlct") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrHghCpctyVtCntr") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"LctnNmbrRqrdDcrs") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"LctnNmbrRqrdIncr") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"LctnVoterEducation") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"Other") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"PrcnctMpCnsldtnPrcss") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"PrcnctMpCnsldtnTmln") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"PrcnctMpDrwngPrcss") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"PrcnctMpDrwngTmln") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"PrcnctMpSpltChngPrcs") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"PrcnctMpSpltChngTmln") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"PrcnctBsdPllPlcCrts") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"PrcnctBsdPllPlcElmnt") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrBORqAuthAllElx") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrBORqAuthCrtnElx") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrBORqAuthCrtnJdx") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrBORqAuthSttwd") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrCrts") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrElxRqrAllwExpnd") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrElxRqrAllwRstrc") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrEliminates") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrJdxRqrAllwExpnd") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrJdxRqrAllwRstrc") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"LctnAccsbltyRqrmnts") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"LctnSlctnPrcssTmln") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"LctnVtgMchnsStations") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"LctnDrvThruOutdrVtng") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"LctnLctnCharCrtria") ~ 1
+      )
+      ,PPVCEN = case_when(
+        str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrHghCpctyVtCntr") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrBORqAuthAllElx") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrBORqAuthCrtnElx") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrBORqAuthCrtnJdx") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrBORqAuthSttwd") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrCrts") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrElxRqrAllwExpnd") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrElxRqrAllwRstrc") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrEliminates") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrJdxRqrAllwExpnd") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtCtrJdxRqrAllwRstrc") ~ 1
+      )
+      ,PPVHRS = case_when(
+        str_detect(`Tags.21ElctnDyVtngSts`,"VtHrsChngPrcssExtnd") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtHrsExpnds") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"VtHrsRdcs") ~ 1
+      )
+      ,PREDEF = case_when(
+        str_detect(`Tags.21ElctnDyVtngSts`, "PrcnctMpCnsldtnPrcss") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`, "PrcnctMpCnsldtnTmln") ~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`, "PrcnctMpDrwngPrcss")~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`, "PrcnctMpDrwngTmln")~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`, "PrcnctMpSpltChngPrcs")~ 1
+        ,str_detect(`Tags.21ElctnDyVtngSts`, "PrcnctMpSpltChngTmln")~ 1
       )
       ,PRIMIS = case_when(
         str_detect(`Tags.21VtrRgstrn`,"PrmryVtngMinorChng") ~ 1
@@ -423,6 +492,8 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21InPrsnVtng`,"PrvsnlVtngBlltVrfctn") ~ 1
         ,str_detect(`Tags.21InPrsnVtng`,"PrvsnlVtngPrcss") ~ 1
         ,str_detect(`Tags.21InPrsnVtng`,"PrvsnlVtngNtfctRsltn") ~ 1
+        ,str_detect(`Tags.21SDR`, "VrfctnRqrCstPrvBllt") ~ 1
+        ,str_detect(`Tags.21VoterID`, "AltsPrvBlltChngPrcss") ~ 1
       )
       ,PWCOMP = case_when(
         str_detect(`Tags.21InPrsnVtng`,"PllWrkrCmpstnChngUI") ~ 1
@@ -438,6 +509,77 @@ scrape_vrl <- function(year){
         str_detect(`Tags.21InPrsnVtng`,"PllWrkQlfctnCrtStrng") ~ 1
         ,str_detect(`Tags.21InPrsnVtng`,"PllWrkQlfctnElmntRlx") ~ 1
         ,str_detect(`Tags.21InPrsnVtng`,"PllWrkRcrtmtStratgs") ~ 1
+      )
+      ,REDIST = case_when(
+        str_detect(`Tags.21Rdstrctng`, "ApplcbltyFedCngrsDst") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "ApplcbltyMncplLclDst") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "ApplcbltySttLgDstrct") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrDataUsePrtsnData") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrDataUseRaceData") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrMndtryPrmsvCrt") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrMndtryPrmsvElmnt") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrPrhbtdCrt") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrPrhbtdElmnt") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrRanking") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrTpcCmmntsOfIntrs") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrTpcCmpctnss") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrTpcCmptvnss") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrTpcCntgty") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrTpcCorePriorDstr") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrTpcIncmbncy") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrTpcNesting") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrTpcOther") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrTpcPrtyOrCnddt") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrTpcPltclSbdvsn") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrTpcPpltn") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrTpcPrprtnlty") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "IncrCntNonRsdFedPrsn") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "IncrCntNonRsdSttPrsn") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "IncrCntSttRsdFedPrsn") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "IncrCntSttRsdSttPrsn") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "IncrRllctnPrcssCrtCh") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "Other") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcsBckupPrcssElmnt") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcsBprtAprvCrtStrRq") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcsBprtAprvElmWknRq") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcsGovVetoCrtExpnd") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcsGovVetoElmnRstrc") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcsJdclRvwCrtExpnd") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcsJdclRvwElmRstrc") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcsLegSprmjCrtStrRq") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcsLegSprmjElmWknRq") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PblcAccsPrtcptCrtExp") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PblcAccsPrtcptElmRst") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "TmlnIntrmFnlDldnErlr") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "TmlnIntrmFnlDldnLtr") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "TmlnStrtPrcsErlr") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "TmlnStrtPrcsLtr") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "MapDrawingLegisltn") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "ApplcbltyOther") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "AuthCmsnCrtsExpds") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "AuthLegElmRstrAuth") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "AuthLegCrtExpAuth") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "AuthCmsnChgMbrApt") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "AuthBOLegAprvsMps") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "AuthBOLegDrwsMps") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "AuthBOCmsnDrwsMps") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcsBckupPrcssLeg") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "AuthBOCmsnAprvsMps") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcsBckupPrcssJdcl") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcsBckupPrcssCmsn") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "AuthBOVtrsAprvMps") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "AuthCmsnElmRst") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "MapDarwingLegisltn") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcsBckupPrcssCrts") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrmryAuthCmmssCrtExp") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrmryAuthLegCrtExpnd") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcsAdvsryCmssnCrt") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcsBckupPrcssChng") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrmryAuthLegElmnRstr") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrmryAuthLegChng") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrmryAuthCmmssMbrApt") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "PrcssOthrChng") ~ 1
+        ,str_detect(`Tags.21Rdstrctng`, "CrtrMndtryPrmsvChng") ~ 1
       )
       ,REGAGY = case_when(
         str_detect(`Tags.21VtrRgstrn`,"RegAgncyAddAgncy") ~ 1
@@ -482,7 +624,7 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21SDR`,"PrfRsdncElmntRlxRqr") ~ 1
         ,str_detect(`Tags.21SDR`,"PrfRsdncNewSDRNotRqr") ~ 1
         ,str_detect(`Tags.21SDR`,"VrfctnAllwCstRegBllt") ~ 1
-        ,str_detect(`Tagsz.21SDR`,"VrfctnChngPrcss") ~ 1
+        ,str_detect(`Tags.21SDR`,"VrfctnChngPrcss") ~ 1
         ,str_detect(`Tags.21SDR`,"VrfctnRqrCstPrvBllt") ~ 1
       )
       ,REGELE = case_when(
@@ -530,6 +672,7 @@ scrape_vrl <- function(year){
       ,REPRES = case_when(
         str_detect(`Tags.21ShftInElctnAthrty`,"IssueElctnRslts") ~ 1
         ,str_detect(`Tags.21IntrfrncElctnAdmin`,"IntrfrncCrtfctnRslts") ~ 1
+        ,str_detect(`Tags.21EmergingIssues`, "RvwCrtfd2020ElctRslt") ~ 1
       )
       ,REGSDL = case_when(
         str_detect(`Tags.21VtrRgstrn`,"RulesSaleDstrbVtrLst") ~ 1
@@ -544,6 +687,12 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "VrfCntTmlnCntngLssTm") ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "VrfCntTmlnCntngMrTm") ~ 1
         ,str_detect(`Tags.21IntrfrncElctnAdmin`,"PrhbtUseTabulators") ~ 1
+      )
+      ,VEDINF = case_when(
+        str_detect(`Tags.21ElctnDyVtngSts`,"LctnVoterEducation") ~ 1
+        ,str_detect(`Tags.21ErlyVtngAvlblty`, "LctnVtrEdctn") ~ 1
+        ,str_detect(`Tags.21ErlyVtngAvlblty`, "TmngVtngHoursRdcs") ~ 1
+        ,str_detect(`Tags.21IncrcrtdVtng`,"VoterEducation") ~ 1
       )
       ,VOTAST = case_when(
         str_detect(`Tags.21ElctnCrms`, "ApplcblThrdPrty") ~ 1
@@ -561,6 +710,7 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21VBMElections`, "AcsblPhysDisablty") ~ 1
         ,str_detect(`Tags.21VBMElections`, "AcsblThirdPrtyAsst") ~ 1
         ,str_detect(`Tags.21ErlyVtngAvlblty`, "LctnAccsbltyRqrmnts")~1
+        ,str_detect(`Tags.21ElctnDyVtngSts`,"LctnAccsbltyRqrmnts") ~ 1
       )
       ,VOTFVR = case_when(
         str_detect(`Tags.21AbsenteeVtg`, "IncarceratedVoting") ~ 1
@@ -638,6 +788,10 @@ scrape_vrl <- function(year){
         str_detect(`Tags.21VtrRgstrn`,"VtrRqrInfoRqrmnts") ~ 1
         ,str_detect(`Tags.21VtrRgstrn`,"VtrRqrRsdncyRqrmnts") ~ 1
         ,str_detect(`Tags.21VtrRgstrn`,"VtrRqrDcmntnRqrmnts") ~ 1
+        ,str_detect(`Tags.21PrfCtznshp`, "ChngRqrmnt") ~ 1
+        ,str_detect(`Tags.21PrfCtznshp`, "CrtRqrmnt") ~ 1
+        ,str_detect(`Tags.21PrfCtznshp`, "ElmntRqrmnt") ~ 1
+        ,str_detect(`Tags.21PrfCtznshp`, "Other") ~ 1
       )
       ,VOTRID = case_when(
         str_detect(`Tags.21AbsenteeVtg`, "AppRqIDCrtExpnd") ~ 1
@@ -689,7 +843,84 @@ scrape_vrl <- function(year){
         ,str_detect(`Tags.21InPrsnVtng`,"ChllngChllngPrcss") ~ 1
         ,str_detect(`Tags.21InPrsnVtng`,"ChllngGrnds") ~ 1
       )
-    )
+    ) %>%
+    mutate_at(vars(AVAPPL:VTRCHA),replace_na, 0) %>%
+    mutate_at(vars(NCOAUTHORS,NDEMCOAUTHORS,NREPCOAUTHORS),replace_na, 0) %>%
+    select(-starts_with("Tags."))
+  
+  # Add missing topic cols
+  vrl_bill_database[,c("AUDITS"
+                       ,"AVMOVE"
+                       ,"BACAND"
+                       ,"BALDES"
+                       ,"BAPART"
+                       ,"CANQUL"
+                       ,"CANRTR"
+                       ,"CANWDW"
+                       ,"CANWRI"
+                       ,"CNTEST"
+                       ,"CYBSEC"
+                       ,"DUALFU" 
+                       ,"ECONPV"
+                       ,"EDHOLI"
+                       ,"ELCOST"
+                       ,"ELDATE"
+                       ,"ELECOL"
+                       ,"ELEING"
+                       ,"EOCAMP"
+                       ,"EXPOLL"
+                       ,"FILING" 
+                       ,"MISCEL" 
+                       ,"POLPAR" 
+                       ,"PPPROC" 
+                       ,"PRIDAT" 
+                       ,"PRIPUS"
+                       ,"PRIRNF" 
+                       ,"PRITYP" 
+                       ,"PTDRES" 
+                       ,"PWTRAI" 
+                       ,"PWYOTH" 
+                       ,"RECOUN" 
+                       ,"REGCVL" 
+                       ,"REGDRI" 
+                       ,"REGIDR" 
+                       ,"RUNOFF" 
+                       ,"SPELEC" 
+                       ,"STVOTE" 
+                       ,"TECHSS"
+                       ,"TFSCIC" 
+                       ,"VACNCY" 
+                       ,"VOTAFW" 
+                       ,"VOTAGE" 
+                       ,"VOTEME" 
+                       ,"VSSCST")] <- 0
+  
+  topic_cols = sort(colnames(vrl_bill_database)[39:133])
+  
+  # Produce final output
+  vrl_bill_database <- vrl_bill_database %>%
+    select(UUID
+           ,YEAR=year
+           ,STATE=state
+           ,BILLNUM
+           ,BILLSTATUS
+           ,ACTNUM
+           ,AUTHORNAME
+           ,AUTHORPARTY
+           ,PREFILEDDATE
+           ,INTRODUCEDDATE
+           ,LASTACTIONDATE
+           ,NCOAUTHORS
+           ,NDEMCOAUTHORS
+           ,NREPCOAUTHORS
+           ,all_of(topic_cols)
+           ,COAUTHORS
+           ,HISTORY
+           ,VRLRATING
+           ,BILLTEXTURL
+           ,BILLSUMMARY) %>%
+    mutate(STATE = as.factor(STATE)
+           ,AUTHORPARTY = as.factor(AUTHORPARTY))
   
   return(vrl_bill_database)
 }

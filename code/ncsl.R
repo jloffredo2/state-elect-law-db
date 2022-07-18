@@ -279,6 +279,7 @@ build_ncsl_bill_database <- function(){
   ncsl_bill_database$NCOAUTHORS = sapply(ncsl_bill_database$COAUTHORS,ncsl_count_coauthors)
   ncsl_bill_database$NDEMCOAUTHORS = sapply(ncsl_bill_database$COAUTHORS,ncsl_count_dem_coauthors)
   ncsl_bill_database$NREPCOAUTHORS = sapply(ncsl_bill_database$COAUTHORS,ncsl_count_rep_coauthors)
+  ncsl_bill_database <- ncsl_bill_database %>% mutate_at(vars(NCOAUTHORS,NDEMCOAUTHORS,NREPCOAUTHORS),replace_na, 0)
   
   # Categorize wide
   ncsl_bill_database$AVAPPL = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Absentee Voting-Application for")
@@ -375,7 +376,7 @@ build_ncsl_bill_database <- function(){
   topic_cols = sort(colnames(ncsl_bill_database)[21:109])
   
   # Produce final output
-  state_elect_law_db <- ncsl_bill_database %>%
+  ncsl_bill_database <- ncsl_bill_database %>%
     select(UUID
            ,YEAR
            ,STATE
@@ -397,8 +398,7 @@ build_ncsl_bill_database <- function(){
            ,AUTHORPARTY = as.factor(AUTHORPARTY)
            ,PREFILEDDATE = mdy(PREFILEDDATE)
            ,INTRODUCEDDATE = mdy(INTRODUCEDDATE)
-           ,LASTACTIONDATE = mdy(LASTACTIONDATE)) %>%
-    filter(!(STATE %in% c("H","HR","S")))
+           ,LASTACTIONDATE = mdy(LASTACTIONDATE))
   
   return(ncsl_bill_database)
 }
