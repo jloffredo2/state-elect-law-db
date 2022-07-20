@@ -28,4 +28,6 @@ build_ballotpedia_bill_database <- function(){
   )
   
   save(ballotpedia_scraped, file = "output/ballotpedia_scraped.RData")
+  
+  return(ballotpedia_scraped)
 }
