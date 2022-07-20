@@ -20,7 +20,7 @@ scrape_billtrack_sponsors <- function(link){
 
 build_ballotpedia_bill_database <- function(){
   ballotpedia_initial = read.csv("output/ballotpedia_initial.csv")
-  sponsor_data = lapply(ballotpedia_initial$bill_track_link, scrape_billtrack_sponsors)
+  sponsor_data = lapply(unique(ballotpedia_initial$bill_track_link), scrape_billtrack_sponsors)
   
   ballotpedia_scraped <- bind_rows(
     map(sponsor_data, function(x){merge(ballotpedia_initial,x,by="bill_track_link")}),
@@ -28,5 +28,4 @@ build_ballotpedia_bill_database <- function(){
   )
   
   save(ballotpedia_scraped, file = "output/ballotpedia_scraped.RData")
-    
 }
