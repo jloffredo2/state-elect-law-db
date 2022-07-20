@@ -1,5 +1,6 @@
 import requests, json
 import pandas as pd
+import logging
 
 # State abbreviations
 states = ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA',
@@ -44,7 +45,7 @@ billtrack_headers = {
 
 # Build bill list
 def build_state_bill_df(st):
-    print(st)
+    logging.info("Retrieving state data in bulk: {}".format(st))
     page = 1
     text = requests.post("https://api4.ballotpedia.org/legislation_tracking/search", headers=ballotpedia_headers,
                          json={"state": [st], "page": page}).text
@@ -64,13 +65,16 @@ def build_state_bill_df(st):
 
 
 def extract_bill_info(id):
-    print(id)
+    logging.info("Bill info (ID: {})".format(id))
     return (json.loads(
         requests.post("https://api4.ballotpedia.org/legislation_tracking/bill", headers=ballotpedia_headers,
                       json={"bill": id}).text)['data'][0])
 
 
 def main():
+    logging.basicConfig(level = logging.INFO,
+                        format = '%(asctime)s:%(levelname)s:%(message)s')
+
     ballotpedia_df = pd.DataFrame(columns=['id', 'state', 'bill_number', 'name',
                                            'most_recent_action', 'action_date', 'current_legislative_status',
                                            'categories'])
@@ -83,7 +87,7 @@ def main():
          'sponsors_partisan_affiliations']]
 
     ballotpedia_df = ballotpedia_df.merge(bill_metadata, how='left', on='id')
-    ballotpedia_df.to_csv("../output/ballotpedia_initial.csv", index=False)
+    ballotpedia_df.to_csv("output/ballotpedia_initial.csv", index=False)
 
 
 if __name__ == "__main__":
