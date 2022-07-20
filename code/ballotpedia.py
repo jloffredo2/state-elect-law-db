@@ -87,7 +87,7 @@ def main():
          'sponsors_partisan_affiliations']]
 
     ballotpedia_df = ballotpedia_df.merge(bill_metadata, how='left', on='id')
-    ballotpedia_df.to_csv("../output/ballotpedia_initial.csv", index=False)
+    ballotpedia_df.to_csv("output/ballotpedia_initial.csv", index=False)
 
 
 if __name__ == "__main__":
