@@ -79,7 +79,7 @@ def main():
                                            'most_recent_action', 'action_date', 'current_legislative_status',
                                            'categories'])
     state_dfs = list(map(build_state_bill_df, states))
-    ballotpedia_df = pd.concat(state_dfs)
+    ballotpedia_df = pd.concat(state_dfs).head(100)
 
     x = list(map(extract_bill_info, ballotpedia_df.id))
     bill_metadata = pd.DataFrame(x)[
