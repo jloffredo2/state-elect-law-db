@@ -46,7 +46,6 @@ ncsl_extract_bill_info <- function(curr, year) {
       YEAR = year,
       ID = bill_id,
       STATUS = status,
-      PREFILEDDATE = prefiled_date,
       INTRODUCEDDATE = introduced_date,
       LASTACTIONDATE = last_action_date,
       AUTHOR = author,
@@ -385,7 +384,6 @@ build_ncsl_bill_database <- function(){
            ,ACTNUM
            ,AUTHORNAME
            ,AUTHORPARTY
-           ,PREFILEDDATE
            ,INTRODUCEDDATE
            ,LASTACTIONDATE
            ,NCOAUTHORS
@@ -396,7 +394,6 @@ build_ncsl_bill_database <- function(){
            ,HISTORY) %>%
     mutate(STATE = as.factor(STATE)
            ,AUTHORPARTY = as.factor(AUTHORPARTY)
-           ,PREFILEDDATE = mdy(PREFILEDDATE)
            ,INTRODUCEDDATE = mdy(INTRODUCEDDATE)
            ,LASTACTIONDATE = mdy(LASTACTIONDATE))
   

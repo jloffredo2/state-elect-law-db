@@ -24,12 +24,10 @@ build_vrl_bill_database <- function(){
   # Rename and change date to date type
   vrl_bill_database <- vrl_bill_database %>%
     rename(ACTNUM = chapter_number
-           ,PREFILEDDATE = prefile_date
            ,INTRODUCEDDATE = intro_date
            ,BILLTEXTURL = text_url
            ,BILLSUMMARY = summary) %>%
-    mutate(PREFILEDDATE = mdy(PREFILEDDATE)
-           ,INTRODUCEDDATE = mdy(INTRODUCEDDATE))
+    mutate(INTRODUCEDDATE = mdy(INTRODUCEDDATE))
   # Recode
   vrl_bill_database$BILLNUM = sprintf("%s%i", vrl_bill_database$legtype, vrl_bill_database$bill_number)
   vrl_bill_database$BILLSTATUS = fct_recode(as.factor(vrl_bill_database$current_disposition),
@@ -897,6 +895,7 @@ build_vrl_bill_database <- function(){
   
   topic_cols = sort(colnames(vrl_bill_database)[39:133])
   
+  vrl_bill_database$UUID = str_c(STATE,YEAR,BILLNUM)
   # Produce final output
   vrl_bill_database <- vrl_bill_database %>%
     select(UUID
@@ -907,7 +906,6 @@ build_vrl_bill_database <- function(){
            ,ACTNUM
            ,AUTHORNAME
            ,AUTHORPARTY
-           ,PREFILEDDATE
            ,INTRODUCEDDATE
            ,LASTACTIONDATE
            ,NCOAUTHORS
@@ -919,8 +917,10 @@ build_vrl_bill_database <- function(){
            ,VRLRATING
            ,BILLTEXTURL
            ,BILLSUMMARY) %>%
-    mutate(STATE = as.factor(STATE)
-           ,AUTHORPARTY = as.factor(AUTHORPARTY))
+    mutate(
+      UUID = str_c(STATE,YEAR,BILLNUM)
+      ,STATE = as.factor(STATE)
+      ,AUTHORPARTY = as.factor(AUTHORPARTY))
   
   return(vrl_bill_database)
 }
