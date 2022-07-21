@@ -74,4 +74,5 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add .
+          git rm output/ballotpedia_initial.csv
           git diff-index --quiet HEAD || (git commit -m "update published data ${{ steps.date.outputs.date }}" && git push)
