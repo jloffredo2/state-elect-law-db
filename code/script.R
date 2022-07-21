@@ -1,8 +1,13 @@
 rm(list = ls())
 
-library(tidyverse)
-library(rvest)
+library(tidyr)
+library(dplyr)
+library(forcats)
 library(lubridate)
+library(rvest)
+library(stringr)
+library(magrittr)
+library(purrr)
 
 # load scraper fxns
 source("code/misc_fxns.R")

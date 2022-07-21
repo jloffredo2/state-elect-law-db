@@ -17,7 +17,6 @@ vrl_count_coauthors <- function(json){
 build_vrl_bill_database <- function(){
   print("scraping VRL storage json")
   bills <- jsonlite::fromJSON(readLines("https://tracker.votingrightslab.org/storage/bills.json"))$data
-  tags <- jsonlite::fromJSON(readLines("https://tracker.votingrightslab.org/storage/tags.json"))$data
 
   #### Match up VRL with NCSL
   vrl_bill_database <- bills
@@ -861,7 +860,6 @@ build_vrl_bill_database <- function(){
   
   topic_cols = sort(colnames(vrl_bill_database)[39:94])
   
-  vrl_bill_database$UUID = str_c(state,year,BILLNUM)
   # Produce final output
   vrl_bill_database <- vrl_bill_database %>%
     mutate(UUID = str_c(state,year,BILLNUM)) %>%
