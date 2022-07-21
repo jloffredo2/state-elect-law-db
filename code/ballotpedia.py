@@ -81,8 +81,8 @@ def main():
     state_dfs = list(map(build_state_bill_df, states))
     ballotpedia_df = pd.concat(state_dfs)
 
-    x = list(map(extract_bill_info, ballotpedia_df.id))
-    bill_metadata = pd.DataFrame(x)[
+    bill_metadata = list(map(extract_bill_info, ballotpedia_df.id))
+    bill_metadata = pd.DataFrame(bill_metadata )[
         ['id', 'bill_track_link', 'session_year', 'summary', 'number_of_sponsors', 'trifecta_status',
          'sponsors_partisan_affiliations']]
 

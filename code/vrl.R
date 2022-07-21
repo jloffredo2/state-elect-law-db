@@ -23,19 +23,17 @@ build_vrl_bill_database <- function(){
   vrl_bill_database <- bills
   # Rename and change date to date type
   vrl_bill_database <- vrl_bill_database %>%
-    rename(ACTNUM = chapter_number
-           ,PREFILEDDATE = prefile_date
-           ,INTRODUCEDDATE = intro_date
+    rename(INTRODUCEDDATE = intro_date
            ,BILLTEXTURL = text_url
            ,BILLSUMMARY = summary) %>%
-    mutate(PREFILEDDATE = mdy(PREFILEDDATE)
-           ,INTRODUCEDDATE = mdy(INTRODUCEDDATE))
+    mutate(INTRODUCEDDATE = mdy(INTRODUCEDDATE))
   # Recode
   vrl_bill_database$BILLNUM = sprintf("%s%i", vrl_bill_database$legtype, vrl_bill_database$bill_number)
   vrl_bill_database$BILLSTATUS = fct_recode(as.factor(vrl_bill_database$current_disposition),
                                             "Failed" = "Failed - Adjourned",
                                             "Pending" = "Pending - Carryover",
-                                            "To Executive" = "To Governor")
+                                            "To Executive" = "To Governor",
+                                            "Enacted" = "Adopted")
   
   vrl_bill_database$AUTHORNAME = ifelse(str_detect(vrl_bill_database$author,"\\([A-Z]{1,3}\\)"),
          trimws(str_remove_all(vrl_bill_database$author,"\\([A-Z]{1,3}\\)"),"both"),
@@ -157,6 +155,10 @@ build_vrl_bill_database <- function(){
         ,str_detect(`Tags.21BlltRtrnVfctnCure`,'VrfCntSgntrElmnt') ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`,'VrfCntSgntrTraining') ~ 1
         ,str_detect(`Tags.21VBMElections`, "BlltRtrnVrfctnCure") ~ 1
+      )
+      ,AVDLIN = case_when(
+        str_detect(`Tags.21AbsenteeVtg`, "AppDdlnErlr") ~ 1
+        ,str_detect(`Tags.21AbsenteeVtg`, "AppDdlnLtr") ~ 1
       )
       ,AVELIG = case_when(
         str_detect(`Tags.21AbsenteeVtg`, "ElgblExcsAccptExpnd") ~ 1
@@ -355,9 +357,17 @@ build_vrl_bill_database <- function(){
         ,str_detect(`Tags.21IntrfrncElctnAdmin`,"UnjstfdBrdnsOnOffcls") ~ 1
         ,str_detect(`Tags.21EmergingIssues`, "ElxnWrkrPrtctns") ~ 1
       )
+      ,EOGENR = max(EOLOCA,EOSTWD)
       ,INVOTE = case_when(
         str_detect(`Tags.21BlltRtrnVfctnCure`, "OnlnVtngAvlblAllVtrs") ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "OnlnVtngAvlblSmVtrs") ~ 1
+      )
+      ,LNGACC = case_when(
+        str_detect(`Tags.21AbsenteeVtg`, "AcsblLanguage") ~ 1
+        ,str_detect(`Tags.21BlltRtrnVfctnCure`, "AcsblLanguage") ~ 1
+        ,str_detect(`Tags.21InPrsnVtng`, "AcsblLanguage") ~ 1
+        ,str_detect(`Tags.21VtrRgstrn`, "AcsblLanguage") ~ 1
+        ,str_detect(`Tags.21VBMElections`, "AcsblLanguage") ~ 1
       )
       ,MAILVO = case_when(
         str_detect(`Tags.21BlltRtrnVfctnCure`, "ApplcbltyVBMElctn") ~ 1
@@ -402,6 +412,9 @@ build_vrl_bill_database <- function(){
         ,str_detect(`Tags.21VtngRstrtn`, "MailEmrgRqstElmRstrc") ~ 1
         ,str_detect(`Tags.21VtngRstrtn`, "MailNtryWtnssRqFcltt") ~ 1
         ,str_detect(`Tags.21VtngRstrtn`, "MailNotcCureFcltates") ~ 1
+      )
+      ,PHYSEC = case_when(
+        str_detect(`Tags.21BlltRtrnVfctnCure`,'BlltRtrnDOLDrpBxScty') ~ 1
       )
       ,POLWAT = case_when(
         str_detect(`Tags.21ElctnCrms`, "ApplcblPollWtchrs") ~ 1
@@ -474,6 +487,7 @@ build_vrl_bill_database <- function(){
         ,str_detect(`Tags.21ElctnDyVtngSts`,"VtHrsExpnds") ~ 1
         ,str_detect(`Tags.21ElctnDyVtngSts`,"VtHrsRdcs") ~ 1
       )
+      ,PPGENR = max(PPACES,PPLOCA,PPVCEN,PPVHRS)
       ,PREDEF = case_when(
         str_detect(`Tags.21ElctnDyVtngSts`, "PrcnctMpCnsldtnPrcss") ~ 1
         ,str_detect(`Tags.21ElctnDyVtngSts`, "PrcnctMpCnsldtnTmln") ~ 1
@@ -669,13 +683,14 @@ build_vrl_bill_database <- function(){
         ,str_detect(`Tags.21VtrRgstrn`,"PreRgstrMinorCrt") ~ 1
         ,str_detect(`Tags.21VtrRgstrn`,"PreRgstrMinorElmn") ~ 1
       )
+      ,REGSDL = case_when(
+        str_detect(`Tags.21VtrRgstrn`,"RulesSaleDstrbVtrLst") ~ 1
+      )
+      ,REGGEN = max(REGAGY,REGAPP,REGATO,REGDRV,REGDTE,REGEDY,REGELE,REGMSC,REGPRE)
       ,REPRES = case_when(
         str_detect(`Tags.21ShftInElctnAthrty`,"IssueElctnRslts") ~ 1
         ,str_detect(`Tags.21IntrfrncElctnAdmin`,"IntrfrncCrtfctnRslts") ~ 1
         ,str_detect(`Tags.21EmergingIssues`, "RvwCrtfd2020ElctRslt") ~ 1
-      )
-      ,REGSDL = case_when(
-        str_detect(`Tags.21VtrRgstrn`,"RulesSaleDstrbVtrLst") ~ 1
       )
       ,VCOUNT = case_when(
         str_detect(`Tags.21BlltRtrnVfctnCure`, "VrfCntGrndsRjctnChng") ~ 1
@@ -699,14 +714,10 @@ build_vrl_bill_database <- function(){
         ,str_detect(`Tags.21ElctnCrms`, "OtcmAsstVtrsIncrsCrm") ~ 1
         ,str_detect(`Tags.21ElctnCrms`, "OtcmAsstVtrsDcrsCrm") ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "Acsbl3dPtyAsstBltCmp") ~ 1
-        ,str_detect(`Tags.21BlltRtrnVfctnCure`, "AcsblLanguage") ~ 1
         ,str_detect(`Tags.21BlltRtrnVfctnCure`, "AcsblPhysDisablty") ~ 1
-        ,str_detect(`Tags.21VtrRgstrn`, "AcsblLanguage") ~ 1
         ,str_detect(`Tags.21VtrRgstrn`, "AcsblPhysDisablty") ~ 1
-        ,str_detect(`Tags.21InPrsnVtng`, "AcsblLanguage") ~ 1
         ,str_detect(`Tags.21InPrsnVtng`, "AcsblPhysDisablty") ~ 1
         ,str_detect(`Tags.21InPrsnVtng`,"AcsblThdPtyAsstnce") ~ 1
-        ,str_detect(`Tags.21VBMElections`, "AcsblLanguage") ~ 1
         ,str_detect(`Tags.21VBMElections`, "AcsblPhysDisablty") ~ 1
         ,str_detect(`Tags.21VBMElections`, "AcsblThirdPrtyAsst") ~ 1
         ,str_detect(`Tags.21ErlyVtngAvlblty`, "LctnAccsbltyRqrmnts")~1
@@ -848,66 +859,19 @@ build_vrl_bill_database <- function(){
     mutate_at(vars(NCOAUTHORS,NDEMCOAUTHORS,NREPCOAUTHORS),replace_na, 0) %>%
     select(-starts_with("Tags."))
   
-  # Add missing topic cols
-  vrl_bill_database[,c("AUDITS"
-                       ,"AVMOVE"
-                       ,"BACAND"
-                       ,"BALDES"
-                       ,"BAPART"
-                       ,"CANQUL"
-                       ,"CANRTR"
-                       ,"CANWDW"
-                       ,"CANWRI"
-                       ,"CNTEST"
-                       ,"CYBSEC"
-                       ,"DUALFU" 
-                       ,"ECONPV"
-                       ,"EDHOLI"
-                       ,"ELCOST"
-                       ,"ELDATE"
-                       ,"ELECOL"
-                       ,"ELEING"
-                       ,"EOCAMP"
-                       ,"EXPOLL"
-                       ,"FILING" 
-                       ,"MISCEL" 
-                       ,"POLPAR" 
-                       ,"PPPROC" 
-                       ,"PRIDAT" 
-                       ,"PRIPUS"
-                       ,"PRIRNF" 
-                       ,"PRITYP" 
-                       ,"PTDRES" 
-                       ,"PWTRAI" 
-                       ,"PWYOTH" 
-                       ,"RECOUN" 
-                       ,"REGCVL" 
-                       ,"REGDRI" 
-                       ,"REGIDR" 
-                       ,"RUNOFF" 
-                       ,"SPELEC" 
-                       ,"STVOTE" 
-                       ,"TECHSS"
-                       ,"TFSCIC" 
-                       ,"VACNCY" 
-                       ,"VOTAFW" 
-                       ,"VOTAGE" 
-                       ,"VOTEME" 
-                       ,"VSSCST")] <- 0
+  topic_cols = sort(colnames(vrl_bill_database)[39:94])
   
-  topic_cols = sort(colnames(vrl_bill_database)[39:133])
-  
+  vrl_bill_database$UUID = str_c(state,year,BILLNUM)
   # Produce final output
   vrl_bill_database <- vrl_bill_database %>%
+    mutate(UUID = str_c(state,year,BILLNUM)) %>%
     select(UUID
            ,YEAR=year
            ,STATE=state
            ,BILLNUM
            ,BILLSTATUS
-           ,ACTNUM
            ,AUTHORNAME
            ,AUTHORPARTY
-           ,PREFILEDDATE
            ,INTRODUCEDDATE
            ,LASTACTIONDATE
            ,NCOAUTHORS
@@ -919,8 +883,9 @@ build_vrl_bill_database <- function(){
            ,VRLRATING
            ,BILLTEXTURL
            ,BILLSUMMARY) %>%
-    mutate(STATE = as.factor(STATE)
-           ,AUTHORPARTY = as.factor(AUTHORPARTY))
+    mutate(
+      STATE = as.factor(STATE)
+      ,AUTHORPARTY = as.factor(AUTHORPARTY))
   
   return(vrl_bill_database)
 }
