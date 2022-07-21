@@ -30,8 +30,6 @@ save(vrl_bill_database, file = "output/vrl_bill_database.Rdata")
 write.csv(ballotpedia_bill_database, file = "ballotpedia/vrl_bill_database.csv",row.names = FALSE)
 save(ballotpedia_bill_database, file = "output/ballotpedia_bill_database.Rdata")
 
-save(vrl_bill_database, ncsl_bill_database, ballotpedia_bill_database,file = "output/state_elect_law_db.Rdata")
-
 ## Edit codebook and readme
 #codebook = readLines("output/codebook.txt")
 #codebook[4] = sprintf("Date: %s",today())

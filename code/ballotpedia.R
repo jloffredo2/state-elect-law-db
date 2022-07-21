@@ -203,6 +203,5 @@ build_ballotpedia_bill_database <- function(){
       STATE = as.factor(STATE)
       ,AUTHORPARTY = as.factor(AUTHORPARTY))
 
-  file.remove("output/ballotpedia_initial.csv")  
   return(ballotpedia_scraped)
 }
