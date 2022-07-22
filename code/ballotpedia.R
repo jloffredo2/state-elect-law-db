@@ -220,5 +220,5 @@ build_ballotpedia_bill_database <- function(){
 ballotpedia_bill_database <- build_ballotpedia_bill_database()
 
 
-write.csv(ballotpedia_bill_database, file = "output/vrl_bill_database.csv",row.names = FALSE)
+write.csv(ballotpedia_bill_database, file = "output/ballotpedia_bill_database.csv",row.names = FALSE)
 save(ballotpedia_bill_database, file = "output/ballotpedia_bill_database.Rdata")
