@@ -214,7 +214,7 @@ build_ballotpedia_bill_database <- function(){
       STATE = as.factor(STATE)
       ,AUTHORPARTY = as.factor(AUTHORPARTY))
 
-  return(ballotpedia_scraped)
+  return(ballotpedia_bill_database)
 }
 
 ballotpedia_bill_database <- build_ballotpedia_bill_database()

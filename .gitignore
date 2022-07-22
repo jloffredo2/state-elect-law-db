@@ -57,3 +57,4 @@ rsconnect/
 .DS_Store
 .github/.DS_Store
 *.rtf
+code/.DS_Store
