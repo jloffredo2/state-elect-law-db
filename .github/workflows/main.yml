@@ -28,6 +28,7 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
+          git pull origin main
           git add -A
           git diff-index --quiet HEAD || (git commit -m "retrieves bulk ballotpedia" && git push)
       - name: push changes
@@ -72,7 +73,8 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add .
+          git pull origin main
+          git add -A
           git rm output/ballotpedia_initial.csv
           git diff-index --quiet HEAD || (git commit -m "update published ballotpedia data ${{ steps.date.outputs.date }}" && git push)
 
@@ -112,7 +114,8 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add .
+          git pull origin main
+          git add -A
           git diff-index --quiet HEAD || (git commit -m "update published ncsl data ${{ steps.date.outputs.date }}" && git push)
 
   vrl:
@@ -151,5 +154,6 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add .
+          git pull origin main
+          git add -A
           git diff-index --quiet HEAD || (git commit -m "update published vrl data ${{ steps.date.outputs.date }}" && git push)
