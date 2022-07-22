@@ -1,3 +1,13 @@
+library(tidyr)
+library(dplyr)
+library(forcats)
+library(lubridate)
+library(rvest)
+library(stringr)
+library(magrittr)
+library(purrr)
+
+source("code/misc_fxns.R")
 ## FUNCTIONS FOR SCRAPING NCSL
 
 # Function for setting values for topic binary indicators
@@ -401,6 +411,9 @@ build_ncsl_bill_database <- function(){
   return(ncsl_bill_database)
 }
 
-
+ncsl_bill_database <- build_ncsl_bill_database()
+# Save outputs
+write.csv(ncsl_bill_database, file = "output/ncsl_bill_database.csv",row.names = FALSE)
+save(ncsl_bill_database, file = "output/ncsl_bill_database.Rdata")
 
 

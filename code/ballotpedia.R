@@ -1,3 +1,14 @@
+library(tidyr)
+library(dplyr)
+library(forcats)
+library(lubridate)
+library(rvest)
+library(stringr)
+library(magrittr)
+library(purrr)
+
+source("code/misc_fxns.R")
+
 vrl_check_topics <- function(categories,topic){
   return(ifelse(sum(str_detect(categories,topic))>0,1,0))
 }
@@ -64,7 +75,7 @@ scrape_billtrack_data <- function(link){
 }
 
 build_ballotpedia_bill_database <- function(){
-  ballotpedia_initial = read.csv("output/ballotpedia_initial.csv") %>% filter(current_legislative_status == 'Enacted')
+  ballotpedia_initial = read.csv("output/ballotpedia_initial.csv")
   sponsor_data = lapply(unique(ballotpedia_initial$bill_track_link), scrape_billtrack_data)
   
   ballotpedia_scraped <- bind_rows(
@@ -205,3 +216,9 @@ build_ballotpedia_bill_database <- function(){
 
   return(ballotpedia_scraped)
 }
+
+ballotpedia_bill_database <- build_ballotpedia_bill_database()
+
+
+write.csv(ballotpedia_bill_database, file = "output/vrl_bill_database.csv",row.names = FALSE)
+save(ballotpedia_bill_database, file = "output/ballotpedia_bill_database.Rdata")

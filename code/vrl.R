@@ -1,3 +1,14 @@
+library(tidyr)
+library(dplyr)
+library(forcats)
+library(lubridate)
+library(rvest)
+library(stringr)
+library(magrittr)
+library(purrr)
+
+source("code/misc_fxns.R")
+
 ## FUNCTIONS FOR SCRAPING VOTING RIGHTS LAB LEG TRACKER
 # Function to count number of Dem coauthors (includes DFL in MN)
 vrl_count_dem_coauthors <- function(json){
@@ -887,3 +898,8 @@ build_vrl_bill_database <- function(){
   
   return(vrl_bill_database)
 }
+
+vrl_bill_database <- build_vrl_bill_database()
+
+write.csv(vrl_bill_database, file = "output/vrl_bill_database.csv",row.names = FALSE)
+save(vrl_bill_database, file = "output/vrl_bill_database.Rdata")
