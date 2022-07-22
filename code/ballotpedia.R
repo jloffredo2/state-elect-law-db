@@ -75,7 +75,7 @@ scrape_billtrack_data <- function(link){
 }
 
 build_ballotpedia_bill_database <- function(){
-  ballotpedia_initial = read.csv("output/ballotpedia_initial.csv") %>% filter(current_legislative_status == 'Enacted')
+  ballotpedia_initial = read.csv("output/ballotpedia_initial.csv")
   sponsor_data = lapply(unique(ballotpedia_initial$bill_track_link), scrape_billtrack_data)
   
   ballotpedia_scraped <- bind_rows(
