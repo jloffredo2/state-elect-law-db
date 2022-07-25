@@ -6,31 +6,34 @@
 **Date**: 2022-07-12
 
 ## DESCRIPTION
-This dataset is the product of scraping the *National Conference of State Legislature*'s "State Elections Legislation Database" and *Voting Rights Lab*'s "Legislative Tracker." The code for producing this dataset can be found in this GitHub repo: https://github.com/jloffredo2/state-elect-law-db. See the `code` subfolder for all relevant code.
+This dataset is the product of scraping the *National Conference of State Legislature*'s "State Elections Legislation Database" and *Voting Rights Lab*'s "Legislative Tracker," and *Ballotpedia*'s "Election Administration Legislation Tracker." The code for producing this dataset can be found in this GitHub repo: https://github.com/jloffredo2/state-elect-law-db. See the `code` subfolder for all relevant code.
 
-If you are using this dataset, please cite it and provide both NCSL and Voting Rights Lab with proper citation as follows:
+If you are using this dataset, please cite it and provide, NCSL, Voting Rights Lab, and Ballotpedia with proper citation as follows:
 
 > National Conference of State Legislatures. 2022. *State Elections Legislation Database*. www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx (July 12, 2022).
 
 > Voting Rights Lab. 2022. *Legislative Tracker*. https://tracker.votingrightslab.org/pending/search (July 18, 2022).
 
+> Ballotpedia. 2022. *Election Administration Legislation Tracker*. https://legislation.ballotpedia.org/home (July 22, 2022).
+
 *To access tidy versions of these databases, use the following files:*
+* `output/ballotpedia_bill_database.csv`: Ballotpedia "Election Administration Legislation Tracker" database in `.csv` format
+* `output/ballotpedia_bill_database.Rdata`: Ballotpedia "Election Administration Legislation Tracker" database saved as a `R` data frame
 * `output/ncsl_bill_database.csv`: NCSL "State Elections Legislation" database in `.csv` format
 * `output/ncsl_bill_database.Rdata`: NCSL "State Elections Legislation" database saved as a `R` data frame
 * `output/vrl_bill_database.csv`: VRL "Legislative Tracker" database in `.csv` format
 * `output/vrl_bill_database.Rdata`: VRL "Legislative Tracker" database saved as a `R` data frame
-* `output/state_elect_law_db.Rdata`: All bill datasets saved as a `R` data frame
 
 ## COLUMN MAPPINGS
 All datasets have a similar structure and following the column label/definitions below.
 ### IDENTIFICATION
+* `UUID` Unique identifier in the form `STATE`-`YEAR`-`BILLNUM` (can be used to join datasets)
+
 * `YEAR` Year tracking organization has tagged bill
 
 * `STATE` State bill is introduced in
 
 * `BILLNUM` Bill number
-
-* `ACTNUM` Act number (if bill is enacted, `NA` otherwise)
 
 * `AUTHORNAME` Last name of bill author
 
@@ -46,7 +49,6 @@ All datasets have a similar structure and following the column label/definitions
   * **To Congress**
   * **To Executive**
   * **Vetoed**
-* `PREFILEDDATE` Date bill is prefiled
 * `INTRODUCEDDATE` Date bill is officially introduced
 * `LASTACTIONDATE` Date of bill's last action
 * `NCOAUTHORS` Total number of coauthors
@@ -54,11 +56,12 @@ All datasets have a similar structure and following the column label/definitions
 * `NREPCOAUTHORS` Number of Republican coauthors
 
 ### TOPICS
-*These categories are defined and assigned by NCSL and VRL. Each topic indictator takes the value 1 if the organization has tagged the bill to a given topic, 0 otherwise.*
+*Each topic indictator takes the value 1 if the organization has tagged the bill to a given topic, 0 otherwise.*
 * `AUDITS` 	Audits-Post Election
 * `AVAPPL` 	Absentee Voting-Application for
 * `AVBDIS` 	Absentee Voting-Distributing Ballots
 * `AVBRET` 	Absentee Voting-Returning Ballots
+* `AVDLIN`  Absentee Voting-Deadlines
 * `AVELIG` 	Absentee Voting-Eligibility
 * `AVEVIP` 	Absentee Voting-Early Voting/In-Person Absentee
 * `AVMIOV` 	Absentee Voting-Military/Overseas
@@ -67,8 +70,9 @@ All datasets have a similar structure and following the column label/definitions
 * `AVNOEX` 	Absentee Voting-No Excuse
 * `AVPERM` 	Absentee Voting-Permanent Status
 * `BACAND` 	Ballot Access-Candidates
-* `BACURE`  Ballot Return, Verification, and Cure (*VRL only*)
+* `BACURE`  Ballot Return, Verification, and Cure
 * `BALDES` 	Ballots-Format & Design
+* `BAMEAS`  Ballot measures
 * `BAPART` 	Ballot Access-Parties
 * `CANQUL` 	Candidates-Qualifications for Office
 * `CANRTR` 	Candidates-Resign to Run
@@ -78,26 +82,31 @@ All datasets have a similar structure and following the column label/definitions
 * `CRIMES` 	Election Crimes
 * `CYBSEC` 	Cybersecurity
 * `DATART` 	Election Data-Collection/Retention of
+* `DGVOTE`  Digital/electronic voting
 * `DUALFU` 	Fusion/Dual-Party
 * `ECONPV` 	Electoral College-National Popular Vote
 * `EDHOLI` 	Election Day Holiday
-* `ELAUTH`  Shifts in Election Authority (*VRL only*)
-* `ELCOST` 	Cost of Elections
+* `ELAUTH`  Shifts in Election Authority
+* `ELCOST` 	Cost/Funding of Elections
 * `ELDATE` 	Dates of Elections
 * `ELECOL` 	Electoral College
 * `ELEING` 	Electioneering
 * `EMEDIS` 	Emergencies/Disasters
 * `EOCAMP` 	Election Officials-Campaign Activities
+* `EOGENR`  Election Official-General (anything broadly related to election official)
 * `EOLOCA` 	Election Officials-Local
 * `EOSTWD` 	Election Officials-Statewide
+* `EPLOCL`  Local election procedures
 * `EXPOLL` 	Exit Polling
 * `FILING` 	Offices-Method of Filling
 * `INVOTE` 	Internet Voting
+* `LNCACC`  Language accommodations
 * `MAILVO` 	Mail Voting
 * `MISCEL` 	Miscellaneous
 * `POLPAR` 	Political Parties
 * `POLWAT` 	Poll Watchers
 * `PPACES` 	Polling Places-Disabled Access
+* `PPGENR`  Polling Places-General (nonspecific)
 * `PPLOCA` 	Polling Places-Locations
 * `PPPROC` 	Polling Places-Arrangement of/Procedures at
 * `PPVCEN` 	Polling Places-Vote Centers
@@ -115,16 +124,18 @@ All datasets have a similar structure and following the column label/definitions
 * `PWQUAL` 	Poll Workers-Selection/Qualifications of
 * `PWTRAI` 	Poll Workers-Training
 * `PWYOTH` 	Poll Workers-Youth
+* `RECALL`  Recall elections
 * `RECOUN` 	Recounts
-* `REDIST`  Redistricting (*VRL only*)
-* `REGAGY`  Registration-Agencies (*VRL only*)
+* `REDIST`  Redistricting
+* `REGAGY`  Registration-Agencies
 * `REGAPP` 	Registration-Application Form/Content
 * `REGATO` 	Registration-Automatic
 * `REGCVL` 	Registration-Centralized Voter List
 * `REGDRI` 	Registration Drives
 * `REGDTE` 	Registration-Deadline
-* `REGEDY` 	Registration-Election Day
+* `REGEDY` 	Registration-Election Day/Same Day
 * `REGELE` 	Registration-Electronic
+* `REGGEN`  Registration-General
 * `REGIDR` 	Registration-ID Required
 * `REGLST` 	Registration-List Maintenance
 * `REGMSC` 	Registration-Misc.
@@ -146,18 +157,19 @@ All datasets have a similar structure and following the column label/definitions
 * `VOTFVR` 	Voters-Felon Voting Rights
 * `VOTMQU` 	Voters-Miscellaneous Qualifications
 * `VOTRID` 	Voter Identification
+* `VOTSEC`  Voting security (polling places, drop box, counting)
 * `VSSCST` 	Voting System Testing/Security/Storage
-* `VTDROP`  Ballot Drop-off Locations (*VRL only*)
+* `VTDROP`  Ballot Drop-off Locations
 * `VTRCHA` 	Challenges to Voters
 
-### ADDITIONAL VRL COLUMNS
+### ADDITIONAL INFORMATIONAL COLUMNS
 * `VRLRATING` 	VRL's coding of overall bill impact
   * **Anti-voter**
   * **Pro-voter**
   * **Mixed/Unclear**
   * **Neutral**
 * `BILLTEXTURL` 	URL to access bill's text
-* `BILLSUMMARY` 	VRL's summarization of bill
+* `BILLSUMMARY` 	Organization's summarization of bill
 
 ### MISC DATA
 *If using R, use `rjson::fromJSON()` to transform these values into an R vector.*

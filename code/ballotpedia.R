@@ -140,7 +140,7 @@ build_ballotpedia_bill_database <- function(){
   ballotpedia_bill_database$EMEDIS = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "States of emergency")                         
   ballotpedia_bill_database$EOGENR = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Election officials")                          
   ballotpedia_bill_database$EPLOCL = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Municipal election procedures")               
-  ballotpedia_bill_database$FUNDNG = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Federal funding")
+  ballotpedia_bill_database$ELCOST = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Federal funding")
                                          ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Private funding")
                                          ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "State appropriations"))                        
   ballotpedia_bill_database$DGVOTE = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Digital/electronic voting")                   
@@ -190,8 +190,9 @@ build_ballotpedia_bill_database <- function(){
   ballotpedia_bill_database$VOTMQU = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Time off for voting")
                                          ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Mandatory voting")
                                          ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Noncitizen voting"))
+  ballotpedia_bill_database$VOTAFW = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Time off for voting")
   
-  topic_cols = sort(colnames(ballotpedia_bill_database)[23:76])
+  topic_cols = sort(colnames(ballotpedia_bill_database)[23:77])
   
   ballotpedia_bill_database <- ballotpedia_bill_database %>%
     select(UUID
