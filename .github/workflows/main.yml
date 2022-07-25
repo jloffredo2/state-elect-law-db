@@ -1,7 +1,7 @@
 name: Update-data
-on:
-  schedule:
-    - cron: "0 22 * * 5" # Every Friday at 10pm
+on: workflow-dispatch
+  #schedule:
+  #  - cron: "0 22 * * 5" # Every Friday at 10pm
 
 jobs:
   ballotpedia_python:

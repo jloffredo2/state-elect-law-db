@@ -95,7 +95,8 @@ build_ballotpedia_bill_database <- function(){
            ,AUTHORPARTY = SPONSORS_PARTISAN_AFFILIATIONS) %>%
     mutate(LASTACTIONDATE = ymd(LASTACTIONDATE)
            ,CATEGORIES = str_split(CATEGORIES, ",")
-           ,BILLNUM = str_replace_all(BILLNUM,c("HB"='H','SB'='S','LB'='L'))
+           ,BILLNUM = str_replace_all(BILLNUM,c("HB"='H','SB'='S','LB'='L','AB'='A',"HS"='H','HF'='H',
+                                                'SF'='S','SS'='S'))
            ,UUID = str_c(STATE,YEAR,BILLNUM)
            ,AUTHORPARTY = ifelse(str_detect(AUTHORNAME,"\\([A-Z]{1,3}\\)\\*"),
                                   str_remove_all(str_extract(AUTHORNAME,"\\([A-Z]{1,3}\\)"),"[()]"),
@@ -109,6 +110,7 @@ build_ballotpedia_bill_database <- function(){
                                     ,"Pending" = "Introduced"
                                     ,"Pending" = "Passed one chamber"
                                     ,"Pending" = "Advanced from committee"
+                                    ,"Pending" = "Conference committee"
                                     ,"Enacted" = "Enacted"))
   # CATEGORIZE WIDE
   ballotpedia_bill_database$AUDITS = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Audits")                                      
