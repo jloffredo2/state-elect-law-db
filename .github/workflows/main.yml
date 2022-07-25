@@ -6,6 +6,7 @@ on: workflow_dispatch
 jobs:
   ballotpedia_python:
     runs-on: ubuntu-latest
+    needs: vrl
     steps:
 
       - name: checkout repo content
