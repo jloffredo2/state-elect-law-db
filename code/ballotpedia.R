@@ -31,6 +31,16 @@ scrape_billtrack_data <- function(link){
       str_remove("Introduced\r\n")
   )
   
+  if(is.na(INTRODUCEDDATE)){
+    INTRODUCEDDATE = mdy(
+      read_html(link) %>%
+        html_element('#summary .active') %>%
+        html_text() %>%
+        str_trim("both") %>%
+        str_remove("Introduced\r\n")
+    )
+  }
+  
   HISTORY <- rjson::toJSON(
     as.list(
       read_html(link) %>%
@@ -85,6 +95,8 @@ build_ballotpedia_bill_database <- function(){
 
   colnames(ballotpedia_scraped) <- str_to_upper(colnames(ballotpedia_scraped))
   
+  ballotpedia_scraped$BILL_NUMBER = gsub(r"{\s*\([^\)]+\)}","",ballotpedia_scraped$BILL_NUMBER)
+  
   ballotpedia_bill_database <- ballotpedia_scraped %>%
     rename(YEAR = SESSION_YEAR
            ,BILLSTATUS = CURRENT_LEGISLATIVE_STATUS
@@ -95,7 +107,8 @@ build_ballotpedia_bill_database <- function(){
            ,AUTHORPARTY = SPONSORS_PARTISAN_AFFILIATIONS) %>%
     mutate(LASTACTIONDATE = ymd(LASTACTIONDATE)
            ,CATEGORIES = str_split(CATEGORIES, ",")
-           ,BILLNUM = str_replace_all(BILLNUM,c("HB"='H','SB'='S','LB'='L'))
+           ,BILLNUM = str_replace_all(BILLNUM,c("HB"='H','SB'='S','LB'='L','AB'='A',"HS"='H','HF'='H',
+                                                'SF'='S','SS'='S'))
            ,UUID = str_c(STATE,YEAR,BILLNUM)
            ,AUTHORPARTY = ifelse(str_detect(AUTHORNAME,"\\([A-Z]{1,3}\\)\\*"),
                                   str_remove_all(str_extract(AUTHORNAME,"\\([A-Z]{1,3}\\)"),"[()]"),
@@ -109,6 +122,7 @@ build_ballotpedia_bill_database <- function(){
                                     ,"Pending" = "Introduced"
                                     ,"Pending" = "Passed one chamber"
                                     ,"Pending" = "Advanced from committee"
+                                    ,"Pending" = "Conference committee"
                                     ,"Enacted" = "Enacted"))
   # CATEGORIZE WIDE
   ballotpedia_bill_database$AUDITS = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Audits")                                      
