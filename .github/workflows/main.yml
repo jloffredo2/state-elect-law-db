@@ -1,5 +1,5 @@
 name: Update-data
-on: workflow-dispatch
+on: workflow_dispatch
   #schedule:
   #  - cron: "0 22 * * 5" # Every Friday at 10pm
 
