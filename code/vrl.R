@@ -423,7 +423,7 @@ build_vrl_bill_database <- function(){
         ,str_detect(`Tags.21VtngRstrtn`, "MailNtryWtnssRqFcltt") ~ 1
         ,str_detect(`Tags.21VtngRstrtn`, "MailNotcCureFcltates") ~ 1
       )
-      ,PHYSEC = case_when(
+      ,VOTSEC = case_when(
         str_detect(`Tags.21BlltRtrnVfctnCure`,'BlltRtrnDOLDrpBxScty') ~ 1
       )
       ,POLWAT = case_when(
