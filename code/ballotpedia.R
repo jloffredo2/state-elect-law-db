@@ -31,6 +31,16 @@ scrape_billtrack_data <- function(link){
       str_remove("Introduced\r\n")
   )
   
+  if(is.na(INTRODUCEDDATE)){
+    INTRODUCEDDATE = mdy(
+      read_html(link) %>%
+        html_element('#summary .active') %>%
+        html_text() %>%
+        str_trim("both") %>%
+        str_remove("Introduced\r\n")
+    )
+  }
+  
   HISTORY <- rjson::toJSON(
     as.list(
       read_html(link) %>%
@@ -84,6 +94,8 @@ build_ballotpedia_bill_database <- function(){
   )
 
   colnames(ballotpedia_scraped) <- str_to_upper(colnames(ballotpedia_scraped))
+  
+  ballotpedia_scraped$BILL_NUMBER = gsub(r"{\s*\([^\)]+\)}","",ballotpedia_scraped$BILL_NUMBER)
   
   ballotpedia_bill_database <- ballotpedia_scraped %>%
     rename(YEAR = SESSION_YEAR
