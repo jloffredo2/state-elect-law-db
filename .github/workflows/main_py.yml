@@ -1,7 +1,7 @@
 name: Pull_BillTracks
-on: workflow_dispatch
-  #- schedule:
-  #  - cron: "0 21 * * 5" # Every Friday at 10pm
+on: #workflow_dispatch
+  - schedule:
+    - cron: "0 22 * * 5"
 
 jobs:
   ballotpedia_python:
