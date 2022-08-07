@@ -3,18 +3,18 @@
 
 **Institution**: MIT
 
-**Date**: 2022-08-06
+**Date**: 2022-08-07
 
 ## DESCRIPTION
 This dataset is the product of scraping the *National Conference of State Legislature*'s "State Elections Legislation Database" and *Voting Rights Lab*'s "Legislative Tracker," and *Ballotpedia*'s "Election Administration Legislation Tracker." The code for producing this dataset can be found in this GitHub repo: https://github.com/jloffredo2/state-elect-law-db. See the `code` subfolder for all relevant code.
 
 If you are using this dataset, please cite it and provide, NCSL, Voting Rights Lab, and Ballotpedia with proper citation as follows:
 
-> National Conference of State Legislatures. 2022. *State Elections Legislation Database*. www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx (August 06, 2022).
+> National Conference of State Legislatures. 2022. *State Elections Legislation Database*. www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx (August 07, 2022).
 
-> Voting Rights Lab. 2022. *Legislative Tracker*. https://tracker.votingrightslab.org/pending/search (August 06, 2022).
+> Voting Rights Lab. 2022. *Legislative Tracker*. https://tracker.votingrightslab.org/pending/search (August 07, 2022).
 
-> Ballotpedia. 2022. *Election Administration Legislation Tracker*. https://legislation.ballotpedia.org/home (August 06, 2022).
+> Ballotpedia. 2022. *Election Administration Legislation Tracker*. https://legislation.ballotpedia.org/home (August 07, 2022).
 
 *To access tidy versions of these databases, use the following files:*
 * `output/ballotpedia_bill_database.csv`: Ballotpedia "Election Administration Legislation Tracker" database in `.csv` format
