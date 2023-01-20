@@ -98,7 +98,7 @@ build_ballotpedia_bill_database <- function(){
   ballotpedia_scraped$BILL_NUMBER = gsub(r"{\s*\([^\)]+\)}","",ballotpedia_scraped$BILL_NUMBER)
   
   ballotpedia_bill_database <- ballotpedia_scraped %>%
-    rename(YEAR = SESSION_YEAR
+    rename(YEAR = LEGISLATIVE_SESSIONS
            ,BILLSTATUS = CURRENT_LEGISLATIVE_STATUS
            ,BILLNUM = BILL_NUMBER
            ,LASTACTIONDATE = ACTION_DATE

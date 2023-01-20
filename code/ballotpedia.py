@@ -84,7 +84,7 @@ def main():
 
     bill_metadata = list(map(extract_bill_info, ballotpedia_df.id))
     bill_metadata = pd.DataFrame(bill_metadata)[
-        ['id', 'bill_track_link', 'session_year', 'summary', 'number_of_sponsors', 'trifecta_status',
+        ['id', 'bill_track_link', 'legislative_sessions', 'summary', 'number_of_sponsors', 'trifecta_status',
          'sponsors_partisan_affiliations']]
 
     ballotpedia_df = ballotpedia_df.merge(bill_metadata, how='left', on='id')
