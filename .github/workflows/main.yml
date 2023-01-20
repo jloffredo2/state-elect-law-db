@@ -5,44 +5,44 @@ on: workflow_dispatch
   # - cron: "0 23 * * 5"
 
 jobs:
- #ballotpedia_r:
- #runs-on: ubuntu-latest
- #steps:
- #  - uses: actions/checkout@v2 # Checkout branch into the runner
- #  - uses: r-lib/actions/setup-r@v2-branch # Set up R runtime
- #    with:
- #      r-version: 'release'
- #  - name: Get current date
- #    id: date
- #    run: echo "::set-output name=date::$(date +'%Y-%m-%d')"    
- #  - name: Setup renv # Set up R env to install packages
- #    run: |
- #      install.packages('remotes')
- #      install.packages("renv")
- #      system("sudo apt-get install libcurl4-openssl-dev")
- #    shell: Rscript {0}
- #    
- #  - uses: actions/cache@v2 # Cache packages so won't be compiled everytime job is run
- #    with:
- #      path: ~/.local/share/renv
- #      key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
- #      restore-keys: |
- #        ${{ runner.os }}-renv-
+ ballotpedia_r:
+ runs-on: ubuntu-latest
+ steps:
+   - uses: actions/checkout@v2 # Checkout branch into the runner
+   - uses: r-lib/actions/setup-r@v2-branch # Set up R runtime
+     with:
+       r-version: 'release'
+   - name: Get current date
+     id: date
+     run: echo "::set-output name=date::$(date +'%Y-%m-%d')"    
+   - name: Setup renv # Set up R env to install packages
+     run: |
+       install.packages('remotes')
+       install.packages("renv")
+       system("sudo apt-get install libcurl4-openssl-dev")
+     shell: Rscript {0}
+     
+   - uses: actions/cache@v2 # Cache packages so won't be compiled everytime job is run
+     with:
+       path: ~/.local/share/renv
+       key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+       restore-keys: |
+         ${{ runner.os }}-renv-
 
- #  - name: Install dependencies # Install the dependencies eg. Dplyr, tidyverse etc
- #    run: renv::restore()
- #    shell: Rscript {0}
- #  - name: Generate data # Run the script
- #    run: source("code/ballotpedia.R")
- #    shell: Rscript {0}
- #  - name: Commit files # Commit changes
- #    run: |
- #      git config --local user.email "actions@github.com"
- #      git config --local user.name "GitHub Actions"
- #      git pull origin main
- #      git add -A
- #      git rm output/ballotpedia_initial.csv
- #      git diff-index --quiet HEAD || (git commit -m "update published ballotpedia data ${{ steps.date.outputs.date }}" && git push)
+   - name: Install dependencies # Install the dependencies eg. Dplyr, tidyverse etc
+     run: renv::restore()
+     shell: Rscript {0}
+   - name: Generate data # Run the script
+     run: source("code/ballotpedia.R")
+     shell: Rscript {0}
+   - name: Commit files # Commit changes
+     run: |
+       git config --local user.email "actions@github.com"
+       git config --local user.name "GitHub Actions"
+       git pull origin main
+       git add -A
+       git rm output/ballotpedia_initial.csv
+       git diff-index --quiet HEAD || (git commit -m "update published ballotpedia data ${{ steps.date.outputs.date }}" && git push)
 
   ncsl:
     runs-on: ubuntu-latest
