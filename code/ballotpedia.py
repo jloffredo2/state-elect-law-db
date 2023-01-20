@@ -48,7 +48,7 @@ def build_state_bill_df(st):
     logging.info("Retrieving state data in bulk: {}".format(st))
     page = 1
     text = requests.post("https://api4.ballotpedia.org/legislation_tracking/search", headers=ballotpedia_headers,
-                         json={"state": [st], "page": page, "topic_area":1}).text
+                         json={"state": [st], "page": page, "topic_area":1, "session": ["2022", "2023"]}).text
     cur_data = pd.DataFrame(json.loads(text)['data'])
     if cur_data.empty == False:
         total_count = int(cur_data.iloc[1]['total_count'])
