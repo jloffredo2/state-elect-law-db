@@ -48,7 +48,7 @@ def build_state_bill_df(st):
     logging.info("Retrieving state data in bulk: {}".format(st))
     page = 1
     text = requests.post("https://api4.ballotpedia.org/legislation_tracking/search", headers=ballotpedia_headers,
-                         json={"state": [st], "page": page, "topic_area":1, "session": ["2022", "2023"]}).text
+                         json={"state": [st], "page": page, "topic_area": 1, "session": ["2022", "2023"]}).text
     cur_data = pd.DataFrame(json.loads(text)['data'])
     if cur_data.empty == False:
         total_count = int(cur_data.iloc[1]['total_count'])
@@ -56,7 +56,8 @@ def build_state_bill_df(st):
         while (cur_count < total_count):
             page = page + 1
             text = requests.post("https://api4.ballotpedia.org/legislation_tracking/search",
-                                 headers=ballotpedia_headers, json={"state": [st], "page": page, "topic_area":1}).text
+                                 headers=ballotpedia_headers,
+                                 json={"state": [st], "page": page, "topic_area": 1, "session": ["2022", "2023"]}).text
             cur_data = pd.concat([cur_data, pd.DataFrame(json.loads(text)['data'])])
             cur_count = cur_data.shape[0]
         return (cur_data.loc[:, cur_data.columns != 'total_count'])
@@ -72,8 +73,8 @@ def extract_bill_info(id):
 
 
 def main():
-    logging.basicConfig(level = logging.INFO,
-                        format = '%(asctime)s:%(levelname)s:%(message)s')
+    logging.basicConfig(level=logging.INFO,
+                        format='%(asctime)s:%(levelname)s:%(message)s')
 
     ballotpedia_df = pd.DataFrame(columns=['id', 'state', 'bill_number', 'name',
                                            'most_recent_action', 'action_date', 'current_legislative_status',
@@ -82,7 +83,7 @@ def main():
     ballotpedia_df = pd.concat(state_dfs)
 
     bill_metadata = list(map(extract_bill_info, ballotpedia_df.id))
-    bill_metadata = pd.DataFrame(bill_metadata )[
+    bill_metadata = pd.DataFrame(bill_metadata)[
         ['id', 'bill_track_link', 'session_year', 'summary', 'number_of_sponsors', 'trifecta_status',
          'sponsors_partisan_affiliations']]
 

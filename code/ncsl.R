@@ -239,30 +239,34 @@ build_ncsl_bill_database <- function(){
     print(year)
     text <- scrape_ncsl(year)
     
-    (text = gsub(pattern = "[ ]+", replacement = " ", text))
-    thetext = strsplit(text, split = "\r\n\r\n\n\r\n\r\n\r")[[1]]
-    (html_text = trimws(thetext[thetext != "\r"] %>% str_remove_all("\r"), "both"))
-    
-    (split_text <- str_split(html_text, "\n"))
-    for (s in 1:length(split_text)) {
-      curr = split_text[[s]]
-      (curr = trimws(curr[curr != "" &
-                            curr != sprintf(" %i", year) &
-                            !str_detect(curr, "Associated Bills:") &
-                            curr != "Bill Text Lookup" & !(curr %in% state.name)], "both"))
-      # Check if two bills caught
-      if (length(which(curr == "History: Click for History")) != 1) {
-        split_indicies = which(str_detect(curr, "^[A-Z]{2}[:space:][A-Z]{1,4}[:space:][0-9]+"))
-        # If we catch multiple bills, split and extract bill info for each
-        if (length(split_indicies) > 1) {
-          split <- splitAt(curr, split_indicies)
-          for (curr_split in split) {
-            ncsl_bill_database <- rbind(ncsl_bill_database, ncsl_extract_bill_info(curr_split, year))
+    if(!is_empty(text)){
+      (text = gsub(pattern = "[ ]+", replacement = " ", text))
+      thetext = strsplit(text, split = "\r\n\r\n\n\r\n\r\n\r")[[1]]
+      (html_text = trimws(thetext[thetext != "\r"] %>% str_remove_all("\r"), "both"))
+      
+      (split_text <- str_split(html_text, "\n"))
+      for (s in 1:length(split_text)) {
+        curr = split_text[[s]]
+        (curr = trimws(curr[curr != "" &
+                              curr != sprintf(" %i", year) &
+                              !str_detect(curr, "Associated Bills:") &
+                              curr != "Bill Text Lookup" & !(curr %in% state.name)], "both"))
+        # Check if two bills caught
+        if (length(which(curr == "History: Click for History")) != 1) {
+          split_indicies = which(str_detect(curr, "^[A-Z]{2}[:space:][A-Z]{1,4}[:space:][0-9]+"))
+          # If we catch multiple bills, split and extract bill info for each
+          if (length(split_indicies) > 1) {
+            split <- splitAt(curr, split_indicies)
+            for (curr_split in split) {
+              ncsl_bill_database <- rbind(ncsl_bill_database, ncsl_extract_bill_info(curr_split, year))
+            }
           }
+        } else{
+          ncsl_bill_database <- rbind(ncsl_bill_database, ncsl_extract_bill_info(curr, year))
         }
-      } else{
-        ncsl_bill_database <- rbind(ncsl_bill_database, ncsl_extract_bill_info(curr, year))
       }
+    } else{
+      print("no results for this year")
     }
   }
   
