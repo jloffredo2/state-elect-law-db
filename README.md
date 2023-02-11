@@ -164,10 +164,10 @@ All datasets have a similar structure and following the column label/definitions
 
 ### ADDITIONAL INFORMATIONAL COLUMNS
 * `VRLRATING` 	VRL's coding of overall bill impact
-  * **Anti-voter**
-  * **Pro-voter**
-  * **Mixed/Unclear**
-  * **Neutral**
+  * **Anti-voter** = `R`
+  * **Pro-voter** = `E`
+  * **Mixed/Unclear** = `M`
+  * **Neutral** = `N`
 * `BILLTEXTURL` 	URL to access bill's text
 * `BILLSUMMARY` 	Organization's summarization of bill
 
@@ -176,3 +176,6 @@ All datasets have a similar structure and following the column label/definitions
 
 * `COAUTHORS` 	JSON string listing all coauthors
 * `HISTORY` 	JSON string of bill's history log
+
+## VRL PROVISION RATINGS
+The Voting Rights Lab dataset also codes whether provisions related to certain topics are **Anti-voter**, **Pro-voter**, **Neutral**, or **Mixed/Unclear**. You can find those codings in `output/vrl_provisions.csv` or `output/vrl_provisions.RData`. What appears in the dataset follows the same `VRLRATING` mapping as above.
