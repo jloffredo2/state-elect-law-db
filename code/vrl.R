@@ -7,6 +7,8 @@ library(stringr)
 library(magrittr)
 library(purrr)
 
+rm(list=ls())
+
 source("code/misc_fxns.R")
 
 ## FUNCTIONS FOR SCRAPING VOTING RIGHTS LAB LEG TRACKER
@@ -29,6 +31,7 @@ build_vrl_bill_database <- function(){
   print("scraping VRL storage json")
   bills <- jsonlite::fromJSON(readLines("https://tracker.votingrightslab.org/storage/bills.json"))$data
 
+  ####### CREATE VRL MAIN OUTPUT ######
   #### Match up VRL with NCSL
   vrl_bill_database <- bills
   # Rename and change date to date type
@@ -36,7 +39,8 @@ build_vrl_bill_database <- function(){
     rename(INTRODUCEDDATE = intro_date
            ,BILLTEXTURL = text_url
            ,BILLSUMMARY = summary) %>%
-    mutate(INTRODUCEDDATE = mdy(INTRODUCEDDATE))
+    mutate(INTRODUCEDDATE = mdy(INTRODUCEDDATE),
+           YEAR = year(INTRODUCEDDATE))
   # Recode
   vrl_bill_database$BILLNUM = sprintf("%s%i", vrl_bill_database$legtype, vrl_bill_database$bill_number)
   vrl_bill_database$BILLSTATUS = fct_recode(as.factor(vrl_bill_database$current_disposition),
@@ -873,9 +877,9 @@ build_vrl_bill_database <- function(){
   
   # Produce final output
   vrl_bill_database <- vrl_bill_database %>%
-    mutate(UUID = str_c(state,year,BILLNUM)) %>%
+    mutate(UUID = str_c(state,YEAR,BILLNUM)) %>%
     select(UUID
-           ,YEAR=year
+           ,YEAR
            ,STATE=state
            ,BILLNUM
            ,BILLSTATUS
@@ -895,6 +899,24 @@ build_vrl_bill_database <- function(){
     mutate(
       STATE = as.factor(STATE)
       ,AUTHORPARTY = as.factor(AUTHORPARTY))
+  
+  ####### CREATE VRL PROVISIONS TABLE #######
+  tag_dictionary <-
+    jsonlite::fromJSON(readLines("https://tracker.votingrightslab.org/storage/tags.json"))$data %>% filter(
+      name %in% c(
+        "Anti-voter",
+        "-Anti-Voter",
+        "Neutral",
+        "-Neutral",
+        "Pro-voter",
+        "-Pro-Voter",
+        "Mixed_Unclear",
+        "-Mixed_Unclear"
+      )
+    )
+  vrl_provisions <- bills %>%
+    mutate(UUID = str_c(state, year, sprintf("%s%i", legtype, bill_number)))
+  
   
   return(vrl_bill_database)
 }
