@@ -903,6 +903,125 @@ build_vrl_bill_database <- function(){
   colnames(vrl_provisions) <- str_remove_all(colnames(vrl_provisions),"21")
 
   ####### CREATE VRL PROCESS CHECK  #######
+  vrl_process_check <- bills %>%
+    mutate(
+      year = mdy(intro_date)
+      ,UUID = str_c(state, year, sprintf("%s%i", legtype, bill_number))) %>%
+    unnest(tags,keep_empty = T) %>%
+    mutate_at(
+      vars(starts_with("21"),`-Impact`),
+      funs(map_chr(.,~.[[1]] %>% str_c(collapse = ", ")))) %>%
+    mutate(
+      RESTRICT_AVVBM_SHRTAPP = ifelse(str_detect(`21AbsenteeVtg`,"AppDdlnErlr"),1,0)
+      ,RESTRICT_AVVBM_SHRTSUB = ifelse(str_detect(`21AbsenteeVtg`,"BlltRtrnDdlnEarlier"),1,0)
+      ,RESTRICT_AVVBM_ELIGIB = ifelse(str_detect(`21AbsenteeVtg`,"ElgblExcsAccptNrrw") |
+                                      str_detect(`21AbsenteeVtg`,"ElgblNoExcsVtngElmnt") |
+                                      str_detect(`21AbsenteeVtg`,"ElgblExcsAccptNrrw")|
+                                      str_detect(`21PAVL`,"RmvlFrmLstMksHrdr")
+                                      ,1,0)
+      ,RESTRICT_AVVBM_SNDAPP = ifelse(str_detect(`21AbsenteeVtg`,"AppMailedAutoProhbts"),1,0)
+      ,RESTRICT_AVVBM_SNDBLT = ifelse(str_detect(`21AbsenteeVtg`,"AppMailedAutoProhbts"),1,0)
+      ,RESTRICT_AVVBM_LIMAST = ifelse(str_detect(`21BlltRtrnVfctnCure`,"BlltRtrnThrdPrtyRstrs"),1,0)
+      ,RESTRICT_AVVBM_LIMCUR = ifelse(str_detect(`21BlltRtrnVfctnCure`,"NtcCrCrblDfctRstrLst") |
+                                        str_detect(`21BlltRtrnVfctnCure`,"NtcCrDdlnMvsEarlier") |
+                                        str_detect(`21BlltRtrnVfctnCure`,"NtcCrMthdsRstrcts") |
+                                        str_detect(`21BlltRtrnVfctnCure`,"NtcCrElmntPrcss") |
+                                        str_detect(`21BlltRtrnVfctnCure`,"NtcCrNtfctnRcvsLtr")
+                                      ,1,0)
+      ,RESTRICT_AVVBM_SIGREQ = ifelse(str_detect(`21BlltRtrnVfctnCure`,"VrfCntSgntrCrt"),1,0)
+      ,RESTRICT_DROPBOX = ifelse(str_detect(`21BlltRtrnVfctnCure`,"BlltRtrnDOLAvlRstrct"),1,0)
+      ,RESTRICT_VTRID = ifelse(
+        str_detect(`21AbsenteeVtg`,"AppRqIDCrtExpnd") |
+          str_detect(`21InPrsnVtng`,"VtrRqrmntIDCrtExpnd") |
+          str_detect(`21VoterID`, "AltsElmntsRstrcts") |
+          str_detect(`21VoterID`, "ApplcbltyAbsntVtng") |
+          str_detect(`21VoterID`, "ApplcbltyErlyVtng") |
+          str_detect(`21VoterID`, "ApplcbltyElctnDyVtng") |
+          str_detect(`21VoterID`, "ApplcbltyThrdPrtyRtr") |
+          str_detect(`21VoterID`, "BOPhotoIDRqrd") |
+          str_detect(`21VoterID`, "IDRqrmntCrts") |
+          str_detect(`21VoterID`, "FreeIDElmntRstrct")
+        ,1,0)
+      ,RESTRICT_VTRREG_EXPREM = ifelse(
+        str_detect(`21VtrLstMntncPrgs`,"RsnRmvlChngAddrss") |
+        str_detect(`21VtrLstMntncPrgs`,"RsnRmvlCtznshpStts") |
+        str_detect(`21VtrLstMntncPrgs`,"RsnRmvlDth") |
+        str_detect(`21VtrLstMntncPrgs`,"RsnRmvlFlnyCnvctn") |
+        str_detect(`21VtrLstMntncPrgs`,"RsnRmvlMntlIncpcty") |
+        str_detect(`21VtrLstMntncPrgs`,"RsnRmvlNonFlnyCvctn") |
+        str_detect(`21VtrLstMntncPrgs`,"RsnRmvlNonVtng")
+        ,1,0
+      )
+      ,RESTRICT_VTRREG_DIFICT = ifelse(
+        str_detect(`21AVR`,"ChngPrtcptAgncyRmvs") |
+        str_detect(`21AVR`,"ChngREALIDCtznshpPrf") |
+        str_detect(`21AVR`,"EliminatesAVR") |
+        str_detect(`21ncrcrtdVtng`,"PrcssPrfRgCrtStrngRq") |
+        str_detect(`21ncrcrtdVtng`,"RgstrFrmAvlbltyRstrc") |
+        str_detect(`21ncrcrtdVtng`,"RgstrPrcssRstrct") |
+        str_detect(`2VtrRgstrn`,"DdlnNewRgstrnErlr")|
+        str_detect(`2VtrRgstrn`,"DdlnUpdtRgstrnErlr")|
+        str_detect(`2VtrRgstrn`,"PreRgstrMinorElmn")|
+        str_detect(`2VtrRgstrn`,"RegAgncyRmvsAgncy")|
+        str_detect(`2VtrRgstrn`,"RegDrvAsstncPrhbt"),
+        1,0
+      )
+      ,RESTRICT_VTTREG_NOSDYR = ifelse(
+        str_detect(`21SDR`, "AvlEVElmntRstrct") |
+        str_detect(`21SDR`, "AvlElctDyElmntRstrct")
+        ,1,0
+      )
+      ,RESTRICT_IPV_PPLOCA = ifelse(
+        str_detect(`21ElctnDyVtngSts`,"PrcnctBsdPllPlcElmnt") |
+        str_detect(`21ElctnDyVtngSts`,"LctnNmbrRqrdIncr") |
+        str_detect(`21ElctnDyVtngSts`,"VtCtrEliminates") |
+        str_detect(`21ElctnDyVtngSts`,"VtHrsRdcs")
+        ,1,0
+      )
+      ,RESTRICT_ERLVTG_LIMIT = ifelse(
+        str_detect(`21ErlyVtngAvlblty`,"TmngVtngHoursRdcs") |
+        str_detect(`21ErlyVtngAvlblty`,"TmngSunVtngElmntNrrw") |
+        str_detect(`21ErlyVtngAvlblty`,"TmngSatVtngElmntNrrw") |
+        str_detect(`21ErlyVtngAvlblty`,"TmngLstDyMvsErlr") |
+        str_detect(`21ErlyVtngAvlblty`,"TmngEVPrdShrtns")
+        ,1,0)
+      ,RESTRICT_EOS_WEAKEN = ifelse(
+        str_detect(`21IntrfrncElctnAdmin`,"BfrctnSttFdrlElx") |
+        str_detect(`21IntrfrncElctnAdmin`,"PrtsnAptmntElxnOffcl") |
+        str_detect(`21IntrfrncElctnAdmin`,"IntrfrncLocalAmdmins") |
+        str_detect(`21IntrfrncElctnAdmin`,"IntrfrncMgmtLitigatn") |
+        str_detect(`21IntrfrncElctnAdmin`,"PnlzJobPrfrmnc") |
+        str_detect(`21IntrfrncElctnAdmin`,"PnlzListMntncInfrctn") |
+        str_detect(`21IntrfrncElctnAdmin`,"PnlzOffclLawfulPrctc") |
+        str_detect(`21IntrfrncElctnAdmin`,"PowerGrabLegislature") |
+        str_detect(`21IntrfrncElctnAdmin`,"ElxnRvwLckClrtyPrcss") |
+        str_detect(`21IntrfrncElctnAdmin`,"ElxnRvwLedByNonExprt") |
+        str_detect(`21IntrfrncElctnAdmin`,"ElxnRvwTrgts2020Elxn") |
+        str_detect(`21IntrfrncElctnAdmin`,"ElxnRvwTrgtsJrsdxn") |
+        str_detect(`21IntrfrncElctnAdmin`,"ElxnRvwUnfndInvstgtn") |
+        str_detect(`21IntrfrncElctnAdmin`,"RskVoterWrkrIntmdtn") |
+        str_detect(`21IntrfrncElctnAdmin`,"StiflingEmrgncyPwrs") |
+        str_detect(`21IntrfrncElctnAdmin`,"UnjstfdBrdnsOnOffcls") |
+        str_detect(`21IntrfrncElctnAdmin`,"PrhbtUseTabulators") |
+        str_detect(`21IntrfrncElctnAdmin`,"RstrctGrantMoney") |
+        str_detect(`21IntrfrncElctnAdmin`,"UsurpngSttElxnAdmin")
+        ,1,0
+      )
+      ,RESTRICT_CRIMES = ifelse(
+        str_detect(`21ElctnCrms`,"ApplcblThrdPrty")|
+        str_detect(`21ElctnCrms`,"ApplcblVoters")|
+        str_detect(`21ElctnCrms`,"CivilPenaltiesCrts")|
+        str_detect(`21ElctnCrms`,"CivilPenaltiesExpnds")|
+        str_detect(`21ElctnCrms`,"FelonyCreates")|
+        str_detect(`21ElctnCrms`,"MisdemeanorCreates")|
+        str_detect(`21ElctnCrms`,"OtcmAsstVtrsIncrsCrm")|
+        str_detect(`21ElctnCrms`,"OtcmVotersIncrsCrm")|
+        str_detect(`21ElctnCrms`,"PnltyIncrsSvrtyPnlty")
+        ,1,0
+      )
+      )
+  
+  
   return(list(vrl_bill_database=vrl_bill_database
               ,vrl_provisions=vrl_provisions))
 }
