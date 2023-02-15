@@ -1,5 +1,6 @@
 name: Pull_BillTracks
-on: #workflow_dispatch
+on:
+  workflow_dispatch:
   schedule:
     - cron: "0 21 * * 2"
     - cron: "0 21 * * 5"
