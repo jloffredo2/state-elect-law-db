@@ -49,6 +49,7 @@ All datasets have a similar structure and following the column label/definitions
   * **To Congress**
   * **To Executive**
   * **Vetoed**
+* `BILLOCATIOM` Bill location in legislative process
 * `INTRODUCEDDATE` Date bill is officially introduced
 * `LASTACTIONDATE` Date of bill's last action
 * `NCOAUTHORS` Total number of coauthors

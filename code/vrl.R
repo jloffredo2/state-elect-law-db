@@ -54,9 +54,47 @@
     vrl_bill_database$BILLNUM = sprintf("%s%i", vrl_bill_database$legtype, vrl_bill_database$bill_number)
     vrl_bill_database$BILLSTATUS = fct_recode(as.factor(vrl_bill_database$current_disposition),
                                               "Failed" = "Failed - Adjourned",
-                                              "Pending" = "Pending - Carryover",
+                                              "Carryover" = "Pending - Carryover",
                                               "To Executive" = "To Governor",
                                               "Enacted" = "Adopted")
+    vrl_bill_database = vrl_bill_database %>%
+      mutate(BILLLOCATION = case_when(
+        str_detect(bill_location, "Committee of the Whole") ~ "Floor",
+        bill_location == "Conference Committee" ~ "Conference",
+        bill_location == "Bills in Conference Committee" ~ "Conference",
+        bill_location == "Bills Carrying Request Messages" ~ "Conference",
+        str_detect(bill_location, "Reading") ~ 'Reading',
+        str_detect(bill_location,"Committee") ~ "Committee",
+        bill_location == "House Election Integrity" ~ "Committee",
+        bill_location == "House Government Oversight" ~ "Committee",
+        bill_location == "SENATE" ~ "Floor",
+        bill_location == "HOUSE" ~ "Floor",
+        bill_location == "Laid on Table" ~ "Floor",
+        bill_location == "Legislature" ~ "Floor",
+        bill_location == "ASSEMBLY" ~ "Floor",
+        bill_location == "Held on Desk" ~ "Floor",
+        str_detect(bill_location,"Consideration") ~ "Floor",
+        bill_location == "Chaptered" ~ 'Passed',
+        bill_location == "Chapter" ~ 'Passed',
+        bill_location == "Signed by Governor" ~ 'Passed',
+        bill_location == "Resolutions Referred" ~ 'Passed',
+        bill_location == "Adopted" ~ 'Passed',
+        bill_location == 'Died' ~ 'Failed',
+        bill_location == 'Failed to Pass' ~ 'Failed',
+        bill_location == 'Withdrawn' ~ 'Withdrawn',
+        bill_location == "Withdrawn from further consideration"  ~ 'Withdrawn',
+        bill_location == 'Postponed Indefinitely' ~ 'Withdrawn',
+        bill_location == 'Indefinitely Postponed' ~ 'Withdrawn',
+        bill_location == 'Tabled' ~ 'Withdrawn',
+        bill_location == "Vetoed by Governor" ~ 'Vetoed',
+        bill_location == "Governor's Veto" ~ 'Vetoed',
+        bill_location == "Concurrence" ~ "Conference",
+        bill_location == "Eligible for Governor" ~ "To Governor",
+        bill_location == "To Governor" ~ "To Governor",
+        bill_location == "Enacting Clause Struck" ~ "Substituted"
+        
+        )) %>%
+      filter(!(bill_location %in% c("Council Floor","Eligible for Congress")))
     
     vrl_bill_database$AUTHORNAME = ifelse(str_detect(vrl_bill_database$author,"\\([A-Z]{1,3}\\)"),
            trimws(str_remove_all(vrl_bill_database$author,"\\([A-Z]{1,3}\\)"),"both"),
@@ -864,6 +902,7 @@
              ,STATE=state
              ,BILLNUM
              ,BILLSTATUS
+             ,BILLLOCATION
              ,AUTHORNAME
              ,AUTHORPARTY
              ,INTRODUCEDDATE
