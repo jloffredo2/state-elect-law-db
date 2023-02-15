@@ -885,7 +885,7 @@
     print("creating provisions table")
     vrl_provisions <- bills %>%
       mutate(
-        year = year(intro_date)
+        year = year(mdy(intro_date))
         ,UUID = str_c(state, year, sprintf("%s%i", legtype, bill_number))) %>%
       unnest(tags,keep_empty = T) %>%
       mutate_at(
@@ -908,7 +908,7 @@
     print("creating process check table")
     vrl_process_check <- bills %>%
       mutate(
-        year = year(intro_date)
+        year = year(mdy(intro_date))
         ,UUID = str_c(state, year, sprintf("%s%i", legtype, bill_number))) %>%
       unnest(tags,keep_empty = T) %>%
       mutate_at(

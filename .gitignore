@@ -59,3 +59,4 @@ rsconnect/
 *.rtf
 code/.DS_Store
 .DS_Store
+*.zip
