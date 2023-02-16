@@ -42,9 +42,11 @@
     # Rename and change date to date type
     vrl_bill_database <- bills %>%
       rename(INTRODUCEDDATE = intro_date
+             ,PREFILEDATE = prefile_date
              ,BILLTEXTURL = text_url
              ,BILLSUMMARY = summary) %>%
       mutate(INTRODUCEDDATE = mdy(INTRODUCEDDATE),
+             PREFILEDATE = mdy(PREFILEDATE),
              YEAR = year(INTRODUCEDDATE)) %>%
       unnest(tags,keep_empty = T) %>%
       mutate_at(
@@ -905,6 +907,7 @@
              ,BILLLOCATION
              ,AUTHORNAME
              ,AUTHORPARTY
+             ,PREFILEDATE
              ,INTRODUCEDDATE
              ,LASTACTIONDATE
              ,NCOAUTHORS

@@ -56,6 +56,7 @@ ncsl_extract_bill_info <- function(curr, year) {
       YEAR = year,
       ID = bill_id,
       STATUS = status,
+      PREFILEDATE = prefiled_date,
       INTRODUCEDDATE = introduced_date,
       LASTACTIONDATE = last_action_date,
       AUTHOR = author,
@@ -401,6 +402,7 @@ build_ncsl_bill_database <- function(){
            ,BILLSTATUS
            ,AUTHORNAME
            ,AUTHORPARTY
+           ,PREFILEDATE
            ,INTRODUCEDDATE
            ,LASTACTIONDATE
            ,NCOAUTHORS
