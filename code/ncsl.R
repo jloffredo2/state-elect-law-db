@@ -413,6 +413,7 @@ build_ncsl_bill_database <- function(){
            ,HISTORY) %>%
     mutate(STATE = as.factor(STATE)
            ,AUTHORPARTY = as.factor(AUTHORPARTY)
+           ,PREFILEDATE = as.Date(PREFILEDATE,format = "%m/%d/%Y")
            ,INTRODUCEDDATE = mdy(INTRODUCEDDATE)
            ,LASTACTIONDATE = mdy(LASTACTIONDATE))
   
