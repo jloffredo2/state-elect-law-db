@@ -400,7 +400,7 @@ build_ncsl_bill_database <- function(){
   ncsl_bill_database <- ncsl_bill_database %>% left_join(general_columns,by="UUID")
   
   # Get columns for bill topics - helps sort these cols alphabetically 
-  topic_cols = sort(colnames(ncsl_bill_database)[21:111])
+  topic_cols = sort(colnames(ncsl_bill_database)[21:112])
   
   # Produce final output
   ncsl_bill_database <- ncsl_bill_database %>%
