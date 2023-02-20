@@ -392,7 +392,7 @@
           ,str_detect(`21IntrfrncElctnAdmin`,"UnjstfdBrdnsOnOffcls") ~ 1
           ,str_detect(`21EmergingIssues`, "ElxnWrkrPrtctns") ~ 1
         )
-        ,EOGENR = max(EOLOCA,EOSTWD)
+        ,EOGENR = ifelse(EOLOCA == 1 | EOSTWD == 1, 1, 0)
         ,INVOTE = case_when(
           str_detect(`21BlltRtrnVfctnCure`, "OnlnVtngAvlblAllVtrs") ~ 1
           ,str_detect(`21BlltRtrnVfctnCure`, "OnlnVtngAvlblSmVtrs") ~ 1
@@ -522,7 +522,7 @@
           ,str_detect(`21ElctnDyVtngSts`,"VtHrsExpnds") ~ 1
           ,str_detect(`21ElctnDyVtngSts`,"VtHrsRdcs") ~ 1
         )
-        ,PPGENR = max(PPACES,PPLOCA,PPVCEN,PPVHRS)
+        ,PPGENR = ifelse(PPACES == 1 | PPLOCA == 1 | PPVCEN == 1 | PPVHRS == 1, 1, 0)
         ,PREDEF = case_when(
           str_detect(`21ElctnDyVtngSts`, "PrcnctMpCnsldtnPrcss") ~ 1
           ,str_detect(`21ElctnDyVtngSts`, "PrcnctMpCnsldtnTmln") ~ 1
@@ -721,7 +721,8 @@
         ,REGSDL = case_when(
           str_detect(`21VtrRgstrn`,"RulesSaleDstrbVtrLst") ~ 1
         )
-        ,REGGEN = max(REGAGY,REGAPP,REGATO,REGDRV,REGDTE,REGEDY,REGELE,REGMSC,REGPRE)
+        ,REGGEN = ifelse(REGAGY== 1 | REGAPP== 1 | REGATO== 1 | REGDRV== 1 | REGDTE== 1 | REGEDY== 1 | REGELE== 1 | REGMSC== 1 | REGPRE== 1,
+                         1,0)
         ,REPRES = case_when(
           str_detect(`21ShftInElctnAthrty`,"IssueElctnRslts") ~ 1
           ,str_detect(`21IntrfrncElctnAdmin`,"IntrfrncCrtfctnRslts") ~ 1

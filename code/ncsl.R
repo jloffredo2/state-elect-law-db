@@ -329,7 +329,6 @@ build_ncsl_bill_database <- function(){
   ncsl_bill_database$EOCAMP = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Officials-Campaign Activities")
   ncsl_bill_database$EOLOCA = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Officials-Local")
   ncsl_bill_database$EOSTWD = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Officials-Statewide")
-  ncsl_bill_database$EOGENR = max(ncsl_bill_database$EOCAMP,ncsl_bill_database$EOLOCA,ncsl_bill_database$EOSTWD)
   ncsl_bill_database$REPRES = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Results/Canvass, Reporting of")
   ncsl_bill_database$ELEING = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Electioneering")
   ncsl_bill_database$ELECOL = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Electoral College")
@@ -353,7 +352,6 @@ build_ncsl_bill_database <- function(){
   ncsl_bill_database$PPVHRS = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Polling Places-Hours")
   ncsl_bill_database$PPLOCA = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Polling Places-Locations")
   ncsl_bill_database$PPVCEN = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Polling Places-Vote Centers")
-  ncsl_bill_database$PPGENR = max(ncsl_bill_database$PPPROC,ncsl_bill_database$PPACES,ncsl_bill_database$PPVHRS,ncsl_bill_database$PPLOCA,ncsl_bill_database$PPVCEN)
   ncsl_bill_database$PREDEF = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Precinct Definition")
   ncsl_bill_database$PRIDAT = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Primaries-Dates")
   ncsl_bill_database$PRIMIS = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Primaries-Misc.")
@@ -374,7 +372,6 @@ build_ncsl_bill_database <- function(){
   ncsl_bill_database$REGMSC = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration-Misc.")
   ncsl_bill_database$REGPRE = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration-Preregistration")
   ncsl_bill_database$REGSDL = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration-Sale/Distribution/Use of Lists")
-  ncsl_bill_database$REGGEN = max(ncsl_bill_database$REGAPP,ncsl_bill_database$REGATO,ncsl_bill_database$REGDRI,ncsl_bill_database$REGDTE,ncsl_bill_database$REGEDY,ncsl_bill_database$REGELE,ncsl_bill_database$REGIDR,ncsl_bill_database$REGMSC,ncsl_bill_database$REGPRE)
   ncsl_bill_database$RUNOFF = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Run-Off Elections")
   ncsl_bill_database$SPELEC = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Special Elections")
   ncsl_bill_database$STVOTE = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Straight Ticket Voting")
@@ -390,8 +387,20 @@ build_ncsl_bill_database <- function(){
   ncsl_bill_database$TECHSS = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Voting Equipment/Technology-Selection & Standards")
   ncsl_bill_database$VSSCST = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Voting System Testing/Security/Storage")
   
+  # Better way if creating general topic cols
+  general_columns <- ncsl_bill_database %>%
+    group_by(UUID) %>%
+    mutate(EOGENR = max(EOCAMP,EOLOCA,EOSTWD),
+           PPGENR = max(PPPROC,PPACES,PPVHRS,PPVCEN),
+           REGGEN = max(REGAPP,REGATO,REGDRI,REGDTE,REGEDY,REGELE,REGIDR,REGMSC,REGPRE)) %>%
+    ungroup() %>%
+    select(UUID,EOGENR,PPGENR,REGGEN) %>%
+    distinct()
+  
+  ncsl_bill_database <- ncsl_bill_database %>% left_join(general_columns,by="UUID")
+  
   # Get columns for bill topics - helps sort these cols alphabetically 
-  topic_cols = sort(colnames(ncsl_bill_database)[21:111])
+  topic_cols = sort(colnames(ncsl_bill_database)[21:112])
   
   # Produce final output
   ncsl_bill_database <- ncsl_bill_database %>%
