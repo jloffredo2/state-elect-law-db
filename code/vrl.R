@@ -895,7 +895,7 @@
       mutate_at(vars(NCOAUTHORS,NDEMCOAUTHORS,NREPCOAUTHORS),replace_na, 0) %>%
       select(-starts_with("21"))
     
-    topic_cols = sort(colnames(vrl_bill_database)[44:99])
+    topic_cols = sort(colnames(vrl_bill_database)[45:100])
     
     # Produce final output
     vrl_bill_database <- vrl_bill_database %>%
