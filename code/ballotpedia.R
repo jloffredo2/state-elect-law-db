@@ -133,80 +133,93 @@ build_ballotpedia_bill_database <- function(){
   ballotpedia_bill_database$AVBRET = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Absentee/mail-in ballot return processes")
   ballotpedia_bill_database$AVDLIN = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Absentee/mail-in ballot deadlines" )
   ballotpedia_bill_database$AVELIG = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Absentee/mail-in voting eligibility")
-  ballotpedia_bill_database$AVEVIP = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Early voting administration")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Early voting duration")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Early voting eligibility"))                    
+  ballotpedia_bill_database$AVEVIP = ifelse(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Early voting administration") == 1 | 
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Early voting duration") == 1 | 
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Early voting eligibility") == 1,
+                                            1,0)                    
   ballotpedia_bill_database$AVMIOV = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Military/UOCAVA voting")                      
   ballotpedia_bill_database$AVMISC = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Absentee/mail-in ballot administration")
   ballotpedia_bill_database$AVPERM = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Permanent lists")                             
   ballotpedia_bill_database$BACAND = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Ballot access for candidates")                
-  ballotpedia_bill_database$BACURE = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Cure provisions")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Signature matching")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Witness or notary requirements"))              
+  ballotpedia_bill_database$BACURE = ifelse(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Cure provisions") == 1 | 
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Signature matching") == 1 | 
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Witness or notary requirements") == 1,
+                                            1,0)              
   ballotpedia_bill_database$BALDES = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Ballot design")                               
   ballotpedia_bill_database$BAMEAS = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Ballot measures (initiative and referendum)") 
   ballotpedia_bill_database$BAPART = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Ballot access for parties")                   
-  ballotpedia_bill_database$CRIMES = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Enforcement against non-officials")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Enforcement against officials"))
+  ballotpedia_bill_database$CRIMES = ifelse(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Enforcement against non-officials") == 1 | 
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Enforcement against officials") == 1,
+                                            1,0)
   ballotpedia_bill_database$CYBSEC = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Cybersecurity")                               
   ballotpedia_bill_database$ECONPV = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "National Popular Vote Interstate Compact")    
-  ballotpedia_bill_database$ELAUTH = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Legislative authority")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Oversight and accountability"))                
+  ballotpedia_bill_database$ELAUTH = ifelse(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Legislative authority")== 1 | 
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Oversight and accountability") == 1,
+                                            1,0)                
   ballotpedia_bill_database$ELDATE = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Election dates and administrative deadlines") 
   ballotpedia_bill_database$ELEING = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Electioneering")                              
   ballotpedia_bill_database$EMEDIS = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "States of emergency")                         
   ballotpedia_bill_database$EOGENR = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Election officials")                          
   ballotpedia_bill_database$EPLOCL = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Municipal election procedures")               
-  ballotpedia_bill_database$ELCOST = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Federal funding")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Private funding")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "State appropriations"))                        
+  ballotpedia_bill_database$ELCOST = ifelse(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Federal funding") == 1 | 
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Private funding") == 1 | 
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "State appropriations")== 1,
+                                            1,0)                        
   ballotpedia_bill_database$DGVOTE = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Digital/electronic voting")                   
   ballotpedia_bill_database$INVOTE = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Online voting")                               
   ballotpedia_bill_database$MAILVO = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Automatic mail-in ballots")                   
-  ballotpedia_bill_database$VOTSEC = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Drop-box security")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Physical security")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Video surveillance")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Chain of custody")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Ballot collection"))                          
+  ballotpedia_bill_database$VOTSEC = ifelse(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Drop-box security") == 1 | 
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Physical security")== 1 | 
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Video surveillance")== 1 | 
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Chain of custody")== 1 | 
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Ballot collection")== 1,
+                                            1,0)                          
   ballotpedia_bill_database$POLWAT = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Poll observers")                              
-  ballotpedia_bill_database$PPGENR = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "In-person voting and polling places")         
-  ballotpedia_bill_database$PRITYP = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Non-traditional primaries")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Primary systems"))                             
+  ballotpedia_bill_database$PPGENR = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "In-person voting and polling places")        
+  ballotpedia_bill_database$PRITYP = ifelse(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Non-traditional primaries")  == 1 |
+                                           sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Primary systems")  == 1,
+                                           1,0)                             
   ballotpedia_bill_database$PROVOT = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Provisional ballots")                         
   ballotpedia_bill_database$PWMISC = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Election workers/volunteers")                 
   ballotpedia_bill_database$RECALL = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Recalls")                                     
   ballotpedia_bill_database$RECOUN = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Recounts")                                    
-  ballotpedia_bill_database$REDIST = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Redistricting commissions")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Redistricting criteria/requirements")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Redistricting funding")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Redistricting process")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Redistricting"))                               
+  ballotpedia_bill_database$REDIST = ifelse(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Redistricting commissions")  == 1 |
+                                         sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Redistricting criteria/requirements") == 1 |
+                                         sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Redistricting funding") == 1 |
+                                         sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Redistricting process") == 1 |
+                                         sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Redistricting")  == 1,
+                                         1,0)                               
   ballotpedia_bill_database$REGATO = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Automatic voter registration")                
   ballotpedia_bill_database$REGDTE = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Voter participation deadlines")               
   ballotpedia_bill_database$REGEDY = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Same-day/Election Day registration")          
   ballotpedia_bill_database$REGGEN = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Voter registration")                          
   ballotpedia_bill_database$REGLST = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Voter list maintenance")                      
-  ballotpedia_bill_database$REPRES = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Certification")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Reporting"))                                   
+  ballotpedia_bill_database$REPRES = ifelse(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Certification")  == 1 |
+                                           sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Reporting") == 1,
+                                           1,0)                                   
   ballotpedia_bill_database$TECHSS = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Voting equipment")                            
   ballotpedia_bill_database$VACNCY = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Vacancy procedures")                          
   ballotpedia_bill_database$VCOUNT = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Counting and canvassing procedures")          
   ballotpedia_bill_database$VOTAGE = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Youth voting")  
-  ballotpedia_bill_database$VOTAST = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Absentee/mail-in voter assistance")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "In-person voter assistance"))                  
+  ballotpedia_bill_database$VOTAST = ifelse(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Absentee/mail-in voter assistance")  == 1 |
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "In-person voter assistance") == 1,
+                                            1,0)                  
   ballotpedia_bill_database$LNGACC = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Language accommodations")                     
   ballotpedia_bill_database$VOTEME = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Ranked-choice voting")                        
   ballotpedia_bill_database$VOTFVR = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Voting by felons or incarcerated individuals")
-  ballotpedia_bill_database$VOTRID = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "In-person voter ID")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Voter ID for absentee/mail-in ballots")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Voter ID for low-income voters")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Voter ID for registration"))                   
-  ballotpedia_bill_database$VTDROP = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Drop-box availability")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Drop-box security"))
+  ballotpedia_bill_database$VOTRID = ifelse(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "In-person voter ID") == 1 |
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Voter ID for absentee/mail-in ballots") == 1 |
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Voter ID for low-income voters") == 1 |
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Voter ID for registration") == 1,
+                                            1,0)                   
+  ballotpedia_bill_database$VTDROP = ifelse(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Drop-box availability")  == 1 |
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Drop-box security") == 1,
+                                            1,0)
   ballotpedia_bill_database$VTRCHA = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Challenges")
-  ballotpedia_bill_database$VOTMQU = max(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Time off for voting")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Mandatory voting")
-                                         ,sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Noncitizen voting"))
+  ballotpedia_bill_database$VOTMQU = ifelse(sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Time off for voting")  == 1 |
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Mandatory voting") == 1 |
+                                            sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Noncitizen voting") == 1,
+                                            1,0)
   ballotpedia_bill_database$VOTAFW = sapply(ballotpedia_bill_database$CATEGORIES, ballotpedia_check_topics, "Time off for voting")
   
   topic_cols = sort(colnames(ballotpedia_bill_database)[23:77])
