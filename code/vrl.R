@@ -873,10 +873,6 @@
           ,str_detect(`21IncrcrtdVtng`, "VtIDRqrAddJlPrsnID") ~ 1
           ,str_detect(`21IncrcrtdVtng`, "VtIDRqrExmptIDRqr") ~ 1
           ,str_detect(`21IncrcrtdVtng`, "VtIDRqrPrvdsCmplntID") ~ 1
-          ,str_detect(`21PrfCtznshp`, "ChngRqrmnt") ~ 1
-          ,str_detect(`21PrfCtznshp`, "CrtRqrmnt") ~ 1
-          ,str_detect(`21PrfCtznshp`, "ElmntRqrmnt") ~ 1
-          ,str_detect(`21PrfCtznshp`, "Other") ~ 1
         )
         ,VTDROP = case_when(
           str_detect(`21BlltRtrnVfctnCure`,'BlltRtrnDOLAvlExpnd') ~ 1
