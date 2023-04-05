@@ -938,7 +938,8 @@
              ,HISTORY
              ,VRLRATING
              ,BILLTEXTURL
-             ,BILLSUMMARY) %>%
+             ,BILLSUMMARY
+             ,starts_with("GENERAL")) %>%
       mutate(
         STATE = as.factor(STATE)
         ,AUTHORPARTY = as.factor(AUTHORPARTY))
