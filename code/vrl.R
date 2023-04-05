@@ -27,6 +27,64 @@
     return(ifelse(!is.na(json),length(rjson::fromJSON(json)),NA))
   }
   
+  classify_tags <- function(tags) {
+    tags <- str_trim(tags) %>% na.omit()
+    categorized_tags <- case_when(
+      tags %in% anti_voter_tags ~ "R",
+      tags %in% pro_voter_tags ~ "E",
+      tags %in% neutral_tags  ~ "N",
+      tags %in% mixed_tags ~ "M",
+      TRUE ~ NA_character_
+    )
+    
+    # count the frequency of each element in the vector
+    freq_table <- table(categorized_tags)
+    
+    # find the index of the maximum frequency
+    max_index <- which.max(freq_table)
+    
+    # extract the element(s) with the maximum frequency
+    most_common <- names(freq_table)[freq_table == freq_table[max_index]]
+    
+    if(length(most_common) == 1){
+      output = most_common
+    } else if(length(most_common) == 4){
+      output = 'M'
+    } else if(setequal(most_common,c("E","R","M"))){
+      output = 'M'
+    } else if(setequal(most_common,c("E","R","N"))){
+      output = 'M'
+    } else if(setequal(most_common,c("E","N","M"))){
+      output = 'E'
+    } else if(setequal(most_common,c("R","N","M"))){
+      output = 'R'
+    } else if(setequal(most_common,c("E","R"))){
+      output = 'M'
+    } else if(setequal(most_common,c("E","M"))){
+      output = 'E'
+    } else if(setequal(most_common,c("R","M"))){
+      output = 'R'
+    } else if(setequal(most_common,c("E","N"))){
+      output = 'E'
+    } else if(setequal(most_common,c("R","N"))){
+      output = 'R'
+    } else {
+      output = 'N'
+    }
+    
+  }
+  
+  clean_classified_tags <- function(col){
+    tag_lists <- str_split(col, ",")
+    
+    # Apply the classify_tags() function to each element of the list
+    tag_class <- sapply(tag_lists, classify_tags)
+    
+    return(tag_class)
+  }     
+    
+    
+  
   build_vrl_bill_database <- function(){
     print("scraping VRL storage json")
     bills <- jsonlite::fromJSON(readLines("https://tracker.votingrightslab.org/storage/bills.json"))$data
@@ -953,17 +1011,34 @@
       unnest(tags,keep_empty = T) %>%
       mutate_at(
         vars(starts_with("21"),`-Impact`),
-        funs(map_chr(.,~.[[1]] %>% str_c(collapse = ", ")))) %>%
-      mutate_at(vars(starts_with("21"),`-Impact`),
-                funs(
-                  case_when(
-                    str_detect(., str_c(anti_voter_tags, collapse = "|")) ~ "R",
-                    str_detect(., str_c(pro_voter_tags, collapse = "|")) ~ "E",
-                    str_detect(., str_c(neutral_tags, collapse = "|")) ~ "N",
-                    str_detect(., str_c(mixed_tags, collapse = "|")) ~ "M"
-                  )
-                )) %>%
-      select(UUID,VRLRATING=`-Impact`,starts_with("21")) 
+        funs(map_chr(.,~.[[1]] %>% str_c(collapse = ", "))))
+    
+    vrl_provisions$`-Impact` <- clean_classified_tags(vrl_provisions$`-Impact`)
+    vrl_provisions$`21InPrsnVtng`<- clean_classified_tags(vrl_provisions$`21InPrsnVtng`)
+    vrl_provisions$`21AbsenteeVtg`<- clean_classified_tags(vrl_provisions$`21AbsenteeVtg`)
+    vrl_provisions$`21AVR`<- clean_classified_tags(vrl_provisions$`21AVR`)
+    vrl_provisions$`21ElctnCrms`<- clean_classified_tags(vrl_provisions$`21ElctnCrms`)
+    vrl_provisions$`21BlltRtrnVfctnCure`<- clean_classified_tags(vrl_provisions$`21BlltRtrnVfctnCure`)
+    vrl_provisions$`21ShftInElctnAthrty` <- clean_classified_tags(vrl_provisions$`21ShftInElctnAthrty`)
+    vrl_provisions$`21IntrfrncElctnAdmin`<- clean_classified_tags(vrl_provisions$`21IntrfrncElctnAdmin`)
+    vrl_provisions$`21SDR`<- clean_classified_tags(vrl_provisions$`21SDR`)
+    vrl_provisions$`21PAVL`<- clean_classified_tags(vrl_provisions$`21PAVL`)
+    vrl_provisions$`21VtrRgstrn`<- clean_classified_tags(vrl_provisions$`21VtrRgstrn`)
+    vrl_provisions$`21VBMElections`<- clean_classified_tags(vrl_provisions$`21VBMElections`)
+    vrl_provisions$`21VoterID`<- clean_classified_tags(vrl_provisions$`21VoterID`)
+    vrl_provisions$`21VtrLstMntncPrgs`<- clean_classified_tags(vrl_provisions$`21VtrLstMntncPrgs`)
+    vrl_provisions$`21ElctnDyVtngSts`<- clean_classified_tags(vrl_provisions$`21ElctnDyVtngSts`)
+    vrl_provisions$`21ErlyVtngAvlblty`   <- clean_classified_tags(vrl_provisions$`21ErlyVtngAvlblty`)
+    vrl_provisions$`21COVIDSttsEmrgncy`<- clean_classified_tags(vrl_provisions$`21COVIDSttsEmrgncy`)
+    vrl_provisions$`21EmergingIssues`<- clean_classified_tags(vrl_provisions$`21EmergingIssues`)
+    vrl_provisions$`21VtngRstrtn`      <- clean_classified_tags(vrl_provisions$`21VtngRstrtn`)
+    vrl_provisions$`21IncrcrtdVtng`<- clean_classified_tags(vrl_provisions$`21IncrcrtdVtng`)
+    vrl_provisions$`21Rdstrctng`<- clean_classified_tags(vrl_provisions$`21Rdstrctng`)
+    vrl_provisions$`21PrfCtznshp`  <- clean_classified_tags(vrl_provisions$`21PrfCtznshp`)
+    
+    
+    
+    vrl_provisions <- vrl_provisions %>% select(UUID,VRLRATING=`-Impact`,starts_with("21")) 
   
     colnames(vrl_provisions) <- str_remove_all(colnames(vrl_provisions),"21")
   
