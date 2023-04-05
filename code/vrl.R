@@ -27,7 +27,7 @@
     return(ifelse(!is.na(json),length(rjson::fromJSON(json)),NA))
   }
   
-  classify_tags <- function(tags) {
+  classify_tags <- function(tags,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags) {
     tags <- str_trim(tags) %>% na.omit()
     categorized_tags <- case_when(
       tags %in% anti_voter_tags ~ "R",
@@ -74,11 +74,11 @@
     
   }
   
-  clean_classified_tags <- function(col){
+  clean_classified_tags <- function(col,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags){
     tag_lists <- str_split(col, ",")
     
     # Apply the classify_tags() function to each element of the list
-    tag_class <- sapply(tag_lists, classify_tags)
+    tag_class <- sapply(tag_lists, classify_tags,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
     
     return(tag_class)
   }     
@@ -1013,28 +1013,28 @@
         vars(starts_with("21"),`-Impact`),
         funs(map_chr(.,~.[[1]] %>% str_c(collapse = ", "))))
     
-    vrl_provisions$`-Impact` <- clean_classified_tags(vrl_provisions$`-Impact`)
-    vrl_provisions$`21InPrsnVtng`<- clean_classified_tags(vrl_provisions$`21InPrsnVtng`)
-    vrl_provisions$`21AbsenteeVtg`<- clean_classified_tags(vrl_provisions$`21AbsenteeVtg`)
-    vrl_provisions$`21AVR`<- clean_classified_tags(vrl_provisions$`21AVR`)
-    vrl_provisions$`21ElctnCrms`<- clean_classified_tags(vrl_provisions$`21ElctnCrms`)
-    vrl_provisions$`21BlltRtrnVfctnCure`<- clean_classified_tags(vrl_provisions$`21BlltRtrnVfctnCure`)
-    vrl_provisions$`21ShftInElctnAthrty` <- clean_classified_tags(vrl_provisions$`21ShftInElctnAthrty`)
-    vrl_provisions$`21IntrfrncElctnAdmin`<- clean_classified_tags(vrl_provisions$`21IntrfrncElctnAdmin`)
-    vrl_provisions$`21SDR`<- clean_classified_tags(vrl_provisions$`21SDR`)
-    vrl_provisions$`21PAVL`<- clean_classified_tags(vrl_provisions$`21PAVL`)
-    vrl_provisions$`21VtrRgstrn`<- clean_classified_tags(vrl_provisions$`21VtrRgstrn`)
-    vrl_provisions$`21VBMElections`<- clean_classified_tags(vrl_provisions$`21VBMElections`)
-    vrl_provisions$`21VoterID`<- clean_classified_tags(vrl_provisions$`21VoterID`)
-    vrl_provisions$`21VtrLstMntncPrgs`<- clean_classified_tags(vrl_provisions$`21VtrLstMntncPrgs`)
-    vrl_provisions$`21ElctnDyVtngSts`<- clean_classified_tags(vrl_provisions$`21ElctnDyVtngSts`)
-    vrl_provisions$`21ErlyVtngAvlblty`   <- clean_classified_tags(vrl_provisions$`21ErlyVtngAvlblty`)
-    vrl_provisions$`21COVIDSttsEmrgncy`<- clean_classified_tags(vrl_provisions$`21COVIDSttsEmrgncy`)
-    vrl_provisions$`21EmergingIssues`<- clean_classified_tags(vrl_provisions$`21EmergingIssues`)
-    vrl_provisions$`21VtngRstrtn`      <- clean_classified_tags(vrl_provisions$`21VtngRstrtn`)
-    vrl_provisions$`21IncrcrtdVtng`<- clean_classified_tags(vrl_provisions$`21IncrcrtdVtng`)
-    vrl_provisions$`21Rdstrctng`<- clean_classified_tags(vrl_provisions$`21Rdstrctng`)
-    vrl_provisions$`21PrfCtznshp`  <- clean_classified_tags(vrl_provisions$`21PrfCtznshp`)
+    vrl_provisions$`-Impact` <- clean_classified_tags(vrl_provisions$`-Impact`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21InPrsnVtng`<- clean_classified_tags(vrl_provisions$`21InPrsnVtng`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21AbsenteeVtg`<- clean_classified_tags(vrl_provisions$`21AbsenteeVtg`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21AVR`<- clean_classified_tags(vrl_provisions$`21AVR`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21ElctnCrms`<- clean_classified_tags(vrl_provisions$`21ElctnCrms`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21BlltRtrnVfctnCure`<- clean_classified_tags(vrl_provisions$`21BlltRtrnVfctnCure`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21ShftInElctnAthrty` <- clean_classified_tags(vrl_provisions$`21ShftInElctnAthrty`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21IntrfrncElctnAdmin`<- clean_classified_tags(vrl_provisions$`21IntrfrncElctnAdmin`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21SDR`<- clean_classified_tags(vrl_provisions$`21SDR`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21PAVL`<- clean_classified_tags(vrl_provisions$`21PAVL`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21VtrRgstrn`<- clean_classified_tags(vrl_provisions$`21VtrRgstrn`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21VBMElections`<- clean_classified_tags(vrl_provisions$`21VBMElections`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21VoterID`<- clean_classified_tags(vrl_provisions$`21VoterID`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21VtrLstMntncPrgs`<- clean_classified_tags(vrl_provisions$`21VtrLstMntncPrgs`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21ElctnDyVtngSts`<- clean_classified_tags(vrl_provisions$`21ElctnDyVtngSts`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21ErlyVtngAvlblty`   <- clean_classified_tags(vrl_provisions$`21ErlyVtngAvlblty`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21COVIDSttsEmrgncy`<- clean_classified_tags(vrl_provisions$`21COVIDSttsEmrgncy`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21EmergingIssues`<- clean_classified_tags(vrl_provisions$`21EmergingIssues`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21VtngRstrtn`      <- clean_classified_tags(vrl_provisions$`21VtngRstrtn`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21IncrcrtdVtng`<- clean_classified_tags(vrl_provisions$`21IncrcrtdVtng`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21Rdstrctng`<- clean_classified_tags(vrl_provisions$`21Rdstrctng`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
+    vrl_provisions$`21PrfCtznshp`  <- clean_classified_tags(vrl_provisions$`21PrfCtznshp`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
     
     
     
@@ -1331,7 +1331,7 @@
                 ,vrl_process_check=vrl_process_check))
   }
   
-  db <- build_vrl_bill_database()
+db <- build_vrl_bill_database()
   
 vrl_bill_database <- db$vrl_bill_database
 write.csv(vrl_bill_database, file = "output/vrl_bill_database.csv",row.names = FALSE)
