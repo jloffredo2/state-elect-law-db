@@ -94,9 +94,7 @@
         bill_location == "Eligible for Governor" ~ "To Governor",
         bill_location == "To Governor" ~ "To Governor",
         bill_location == "Enacting Clause Struck" ~ "Substituted"
-        
-        )) %>%
-      filter(!(bill_location %in% c("Council Floor","Eligible for Congress")))
+        )) %>% filter(!(bill_location %in% c("Council Floor","Eligible for Congress")))
     
     vrl_bill_database$AUTHORNAME = ifelse(str_detect(vrl_bill_database$author,"\\([A-Z]{1,3}\\)"),
            trimws(str_remove_all(vrl_bill_database$author,"\\([A-Z]{1,3}\\)"),"both"),
@@ -890,6 +888,27 @@
           ,str_detect(`21InPrsnVtng`,"ChllngChllngPrcss") ~ 1
           ,str_detect(`21InPrsnVtng`,"ChllngGrnds") ~ 1
         )
+        ,GENERAL_InPrsnVtng = ifelse(`21InPrsnVtng`!="",1,0)
+        ,GENERAL_AbsenteeVtg = ifelse(`21AbsenteeVtg`!='',1,0)
+        ,GENERAL_AVR = ifelse(`21AVR`!='',1,0)
+        ,GENERAL_ElctnCrms = ifelse(`21ElctnCrms` != '',1,0)
+        ,GENERAL_BlltRtrnVfctnCure = ifelse(`21BlltRtrnVfctnCure` != '',1,0)
+        ,GENERAL_ShftInElctnAthrty = ifelse(`21ShftInElctnAthrty`!='',1,0)
+        ,GENERAL_IntrfrncElctnAdmin = ifelse(`21IntrfrncElctnAdmin`!='',1,0)
+        ,GENERAL_SDR = ifelse(`21SDR`!='',1,0)
+        ,GENERAL_PAVL = ifelse(`21PAVL`!='',1,0)
+        ,GENERAL_VtrRgstrn = ifelse(`21VtrRgstrn`!='',1,0)
+        ,GENERAL_VBMElections = ifelse(`21VBMElections`!='',1,0)
+        ,GENERAL_VoterID = ifelse(`21VoterID`!='',1,0)
+        ,GENERAL_VtrLstMntncPrgs = ifelse(`21VtrLstMntncPrgs`!='',1,0)
+        ,GENERAL_ElctnDyVtngSts = ifelse(`21ElctnDyVtngSts`!='',1,0)
+        ,GENERAL_ErlyVtngAvlblty = ifelse(`21ErlyVtngAvlblty`!='',1,0)
+        ,GENERAL_COVIDSttsEmrgncy = ifelse(`21COVIDSttsEmrgncy`!='',1,0)
+        ,GENERAL_EmergingIssues = ifelse(`21EmergingIssues`!='',1,0)
+        ,GENERAL_VtngRstrtn = ifelse(`21VtngRstrtn`!='',1,0)
+        ,GENERAL_IncrcrtdVtng = ifelse(`21IncrcrtdVtng`!='',1,0)
+        ,GENERAL_21Rdstrctng = ifelse(`21Rdstrctng`!='',1,0)
+        ,GENERAL_21PrfCtznshp = ifelse(`21PrfCtznshp`!='',1,0)
       ) %>%
       mutate_at(vars(AVAPPL:VTRCHA),replace_na, 0) %>%
       mutate_at(vars(NCOAUTHORS,NDEMCOAUTHORS,NREPCOAUTHORS),replace_na, 0) %>%
