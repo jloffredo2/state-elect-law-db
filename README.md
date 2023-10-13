@@ -3,16 +3,16 @@
 
 **Institution**: MIT
 
-**Date**: 2023-10-10
+**Date**: 2023-10-13
 
 ## DESCRIPTION
 This dataset is the product of scraping the *National Conference of State Legislature*'s "State Elections Legislation Database" and *Voting Rights Lab*'s "Legislative Tracker." The code for producing this dataset can be found in this GitHub repo: https://github.com/jloffredo2/state-elect-law-db. See the `code` subfolder for all relevant code.
 
 If you are using this dataset, please cite it and provide, NCSL and Voting Rights Lab with proper citation as follows:
 
-> National Conference of State Legislatures. 2023. *State Elections Legislation Database*. www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx (October 10, 2023).
+> National Conference of State Legislatures. 2023. *State Elections Legislation Database*. www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx (October 13, 2023).
 
-> Voting Rights Lab. 2023. *Legislative Tracker*. https://tracker.votingrightslab.org/pending/search (October 10, 2023).
+> Voting Rights Lab. 2023. *Legislative Tracker*. https://tracker.votingrightslab.org/pending/search (October 13, 2023).
 
 *To access tidy versions of these databases, use the following files:*
 * `output/ncsl_bill_database.csv`: NCSL "State Elections Legislation" database in `.csv` format
