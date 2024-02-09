@@ -60,3 +60,6 @@ rsconnect/
 code/.DS_Store
 .DS_Store
 *.zip
+
+# Ignore roll call look up for Boris Shor
+/bs_roll_calls/
