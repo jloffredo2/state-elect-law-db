@@ -317,7 +317,7 @@ build_ncsl_bill_database <- function(){
   ncsl_bill_database$CANWDW = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Candidates-Withdrawal/Death")
   ncsl_bill_database$CANWRI = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Candidates-Write-in")
   ncsl_bill_database$VTRCHA = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Challenges to Voters")
-  ncsl_bill_database$CNTEST = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Contests")
+  ncsl_bill_database$CNTEST = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Contests (Court Challenges)")
   ncsl_bill_database$ELCOST = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Cost of Elections")
   ncsl_bill_database$VCOUNT = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Counting Votes")
   ncsl_bill_database$CYBSEC = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Cybersecurity")
