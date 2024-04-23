@@ -136,6 +136,7 @@ All datasets have a similar structure and following the column label/definitions
 * `REGIDR` 	Registration-ID Required
 * `REGLST` 	Registration-List Maintenance
 * `REGMSC` 	Registration-Misc.
+* `REGONL` 	Registration-Online
 * `REGPRE` 	Registration-Preregistration
 * `REGSDL` 	Registration-Sale/Distribution/Use of Lists
 * `REPRES` 	Election Results/Canvass, Reporting of
