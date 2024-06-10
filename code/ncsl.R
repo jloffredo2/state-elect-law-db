@@ -74,96 +74,96 @@ scrape_ncsl <- function(year){
   search <- html_form(read_html(URL))[[1]]
   
   params = list(
-    "dnn$ctr15754$StateNetDB$ckBxAllTopics" = "on"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$0" = "ABS-Application"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$1" = "ABS-Distrib"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$2" = "ABS-Early"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$3" = "ABS-Eligibility"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$4" = "ABS-Mil/Overseas"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$5" = "ABS"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$6" = "ABS-MOVE"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$7" = "ABS-No-excuse"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$8" = "ABS-Permanent"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$9" = "ABS-Return"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$10" = "IRV"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$11" = "AUDIT"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$12" = "BALLACC-Cand"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$13" = "BALLACC-Party"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$14" = "BALLOT"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$15" = "CAND-Qualification"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$16" = "CAND-Resign"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$17" = "CAND-Withdrawal"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$18" = "CAND-Writein"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$19" = "CHALLENGE"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$20" = "CONTEST"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$21" = "COST"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$22" = "COUNT"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$23" = "CYBERSECURITY"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$24" = "DATE"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$25" = "DRE-Paper"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$26" = "CRIMES"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$27" = "DATA"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$28" = "HOLIDAY"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$29" = "OFFICIAL-Campaign"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$30" = "OFFICIAL-Local"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$31" = "OFFICIAL-State"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$32" = "RESULT"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$33" = "ELECTIONEERING"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$34" = "EC"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$35" = "EC-NPV"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$36" = "EMERGENCY"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$37" = "EXITPOLL"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$38" = "FUSION"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$39" = "INTERNET"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$40" = "MAIL"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$41" = "MISC"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$42" = "OFFICE"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$43" = "PARTIES"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$44" = "WATCHERS"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$45" = "POLLWORKER-Comp"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$46" = "POLLWORKER"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$47" = "POLLWORKER-Select"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$48" = "POLLWORKER-Train"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$49" = "POLLWORKER-Youth"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$50" = "POLLS-Arrangement"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$51" = "POLLS-Disabled"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$52" = "POLLS-Hours"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$53" = "POLLS-Locations"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$54" = "POLLS-Vote-centers"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$55" = "PRECINCT"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$56" = "PRIMARY-Date"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$57" = "PRIMARY"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$58" = "PRIMARY-Presidential"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$59" = "PRIMARY-Runoff"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$60" = "PRIMARY-Type"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$61" = "PROVISIONAL"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$62" = "RECOUNT"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$63" = "REG-Drives"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$64" = "REG-Application"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$65" = "REG-Universal"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$66" = "REG-Central_List"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$67" = "REG-Deadline"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$68" = "REG-Election_Day"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$69" = "REG-Electronic"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$70" = "REG-ID"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$71" = "REG-List_Maint"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$72" = "REG"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$73" = "REG-Pre-reg"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$74" = "REG-Sale"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$75" = "RUNOFF"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$76" = "SPECIAL"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$77" = "STRAIGHT"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$78" = "TASKFORCE"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$79" = "VACANCY"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$80" = "VOTER_ED"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$81" = "VOTER_ID"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$82" = "VOTER-Absence"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$83" = "VOTER-Age"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$84" = "VOTER-Assist"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$85" = "VOTER-Felon"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$86" = "VOTER-Misc"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$87" = "MACHINES"
-    ,"dnn$ctr15754$StateNetDB$ckBxTopics$88" = "MACHINES-Test"
+    "dnn$ctr15754$StateNetDB$ckBxAllTopics" = "on" 
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$0" = 'ABS-Application'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$1" = 'ABS-Distrib'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$2" = 'ABS-Eligibility'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$3" = 'ABS-Mil/Overseas'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$4" = 'ABS'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$5" = 'ABS-MOVE'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$6" = 'ABS-No-excuse'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$7" = 'ABS-Permanent'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$8" = 'ABS-Return'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$9" = 'IRV'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$10" = 'AUDIT'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$11" = 'BALLACC-Cand'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$12" = 'BALLACC-Party'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$13" = 'BALLOT'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$14" = 'CAND-Qualification'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$15" = 'CAND-Resign'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$16" = 'CAND-Withdrawal'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$17" = 'CAND-Writein'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$18" = 'CHALLENGE'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$19" = 'COST'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$20" = 'COUNT'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$21" = 'CYBERSECURITY'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$22" = 'DATE'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$23" = 'DRE-Paper'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$24" = 'ABS-Early'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$25" = 'CONTEST'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$26" = 'CRIMES'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$27" = 'DATA'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$28" = 'HOLIDAY'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$29" = 'OFFICIAL-Campaign'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$30" = 'OFFICIAL-Local'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$31" = 'OFFICIAL-State'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$32" = 'RESULT'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$33" = 'ELECTIONEERING'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$34" = 'EC'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$35" = 'EC-NPV'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$36" = 'EMERGENCY'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$37" = 'EXITPOLL'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$38" = 'FUSION'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$39" = 'INTERNET'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$40" = 'MAIL'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$41" = 'MISC'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$42" = 'OFFICE'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$43" = 'PARTIES'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$44" = 'WATCHERS'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$45" = 'POLLWORKER-Comp'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$46" = 'POLLWORKER'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$47" = 'POLLWORKER-Select'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$48" = 'POLLWORKER-Train'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$49" = 'POLLWORKER-Youth'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$50" = 'POLLS-Arrangement'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$51" = 'POLLS-Disabled'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$52" = 'POLLS-Hours'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$53" = 'POLLS-Locations'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$54" = 'POLLS-Vote-centers'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$55" = 'PRECINCT'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$56" = 'PRIMARY-Date'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$57" = 'PRIMARY'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$58" = 'PRIMARY-Presidential'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$59" = 'PRIMARY-Runoff'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$60" = 'PRIMARY-Type'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$61" = 'PROVISIONAL'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$62" = 'RECOUNT'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$63" = 'REG-Drives'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$64" = 'REG-Application'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$65" = 'REG-Universal'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$66" = 'REG-Deadline'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$67" = 'REG-Election_Day'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$68" = 'REG-ID'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$69" = 'REG-List_Maint'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$70" = 'REG'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$71" = 'REG-Electronic'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$72" = 'REG-Pre-reg'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$73" = 'REG-Sale'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$74" = 'REG-Central_List'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$75" = 'RUNOFF'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$76" = 'SPECIAL'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$77" = 'STRAIGHT'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$78" = 'TASKFORCE'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$79" = 'VACANCY'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$80" = 'VOTER_ED'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$81" = 'VOTER_ID'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$82" = 'VOTER-Absence'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$83" = 'VOTER-Age'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$84" = 'VOTER-Assist'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$85" = 'VOTER-Felon'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$86" = 'VOTER-Misc'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$87" = 'MACHINES'
+    ,"dnn$ctr15754$StateNetDB$ckBxTopics$88" = 'MACHINES-Test'
     ,"dnn$ctr15754$StateNetDB$ckBxAllStates" = "on"
     ,"dnn$ctr15754$StateNetDB$ckBxStates$0" = "AL"
     ,"dnn$ctr15754$StateNetDB$ckBxStates$1" = "AK"
@@ -226,19 +226,28 @@ scrape_ncsl <- function(year){
   
   (search <- search %>% html_form_set(!!!params))
   
-  resp <- read_html(html_form_submit(search,submit = "dnn$ctr15754$StateNetDB$btnSearch"))%>%
-    html_elements("#dnn_ctr15754_StateNetDB_linkList") %>%
-    html_text2()
+  # retrieve html
+  resp <- read_html(html_form_submit(search,submit = "dnn$ctr15754$StateNetDB$btnSearch"))
   
-  return(resp)
+  # html_text
+  html_text_output <- resp %>% html_elements("#dnn_ctr15754_StateNetDB_linkList") %>% html_text2()
+  
+  # links to bill text
+  bill_text <- resp %>% html_elements("#dnn_ctr15754_StateNetDB_linkList a") %>% html_attr("href")
+  
+  return(list(html_text_output = html_text_output, bill_text = bill_text))
 }
 
 build_ncsl_bill_database <- function(){
   # Loop through each year's scraped html
   ncsl_bill_database <- data.frame()
+  bill_links <- c()
   for (year in (2011:year(Sys.Date()))) {
     print(year)
-    text <- scrape_ncsl(year)
+    
+    scrape_results <- scrape_ncsl(year)
+    text <- scrape_results$html_text_output
+    bill_links <- c(bill_links, scrape_results$bill_text)
     
     if(!is_empty(text)){
       (text = gsub(pattern = "[ ]+", replacement = " ", text))
@@ -270,6 +279,20 @@ build_ncsl_bill_database <- function(){
       print("no results for this year")
     }
   }
+  
+  # Clean up bill text urls
+  urls <- data.frame(BILLTEXTURL = bill_links) |>
+    mutate(
+      billid = str_match(BILLTEXTURL, "id=ID:bill:([^&]+)")[, 2],
+      STATE = str_sub(billid, 1, 2),
+      YEAR = str_sub(billid, 3, 6),
+      BILLNUM = str_sub(billid, 7) |> str_extract("[HSALD].*"),
+      UUID = str_c(STATE, YEAR, BILLNUM)
+    ) |>
+    group_by(UUID) |>
+    summarize(BILLTEXTURL = jsonlite::toJSON(list(BILLTEXTURL), auto_unbox = TRUE)) |>
+    distinct(UUID, .keep_all = TRUE) |>
+    ungroup()
   
   # Extract state
   ncsl_bill_database$STATE <- str_sub(ncsl_bill_database$ID,1,2)
@@ -403,6 +426,9 @@ build_ncsl_bill_database <- function(){
   # Get columns for bill topics - helps sort these cols alphabetically 
   topic_cols = sort(colnames(ncsl_bill_database)[21:113])
   
+  # Add urls
+  ncsl_bill_database <- ncsl_bill_database |> left_join(urls, by = "UUID")
+  
   # Produce final output
   ncsl_bill_database <- ncsl_bill_database %>%
     select(UUID
@@ -420,7 +446,8 @@ build_ncsl_bill_database <- function(){
            ,NREPCOAUTHORS
            ,all_of(topic_cols)
            ,COAUTHORS
-           ,HISTORY) %>%
+           ,HISTORY
+           ,BILLTEXTURL) %>%
     mutate(STATE = as.factor(STATE)
            ,AUTHORPARTY = as.factor(AUTHORPARTY)
            ,PREFILEDATE = as.Date(PREFILEDATE,format = "%m/%d/%Y")
@@ -434,5 +461,3 @@ ncsl_bill_database <- build_ncsl_bill_database()
 # Save outputs
 write.csv(ncsl_bill_database, file = "output/ncsl_bill_database.csv",row.names = FALSE)
 save(ncsl_bill_database, file = "output/ncsl_bill_database.Rdata")
-
-

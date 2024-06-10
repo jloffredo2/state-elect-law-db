@@ -174,6 +174,7 @@ All datasets have a similar structure and following the column label/definitions
 
 * `COAUTHORS` 	JSON string listing all coauthors
 * `HISTORY` 	JSON string of bill's history log
+* `BILLTEXTURL` 	URL to bill text
 
 ## VRL PROVISION RATINGS
 The Voting Rights Lab dataset also codes whether provisions related to certain topics are **Anti-voter**, **Pro-voter**, **Neutral**, or **Mixed/Unclear**. You can find those codings in `output/vrl_provisions.csv` or `output/vrl_provisions.RData`. What appears in the dataset follows the same `VRLRATING` mapping as above. The files in `output/vrl_process_check.csv` and `output/vrl_process_check.RData` are used to check handcoding for some of my ongoing projects.
