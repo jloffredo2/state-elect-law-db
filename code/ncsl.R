@@ -226,19 +226,28 @@ scrape_ncsl <- function(year){
   
   (search <- search %>% html_form_set(!!!params))
   
-  resp <- read_html(html_form_submit(search,submit = "dnn$ctr15754$StateNetDB$btnSearch"))%>%
-    html_elements("#dnn_ctr15754_StateNetDB_linkList") %>%
-    html_text2()
+  # retrieve html
+  resp <- read_html(html_form_submit(search,submit = "dnn$ctr15754$StateNetDB$btnSearch"))
   
-  return(resp)
+  # html_text
+  html_text_output <- resp %>% html_elements("#dnn_ctr15754_StateNetDB_linkList") %>% html_text2()
+  
+  # links to bill text
+  bill_text <- resp %>% html_elements("#dnn_ctr15754_StateNetDB_linkList a") %>% html_attr("href")
+  
+  return(list(html_text_output = html_text_output, bill_text = bill_text))
 }
 
 build_ncsl_bill_database <- function(){
   # Loop through each year's scraped html
   ncsl_bill_database <- data.frame()
+  bill_links <- c()
   for (year in (2011:year(Sys.Date()))) {
     print(year)
-    text <- scrape_ncsl(year)
+    
+    scrape_results <- scrape_ncsl(year)
+    text <- scrape_results$html_text_output
+    bill_links <- c(bill_links, scrape_results$bill_text)
     
     if(!is_empty(text)){
       (text = gsub(pattern = "[ ]+", replacement = " ", text))
@@ -270,6 +279,20 @@ build_ncsl_bill_database <- function(){
       print("no results for this year")
     }
   }
+  
+  # Clean up bill text urls
+  urls <- data.frame(BILLTEXTURL = bill_links) |>
+    mutate(
+      billid = str_match(BILLTEXTURL, "id=ID:bill:([^&]+)")[, 2],
+      STATE = str_sub(billid, 1, 2),
+      YEAR = str_sub(billid, 3, 6),
+      BILLNUM = str_sub(billid, 7) |> str_extract("[HSALD].*"),
+      UUID = str_c(STATE, YEAR, BILLNUM)
+    ) |>
+    group_by(UUID) |>
+    summarize(BILLTEXTURL = jsonlite::toJSON(list(BILLTEXTURL), auto_unbox = TRUE)) |>
+    distinct(UUID, .keep_all = TRUE) |>
+    ungroup()
   
   # Extract state
   ncsl_bill_database$STATE <- str_sub(ncsl_bill_database$ID,1,2)
@@ -403,6 +426,9 @@ build_ncsl_bill_database <- function(){
   # Get columns for bill topics - helps sort these cols alphabetically 
   topic_cols = sort(colnames(ncsl_bill_database)[21:113])
   
+  # Add urls
+  ncsl_bill_database <- ncsl_bill_database |> left_join(urls, by = "UUID")
+  
   # Produce final output
   ncsl_bill_database <- ncsl_bill_database %>%
     select(UUID
@@ -420,7 +446,8 @@ build_ncsl_bill_database <- function(){
            ,NREPCOAUTHORS
            ,all_of(topic_cols)
            ,COAUTHORS
-           ,HISTORY) %>%
+           ,HISTORY
+           ,BILLTEXTURL) %>%
     mutate(STATE = as.factor(STATE)
            ,AUTHORPARTY = as.factor(AUTHORPARTY)
            ,PREFILEDATE = as.Date(PREFILEDATE,format = "%m/%d/%Y")
@@ -434,5 +461,3 @@ ncsl_bill_database <- build_ncsl_bill_database()
 # Save outputs
 write.csv(ncsl_bill_database, file = "output/ncsl_bill_database.csv",row.names = FALSE)
 save(ncsl_bill_database, file = "output/ncsl_bill_database.Rdata")
-
-
