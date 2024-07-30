@@ -233,7 +233,12 @@ scrape_ncsl <- function(year){
   html_text_output <- resp %>% html_elements("#dnn_ctr15754_StateNetDB_linkList") %>% html_text2()
   
   # links to bill text
-  bill_text <- resp %>% html_elements("#dnn_ctr15754_StateNetDB_linkList a") %>% html_attr("href")
+  bill_text <- resp %>%
+    html_nodes("#dnn_ctr15754_StateNetDB_linkList a") %>%
+    { data.frame(Text = html_text(.), Link = html_attr(., 'href')) } %>%
+    mutate(
+      ID = str_squish(Text) %>% str_trim(),
+      YEAR = year)
   
   return(list(html_text_output = html_text_output, bill_text = bill_text))
 }
@@ -241,13 +246,13 @@ scrape_ncsl <- function(year){
 build_ncsl_bill_database <- function(){
   # Loop through each year's scraped html
   ncsl_bill_database <- data.frame()
-  bill_links <- c()
+  bill_links <- data.frame()
   for (year in (2011:year(Sys.Date()))) {
     print(year)
     
     scrape_results <- scrape_ncsl(year)
     text <- scrape_results$html_text_output
-    bill_links <- c(bill_links, scrape_results$bill_text)
+    bill_links <- rbind(bill_links, scrape_results$bill_text)
     
     if(!is_empty(text)){
       (text = gsub(pattern = "[ ]+", replacement = " ", text))
@@ -279,20 +284,6 @@ build_ncsl_bill_database <- function(){
       print("no results for this year")
     }
   }
-  
-  # Clean up bill text urls
-  urls <- data.frame(BILLTEXTURL = bill_links) |>
-    mutate(
-      billid = str_match(BILLTEXTURL, "id=ID:bill:([^&]+)")[, 2],
-      STATE = str_sub(billid, 1, 2),
-      YEAR = str_sub(billid, 3, 6),
-      BILLNUM = str_sub(billid, 7) |> str_extract("[HSALD].*"),
-      UUID = str_c(STATE, YEAR, BILLNUM)
-    ) |>
-    group_by(UUID) |>
-    summarize(BILLTEXTURL = jsonlite::toJSON(list(BILLTEXTURL), auto_unbox = TRUE)) |>
-    distinct(UUID, .keep_all = TRUE) |>
-    ungroup()
   
   # Extract state
   ncsl_bill_database$STATE <- str_sub(ncsl_bill_database$ID,1,2)
@@ -427,7 +418,9 @@ build_ncsl_bill_database <- function(){
   topic_cols = sort(colnames(ncsl_bill_database)[21:113])
   
   # Add urls
-  ncsl_bill_database <- ncsl_bill_database |> left_join(urls, by = "UUID")
+  ncsl_bill_database <- ncsl_bill_database |> left_join(bill_links, by = c("YEAR","ID")) |>
+    select(-Text) |>
+    rename(BILLTEXTURL = Link)
   
   # Produce final output
   ncsl_bill_database <- ncsl_bill_database %>%
