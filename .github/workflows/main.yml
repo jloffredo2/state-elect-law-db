@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@main # Checkout branch into the runner
       - uses: r-lib/actions/setup-r@v2-branch # Set up R runtime
         with:
-          r-version: '4.3.3'
+          r-version: '4.4.0'
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"    
@@ -51,7 +51,7 @@ jobs:
       - uses: actions/checkout@main # Checkout branch into the runner
       - uses: r-lib/actions/setup-r@v2-branch # Set up R runtime
         with:
-          r-version: '4.3.3'
+          r-version: '4.4.0'
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"    
@@ -92,7 +92,7 @@ jobs:
       - uses: actions/checkout@main # Checkout branch into the runner
       - uses: r-lib/actions/setup-r@v2-branch # Set up R runtime
         with:
-          r-version: '4.3.3'
+          r-version: '4.4.0'
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"    
