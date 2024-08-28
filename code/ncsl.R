@@ -71,7 +71,7 @@ ncsl_extract_bill_info <- function(curr, year) {
 scrape_ncsl <- function(year){
   print("scraping NCSL webform")
   URL <- "https://www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx"
-  search <- html_form(read_html(URL))[[1]]
+  search <- html_form(read_html(URL, config = config(ssl_verifypeer = FALSE)))[[1]]
   
   params = list(
     "dnn$ctr15754$StateNetDB$ckBxAllTopics" = "on" 
@@ -227,7 +227,7 @@ scrape_ncsl <- function(year){
   (search <- search %>% html_form_set(!!!params))
   
   # retrieve html
-  resp <- read_html(html_form_submit(search,submit = "dnn$ctr15754$StateNetDB$btnSearch"))
+  resp <- read_html(html_form_submit(search,submit = "dnn$ctr15754$StateNetDB$btnSearch"), config = config(ssl_verifypeer = FALSE))
   
   # html_text
   html_text_output <- resp %>% html_elements("#dnn_ctr15754_StateNetDB_linkList") %>% html_text2()
