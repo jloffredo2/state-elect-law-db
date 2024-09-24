@@ -63,3 +63,6 @@ code/.DS_Store
 
 # Ignore roll call look up for Boris Shor
 /bs_roll_calls/
+
+# Ignore legacy_ncsl files
+legacy_ncsl/
