@@ -70,7 +70,7 @@ ncsl_extract_bill_info <- function(curr, year) {
 
 scrape_ncsl <- function(year){
   print("scraping NCSL webform")
-  URL <- "https://www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx"
+  URL <- "https://www.ncsl.org/elections-and-campaigns/state-elections-legislation-database"
   search <- html_form(read_html(URL, config = config(ssl_verifypeer = FALSE)))[[1]]
   
   params = list(
