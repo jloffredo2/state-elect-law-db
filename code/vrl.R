@@ -102,7 +102,8 @@ build_vrl_bill_database <- function(){
     rename(INTRODUCEDDATE = intro_date
            ,PREFILEDATE = prefile_date
            ,BILLTEXTURL = text_url
-           ,BILLSUMMARY = summary) %>%
+           ,BILLSUMMARY = summary
+           ,VRLANALYSIS = public_commentary) %>%
     mutate(INTRODUCEDDATE = mdy(INTRODUCEDDATE),
            PREFILEDATE = mdy(PREFILEDATE),
            YEAR = year(INTRODUCEDDATE)) %>%
@@ -997,6 +998,7 @@ build_vrl_bill_database <- function(){
            ,VRLRATING
            ,BILLTEXTURL
            ,BILLSUMMARY
+           ,VRLANALYSIS
            ,starts_with("GENERAL")) %>%
     mutate(
       STATE = as.factor(STATE)

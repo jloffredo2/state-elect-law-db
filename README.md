@@ -1,18 +1,18 @@
-# STATE ELECTIONS LEGISLATION DATABASE (2011-2024)
+# STATE ELECTIONS LEGISLATION DATABASE (2011-2025)
 **Author**: Joseph Loffredo
 
 **Institution**: MIT
 
-**Date**: 2024-12-31
+**Date**: 2025-01-31
 
 ## DESCRIPTION
 This dataset is the product of scraping the *National Conference of State Legislature*'s "State Elections Legislation Database" and *Voting Rights Lab*'s "Legislative Tracker." The code for producing this dataset can be found in this GitHub repo: https://github.com/jloffredo2/state-elect-law-db. See the `code` subfolder for all relevant code.
 
 If you are using this dataset, please cite it and provide, NCSL and Voting Rights Lab with proper citation as follows:
 
-> National Conference of State Legislatures. 2024. *State Elections Legislation Database*. www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx (December 31, 2024).
+> National Conference of State Legislatures. 2024. *State Elections Legislation Database*. www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx (January 31, 2025).
 
-> Voting Rights Lab. 2024. *Legislative Tracker*. https://tracker.votingrightslab.org/pending/search (December 31, 2024).
+> Voting Rights Lab. 2024. *Legislative Tracker*. https://tracker.votingrightslab.org/pending/search (January 31, 2025).
 
 *To access tidy versions of these databases, use the following files:*
 * `output/ncsl_bill_database.csv`: NCSL "State Elections Legislation" database in `.csv` format
