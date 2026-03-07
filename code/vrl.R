@@ -86,9 +86,17 @@ clean_classified_tags <- function(col,anti_voter_tags,pro_voter_tags,neutral_tag
   
 
 build_vrl_bill_database <- function(){
-  print("scraping VRL storage json")
-  bills <- jsonlite::fromJSON(readLines("https://tracker.votingrightslab.org/storage/bills.json"))$data
-  tags <- jsonlite::fromJSON(readLines("https://tracker.votingrightslab.org/storage/tags.json"))$data 
+  print("loading VRL json from local cache")
+  cache_dir <- "data/vrl_cache"
+  years_available <- c(2021, 2022, 2023, 2024, 2025, 2026)
+  bills_list <- lapply(years_available, function(yr) {
+    d <- jsonlite::fromJSON(file.path(cache_dir, paste0("bills-", yr, ".json")))$data
+    rownames(d) <- NULL
+    d
+  })
+  bills <- bind_rows(bills_list)
+  bills <- bills[!duplicated(bills$id), ]
+  tags <- jsonlite::fromJSON(file.path(cache_dir, "tags.json"))$data
   anti_voter_tags <- c("-Anti-Voter",tags$id[tags$name=="-Anti-Voter"],"Anti-voter",tags$id[tags$name=="Anti-voter"])
   pro_voter_tags <- c("-Pro-Voter",tags$id[tags$name=="-Pro-Voter"],"Pro-voter",tags$id[tags$name=="Pro-voter"])
   neutral_tags <- c("-Neutral",tags$id[tags$name=="-Neutral"],"Neutral",tags$id[tags$name=="Neutral"])
@@ -110,13 +118,15 @@ build_vrl_bill_database <- function(){
     unnest(tags,keep_empty = T) %>%
     mutate_at(
       vars(starts_with("21"),`-Impact`),
-      funs(map_chr(.,~.[[1]] %>% str_c(collapse = ", "))))
+      funs(map_chr(., ~if(is.null(.)) '' else str_c(if("tag" %in% names(.)) .[["tag"]] else .[[1]], collapse = ", "))))
   # Recode
   vrl_bill_database$BILLNUM = sprintf("%s%i", vrl_bill_database$legtype, vrl_bill_database$bill_number)
   vrl_bill_database$BILLSTATUS = fct_recode(as.factor(vrl_bill_database$current_disposition),
                                             "Failed" = "Failed - Adjourned",
                                             "Carryover" = "Pending - Carryover",
                                             "To Executive" = "To Governor",
+                                            "To Executive" = "To Congress",
+                                            "Vetoed" = "Override Pending",
                                             "Enacted" = "Adopted")
   vrl_bill_database = vrl_bill_database %>%
     mutate(BILLLOCATION = case_when(
@@ -152,14 +162,28 @@ build_vrl_bill_database <- function(){
       bill_location == "Concurrence" ~ "Conference",
       bill_location == "Eligible for Governor" ~ "To Governor",
       bill_location == "To Governor" ~ "To Governor",
-      bill_location == "Enacting Clause Struck" ~ "Substituted"
+      bill_location == "Enacting Clause Struck" ~ "Substituted",
+      bill_location == "Replaced by New Draft" ~ "Substituted",
+      bill_location == "Became Law Without Governor's Signature" ~ "Passed",
+      bill_location == "To Enrollment" ~ "Passed",
+      bill_location == "To Congress" ~ "To Governor",
+      bill_location == "In Joint Session" ~ "Floor",
+      bill_location == "Assembly Inactive File" ~ "Floor",
+      bill_location == "Senate Inactive File" ~ "Floor",
+      bill_location == "Vetoed" ~ "Vetoed",
+      str_detect(bill_location, "Subcommittee") ~ "Committee",
+      str_detect(bill_location, "Government, Military") ~ "Committee",
+      str_detect(bill_location, "Legislative Commissioner") ~ "Committee"
       )) %>% filter(!(bill_location %in% c("Council Floor","Eligible for Congress")))
   
   vrl_bill_database$AUTHORNAME = ifelse(str_detect(vrl_bill_database$author,"\\([A-Z]{1,3}\\)"),
          trimws(str_remove_all(vrl_bill_database$author,"\\([A-Z]{1,3}\\)"),"both"),
          vrl_bill_database$author)
   vrl_bill_database$AUTHORPARTY = str_remove_all(str_extract(vrl_bill_database$author,"\\([A-Z]{1,3}\\)"),"[()]")
-  vrl_bill_database$LASTACTIONDATE = mdy(lapply(vrl_bill_database$status_actions, function(x){tail(x,1) %>% str_sub(1, 10)}))
+  vrl_bill_database$LASTACTIONDATE = mdy(sapply(vrl_bill_database$status_actions, function(x){
+    if(is.null(x) || nrow(x) == 0) return(NA_character_)
+    tail(x$date, 1)
+  }))
   vrl_bill_database$HISTORY = lapply(vrl_bill_database$status_actions, rjson::toJSON)
   vrl_bill_database$HISTORY = unlist(vrl_bill_database$HISTORY)
   vrl_bill_database$HISTORY[vrl_bill_database$HISTORY=="\"NA\""] = NA
@@ -1013,7 +1037,7 @@ build_vrl_bill_database <- function(){
     unnest(tags,keep_empty = T) %>%
     mutate_at(
       vars(starts_with("21"),`-Impact`),
-      funs(map_chr(.,~.[[1]] %>% str_c(collapse = ", "))))
+      funs(map_chr(., ~if(is.null(.)) '' else str_c(if("tag" %in% names(.)) .[["tag"]] else .[[1]], collapse = ", "))))
   
   vrl_provisions$`-Impact` <- clean_classified_tags(vrl_provisions$`-Impact`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
   vrl_provisions$`21InPrsnVtng`<- clean_classified_tags(vrl_provisions$`21InPrsnVtng`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
@@ -1053,7 +1077,7 @@ build_vrl_bill_database <- function(){
     unnest(tags,keep_empty = T) %>%
     mutate_at(
       vars(starts_with("21"),`-Impact`),
-      funs(map_chr(.,~.[[1]] %>% str_c(collapse = ", ")))) %>%
+      funs(map_chr(., ~if(is.null(.)) '' else str_c(if("tag" %in% names(.)) .[["tag"]] else .[[1]], collapse = ", ")))) %>%
     mutate(
       RESTRICT_AVVBM_SHRTAPP = ifelse(str_detect(`21AbsenteeVtg`,"AppDdlnErlr"),1,0)
       ,RESTRICT_AVVBM_SHRTSUB = ifelse(str_detect(`21AbsenteeVtg`,"BlltRtrnDdlnEarlier"),1,0)

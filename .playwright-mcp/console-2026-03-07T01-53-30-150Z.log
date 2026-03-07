@@ -1,0 +1,19 @@
+[    5219ms] [WARNING] TypeError: Failed to fetch
+    at https://tracker.votingrightslab.org/js/chunk-vendors-a10f08f7.vrl-202602131441-6819b98b.js:14:22809
+    at fr.sendFetchRequest (https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:174753)
+    at fr.sendRequest (https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:174627)
+    at https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:174573
+    at Map.forEach (<anonymous>)
+    at fr.sendRequests (https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:174526)
+    at ur.onFlush (https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:173300)
+    at ur.flush (https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:171619)
+    at ur.push (https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:171579)
+    at fr.send (https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:174164)
+    at dr.track (https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:169124)
+    at ao.track (https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:139408)
+    at https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:95634
+    at Object.init (https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:95908)
+    at https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:258368
+    at https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:258539
+    at https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:258543
+    at https://cdn.fundraiseup.com/widget/ADNGWDXQ:3:258547 @ https://tracker.votingrightslab.org/js/chunk-vendors-a10f08f7.vrl-202602131441-6819b98b.js:13
