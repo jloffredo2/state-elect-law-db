@@ -66,3 +66,4 @@ code/.DS_Store
 
 # Ignore legacy_ncsl files
 legacy_ncsl/
+run_weekly.log
