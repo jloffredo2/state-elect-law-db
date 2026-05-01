@@ -92,6 +92,11 @@ build_vrl_bill_database <- function(){
   bills_list <- lapply(years_available, function(yr) {
     d <- jsonlite::fromJSON(file.path(cache_dir, paste0("bills-", yr, ".json")))$data
     rownames(d) <- NULL
+    if (is.data.frame(d$tags)) {
+      d$tags <- d$tags[, names(d$tags) != "", drop = FALSE]
+    } else {
+      d$tags <- lapply(d$tags, function(t) if (is.list(t)) t[names(t) != ""] else t)
+    }
     d
   })
   bills <- bind_rows(bills_list)
