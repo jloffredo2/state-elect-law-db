@@ -28,7 +28,7 @@ vrl_count_coauthors <- function(json){
 }
 
 classify_tags <- function(tags,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags) {
-  tags <- str_trim(tags) %>% na.omit()
+  tags <- str_trim(tags) |> na.omit()
   categorized_tags <- case_when(
     tags %in% anti_voter_tags ~ "R",
     tags %in% pro_voter_tags ~ "E",
@@ -111,19 +111,18 @@ build_vrl_bill_database <- function(){
   print("creating main output")
   #### Match up VRL with NCSL
   # Rename and change date to date type
-  vrl_bill_database <- bills %>%
+  vrl_bill_database <- bills |>
     rename(INTRODUCEDDATE = intro_date
            ,PREFILEDATE = prefile_date
            ,BILLTEXTURL = text_url
            ,BILLSUMMARY = summary
-           ,VRLANALYSIS = public_commentary) %>%
+           ,VRLANALYSIS = public_commentary) |>
     mutate(INTRODUCEDDATE = mdy(INTRODUCEDDATE),
            PREFILEDATE = mdy(PREFILEDATE),
-           YEAR = year(INTRODUCEDDATE)) %>%
-    unnest(tags,keep_empty = T) %>%
-    mutate_at(
-      vars(starts_with("21"),`-Impact`),
-      funs(map_chr(., ~if(is.null(.)) '' else str_c(if("tag" %in% names(.)) .[["tag"]] else .[[1]], collapse = ", "))))
+           YEAR = year(INTRODUCEDDATE)) |>
+    unnest(cols = tags, keep_empty = TRUE) |>
+    mutate(across(c(starts_with("21"), `-Impact`),
+      \(col) map_chr(col, ~if(is.null(.)) '' else str_c(if("tag" %in% names(.)) .[["tag"]] else .[[1]], collapse = ", "))))
   # Recode
   vrl_bill_database$BILLNUM = sprintf("%s%i", vrl_bill_database$legtype, vrl_bill_database$bill_number)
   vrl_bill_database$BILLSTATUS = fct_recode(as.factor(vrl_bill_database$current_disposition),
@@ -133,7 +132,7 @@ build_vrl_bill_database <- function(){
                                             "To Executive" = "To Congress",
                                             "Vetoed" = "Override Pending",
                                             "Enacted" = "Adopted")
-  vrl_bill_database = vrl_bill_database %>%
+  vrl_bill_database = vrl_bill_database |>
     mutate(BILLLOCATION = case_when(
       str_detect(bill_location, "Committee of the Whole") ~ "Floor",
       bill_location == "Conference Committee" ~ "Conference",
@@ -179,7 +178,7 @@ build_vrl_bill_database <- function(){
       str_detect(bill_location, "Subcommittee") ~ "Committee",
       str_detect(bill_location, "Government, Military") ~ "Committee",
       str_detect(bill_location, "Legislative Commissioner") ~ "Committee"
-      )) %>% filter(!(bill_location %in% c("Council Floor","Eligible for Congress")))
+      )) |> filter(!(bill_location %in% c("Council Floor","Eligible for Congress")))
   
   vrl_bill_database$AUTHORNAME = ifelse(str_detect(vrl_bill_database$author,"\\([A-Z]{1,3}\\)"),
          trimws(str_remove_all(vrl_bill_database$author,"\\([A-Z]{1,3}\\)"),"both"),
@@ -202,7 +201,7 @@ build_vrl_bill_database <- function(){
   vrl_bill_database$NREPCOAUTHORS = sapply(vrl_bill_database$COAUTHORS,vrl_count_rep_coauthors)
   
   # VRL Rating
-  vrl_bill_database <- vrl_bill_database %>%
+  vrl_bill_database <- vrl_bill_database |>
     mutate(VRLRATING = case_when(
       str_detect(`-Impact`, str_c(anti_voter_tags, collapse = "|")) ~ "R",
       str_detect(`-Impact`, str_c(pro_voter_tags, collapse = "|")) ~ "E",
@@ -210,8 +209,8 @@ build_vrl_bill_database <- function(){
       str_detect(`-Impact`, str_c(mixed_tags, collapse = "|")) ~ "M"))
                                        
   # Topic dummies
-  vrl_bill_database <- vrl_bill_database %>%
-    mutate(across(starts_with("21"), .fns = str_remove_all, "null")) %>%
+  vrl_bill_database <- vrl_bill_database |>
+    mutate(across(starts_with("21"), .fns = str_remove_all, "null")) |>
     mutate(
       AVAPPL = case_when(
         str_detect(`21AbsenteeVtg`, "AppContentOrFormat") ~ 1
@@ -997,16 +996,16 @@ build_vrl_bill_database <- function(){
       ,GENERAL_IncrcrtdVtng = ifelse(`21IncrcrtdVtng`!='',1,0)
       ,GENERAL_21Rdstrctng = ifelse(`21Rdstrctng`!='',1,0)
       ,GENERAL_21PrfCtznshp = ifelse(`21PrfCtznshp`!='',1,0)
-    ) %>%
-    mutate_at(vars(AVAPPL:VTRCHA),replace_na, 0) %>%
-    mutate_at(vars(NCOAUTHORS,NDEMCOAUTHORS,NREPCOAUTHORS),replace_na, 0) %>%
+    ) |>
+    mutate(across(AVAPPL:VTRCHA, ~replace_na(., 0))) |>
+    mutate(across(c(NCOAUTHORS, NDEMCOAUTHORS, NREPCOAUTHORS), ~replace_na(., 0))) |>
     select(-starts_with("21"))
   
   topic_cols = sort(colnames(vrl_bill_database)[45:100])
   
   # Produce final output
-  vrl_bill_database <- vrl_bill_database %>%
-    mutate(UUID = str_c(state,YEAR,BILLNUM)) %>%
+  vrl_bill_database <- vrl_bill_database |>
+    mutate(UUID = str_c(state,YEAR,BILLNUM)) |>
     select(UUID
            ,YEAR
            ,STATE=state
@@ -1028,22 +1027,21 @@ build_vrl_bill_database <- function(){
            ,BILLTEXTURL
            ,BILLSUMMARY
            ,VRLANALYSIS
-           ,starts_with("GENERAL")) %>%
+           ,starts_with("GENERAL")) |>
     mutate(
       STATE = as.factor(STATE)
       ,AUTHORPARTY = as.factor(AUTHORPARTY))
   
   ####### CREATE VRL PROVISIONS TABLE #######
   print("creating provisions table")
-  vrl_provisions <- bills %>%
+  vrl_provisions <- bills |>
     mutate(
       year = year(mdy(intro_date))
-      ,UUID = str_c(state, year, sprintf("%s%i", legtype, bill_number))) %>%
-    unnest(tags,keep_empty = T) %>%
-    mutate_at(
-      vars(starts_with("21"),`-Impact`),
-      funs(map_chr(., ~if(is.null(.)) '' else str_c(if("tag" %in% names(.)) .[["tag"]] else .[[1]], collapse = ", "))))
-  
+      ,UUID = str_c(state, year, sprintf("%s%i", legtype, bill_number))) |>
+    unnest(cols = tags, keep_empty = TRUE) |>
+    mutate(across(c(starts_with("21"), `-Impact`),
+      \(col) map_chr(col, ~if(is.null(.)) '' else str_c(if("tag" %in% names(.)) .[["tag"]] else .[[1]], collapse = ", "))))
+
   vrl_provisions$`-Impact` <- clean_classified_tags(vrl_provisions$`-Impact`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
   vrl_provisions$`21InPrsnVtng`<- clean_classified_tags(vrl_provisions$`21InPrsnVtng`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
   vrl_provisions$`21AbsenteeVtg`<- clean_classified_tags(vrl_provisions$`21AbsenteeVtg`,anti_voter_tags,pro_voter_tags,neutral_tags,mixed_tags)
@@ -1069,20 +1067,19 @@ build_vrl_bill_database <- function(){
   
   
   
-  vrl_provisions <- vrl_provisions %>% select(UUID,VRLRATING=`-Impact`,starts_with("21")) 
+  vrl_provisions <- vrl_provisions |> select(UUID,VRLRATING=`-Impact`,starts_with("21")) 
 
   colnames(vrl_provisions) <- str_remove_all(colnames(vrl_provisions),"21")
 
   ####### CREATE VRL PROCESS CHECK  #######
   print("creating process check table")
-  vrl_process_check <- bills %>%
+  vrl_process_check <- bills |>
     mutate(
       year = year(mdy(intro_date))
-      ,UUID = str_c(state, year, sprintf("%s%i", legtype, bill_number))) %>%
-    unnest(tags,keep_empty = T) %>%
-    mutate_at(
-      vars(starts_with("21"),`-Impact`),
-      funs(map_chr(., ~if(is.null(.)) '' else str_c(if("tag" %in% names(.)) .[["tag"]] else .[[1]], collapse = ", ")))) %>%
+      ,UUID = str_c(state, year, sprintf("%s%i", legtype, bill_number))) |>
+    unnest(cols = tags, keep_empty = TRUE) |>
+    mutate(across(c(starts_with("21"), `-Impact`),
+      \(col) map_chr(col, ~if(is.null(.)) '' else str_c(if("tag" %in% names(.)) .[["tag"]] else .[[1]], collapse = ", ")))) |>
     mutate(
       RESTRICT_AVVBM_SHRTAPP = ifelse(str_detect(`21AbsenteeVtg`,"AppDdlnErlr"),1,0)
       ,RESTRICT_AVVBM_SHRTSUB = ifelse(str_detect(`21AbsenteeVtg`,"BlltRtrnDdlnEarlier"),1,0)
@@ -1353,7 +1350,7 @@ build_vrl_bill_database <- function(){
         str_detect(`21ErlyVtngAvlblty`, "IncarceratedVoting")
         ,1,0
       )
-    ) %>%
+    ) |>
     select(UUID,starts_with("EXPAND"),starts_with("RESTRICT"))
   
   

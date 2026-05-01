@@ -33,23 +33,23 @@ ncsl_count_coauthors <- function(json){
 ncsl_extract_bill_info <- function(curr, year) {
   bill_id = curr[1]
   print(bill_id)
-  status = curr[grepl(pattern = "^Status:", curr)] %>% gsub("Status:", "", x = .) %>% str_trim
-  authors = (curr[grepl(pattern = "^Author:", curr)] %>% str_trim %>% str_split("Additional Authors:"))[[1]]
-  author = authors[1] %>% gsub("Author:", "", x = .) %>% str_trim
-  coauthors = ifelse(length(authors) > 1, (authors[2] %>% str_split(";")), NA)[[1]]
+  status = curr[grepl(pattern = "^Status:", curr)] |> str_remove("Status:") |> str_trim()
+  authors = (curr[grepl(pattern = "^Author:", curr)] |> str_trim() |> str_split("Additional Authors:"))[[1]]
+  author = authors[1] |> str_remove("Author:") |> str_trim()
+  coauthors = ifelse(length(authors) > 1, (authors[2] |> str_split(";")), NA)[[1]]
   coauthors = trimws(coauthors,"both")
-  topics = (curr[grepl(pattern = "^Topics:", curr)] %>% gsub("Topics:", "", x = .) %>% str_trim %>% str_split(", "))[[1]]
-  summary = curr[grepl(pattern = "^Summary:", curr)] %>% gsub("Summary:", "", x = .) %>% str_trim
+  topics = (curr[grepl(pattern = "^Topics:", curr)] |> str_remove("Topics:") |> str_trim() |> str_split(", "))[[1]]
+  summary = curr[grepl(pattern = "^Summary:", curr)] |> str_remove("Summary:") |> str_trim()
   history_index = which(str_detect(curr, "^History:")) + 1
-  history = curr[history_index:length(curr)] %>% str_trim
+  history = curr[history_index:length(curr)] |> str_trim
   # Check intro versus prefile date
   prefiled_date = ifelse(sum(str_detect(history, "PREFILED")) > 0 ,
-                         history[str_detect(history, "PREFILED") == TRUE] %>% str_sub(1, 10),
+                         history[str_detect(history, "PREFILED") == TRUE] |> str_sub(1, 10),
                          NA)
   introduced_date = ifelse(sum(str_detect(history, "INTRODUCED")) > 0 ,
-                           history[str_detect(history, "INTRODUCED") == TRUE] %>% str_sub(1, 10),
+                           history[str_detect(history, "INTRODUCED") == TRUE] |> str_sub(1, 10),
                            NA)
-  last_action_date = ifelse(str_detect(history[length(history)],".*[0-9].*"),history[length(history)] %>% str_sub(1, 10),history[length(history)-1] %>% str_sub(1, 10))
+  last_action_date = ifelse(str_detect(history[length(history)],".*[0-9].*"),history[length(history)] |> str_sub(1, 10),history[length(history)-1] |> str_sub(1, 10))
   
   return(
     data.frame(
@@ -194,20 +194,20 @@ scrape_ncsl <- function(year){
     ,"dnn$ctr31026$StateNetDB$ddlYear" = sprintf("%i", year)
 )
   
-  (search <- search %>% html_form_set(!!!params))
+  (search <- search |> html_form_set(!!!params))
   
   # retrieve html
   resp <- read_html(html_form_submit(search,submit = "dnn$ctr31026$StateNetDB$btnSearch"), config = config(ssl_verifypeer = FALSE))
   
   # html_text
-  html_text_output <- resp %>% html_elements("#dnn_ctr31026_StateNetDB_linkList") %>% html_text2()
+  html_text_output <- resp |> html_elements("#dnn_ctr31026_StateNetDB_linkList") |> html_text2()
   
   # links to bill text
-  bill_text <- resp %>%
-    html_nodes("#dnn_ctr31026_StateNetDB_linkList a") %>%
-    { data.frame(Text = html_text(.), Link = html_attr(., 'href')) } %>%
+  bill_text <- resp |>
+    html_nodes("#dnn_ctr31026_StateNetDB_linkList a") |>
+    (\(x) data.frame(Text = html_text(x), Link = html_attr(x, 'href')))() |>
     mutate(
-      ID = str_squish(Text) %>% str_trim(),
+      ID = str_squish(Text) |> str_trim(),
       YEAR = year)
   
   return(list(html_text_output = html_text_output, bill_text = bill_text))
@@ -227,7 +227,7 @@ build_ncsl_bill_database <- function(){
     if(!is_empty(text)){
       (text = gsub(pattern = "[ ]+", replacement = " ", text))
       thetext = strsplit(text, split = "\r\n\r\n\n\r\n\r\n\r")[[1]]
-      (html_text = trimws(thetext[thetext != "\r"] %>% str_remove_all("\r"), "both"))
+      (html_text = trimws(thetext[thetext != "\r"] |> str_remove_all("\r"), "both"))
       
       (split_text <- str_split(html_text, "\n"))
       for (s in 1:length(split_text)) {
@@ -278,7 +278,7 @@ build_ncsl_bill_database <- function(){
   ncsl_bill_database$NCOAUTHORS = sapply(ncsl_bill_database$COAUTHORS,ncsl_count_coauthors)
   ncsl_bill_database$NDEMCOAUTHORS = sapply(ncsl_bill_database$COAUTHORS,ncsl_count_dem_coauthors)
   ncsl_bill_database$NREPCOAUTHORS = sapply(ncsl_bill_database$COAUTHORS,ncsl_count_rep_coauthors)
-  ncsl_bill_database <- ncsl_bill_database %>% mutate_at(vars(NCOAUTHORS,NDEMCOAUTHORS,NREPCOAUTHORS),replace_na, 0)
+  ncsl_bill_database <- ncsl_bill_database |> mutate(across(c(NCOAUTHORS, NDEMCOAUTHORS, NREPCOAUTHORS), ~replace_na(., 0)))
   
   # Categorize wide
   ncsl_bill_database$AVAPPL = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Absentee Voting - Application and Request for")
@@ -374,16 +374,16 @@ build_ncsl_bill_database <- function(){
   ncsl_bill_database$VSSCST = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Technology - Selection & Standards, Security, Storage and Testing")
   
   # Better way if creating general topic cols
-  general_columns <- ncsl_bill_database %>%
-    group_by(UUID) %>%
+  general_columns <- ncsl_bill_database |>
+    group_by(UUID) |>
     mutate(EOGENR = max(EOCAMP,EOLOCA,EOSTWD),
            PPGENR = max(PPPROC,PPACES,PPVHRS,PPVCEN),
-           REGGEN = max(REGAPP,REGATO,REGDRI,REGDTE,REGEDY,REGELE,REGIDR,REGMSC,REGPRE)) %>%
-    ungroup() %>%
-    select(UUID,EOGENR,PPGENR,REGGEN) %>%
+           REGGEN = max(REGAPP,REGATO,REGDRI,REGDTE,REGEDY,REGELE,REGIDR,REGMSC,REGPRE)) |>
+    ungroup() |>
+    select(UUID,EOGENR,PPGENR,REGGEN) |>
     distinct()
   
-  ncsl_bill_database <- ncsl_bill_database %>% left_join(general_columns,by="UUID")
+  ncsl_bill_database <- ncsl_bill_database |> left_join(general_columns,by="UUID")
   
   # Get columns for bill topics - helps sort these cols alphabetically 
   topic_cols = sort(colnames(ncsl_bill_database)[21:113])
@@ -394,7 +394,7 @@ build_ncsl_bill_database <- function(){
     rename(BILLTEXTURL = Link)
   
   # Produce final output
-  ncsl_bill_database <- ncsl_bill_database %>%
+  ncsl_bill_database <- ncsl_bill_database |>
     select(UUID
            ,YEAR
            ,STATE
@@ -411,7 +411,7 @@ build_ncsl_bill_database <- function(){
            ,all_of(topic_cols)
            ,COAUTHORS
            ,HISTORY
-           ,BILLTEXTURL) %>%
+           ,BILLTEXTURL) |>
     mutate(STATE = as.factor(STATE)
            ,AUTHORPARTY = as.factor(AUTHORPARTY)
            ,PREFILEDATE = as.Date(PREFILEDATE,format = "%m/%d/%Y")

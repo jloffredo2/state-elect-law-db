@@ -6,7 +6,6 @@ library(forcats)
 library(lubridate)
 library(rvest)
 library(stringr)
-library(magrittr)
 library(purrr)
 
 # Download fresh VRL data via browser (bypasses Cloudflare)
