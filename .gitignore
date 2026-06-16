@@ -67,4 +67,11 @@ code/.DS_Store
 # Ignore legacy_ncsl files
 legacy_ncsl/
 run_weekly.log
+run_weekly.sh
 logs/
+.github/
+.playwright-mcp/
+renv/
+renv.lock
+requirements.txt
+readme.html
