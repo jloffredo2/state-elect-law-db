@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 REPO="/Users/josephloffredo/Desktop/GitHub/state-elect-law-db"
 LOG="$REPO/logs/run.log"
@@ -17,6 +16,10 @@ export VRL_PASSWORD=$(grep '^VRL_PASSWORD=' ~/.Renviron | cut -d= -f2 | tr -d '[
 cd "$REPO"
 
 /usr/local/bin/Rscript code/script.R
+if [ $? -ne 0 ]; then
+    echo "Rscript failed. Aborting commit."
+    exit 1
+fi
 
 echo "Script completed. Committing output..."
 
