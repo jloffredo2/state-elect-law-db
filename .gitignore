@@ -75,3 +75,5 @@ renv/
 renv.lock
 requirements.txt
 readme.html
+.Rprofile
+.gitattributes
