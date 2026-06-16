@@ -41,7 +41,7 @@ ncsl_extract_bill_info <- function(curr, year) {
   topics = (curr[grepl(pattern = "^Topics:", curr)] |> str_remove("Topics:") |> str_trim() |> str_split(", "))[[1]]
   summary = curr[grepl(pattern = "^Summary:", curr)] |> str_remove("Summary:") |> str_trim()
   history_index = which(str_detect(curr, "^History:")) + 1
-  history = curr[history_index:length(curr)] |> str_trim
+  history = curr[history_index:length(curr)] |> str_trim()
   # Check intro versus prefile date
   prefiled_date = ifelse(sum(str_detect(history, "PREFILED")) > 0 ,
                          history[str_detect(history, "PREFILED") == TRUE] |> str_sub(1, 10),

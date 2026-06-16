@@ -1370,5 +1370,5 @@ write.csv(vrl_provisions, file = "output/vrl_provisions.csv",row.names = FALSE)
 save(vrl_provisions, file = "output/vrl_provisions.Rdata")
 
 vrl_process_check <- db$vrl_process_check
-write.csv(vrl_process_check, file = "output/vrl_process_check",row.names = FALSE)
+write.csv(vrl_process_check, file = "output/vrl_process_check.csv",row.names = FALSE)
 save(vrl_process_check, file = "output/vrl_process_check.Rdata")
