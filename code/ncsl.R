@@ -4,30 +4,120 @@ library(forcats)
 library(lubridate)
 library(rvest)
 library(stringr)
-library(magrittr)
 library(purrr)
 
 source("code/misc_fxns.R")
 ## FUNCTIONS FOR SCRAPING NCSL
 
-# Function for setting values for topic binary indicators
-ncsl_check_topics <- function(json,topic){
-  return(ifelse(sum(str_detect(rjson::fromJSON(json),topic))>0,1,0))
-}
-
-# Function to count number of Dem coauthors (includes DFL in MN)
-ncsl_count_dem_coauthors <- function(json){
-  return(ifelse(!is.na(json),sum(str_detect(rjson::fromJSON(json),"\\(D\\)")) + sum(str_detect(rjson::fromJSON(json),"\\(DFL\\)")),NA))
-}
-
-# Function to count number of Rep coauthors
-ncsl_count_rep_coauthors <- function(json){
-  return(ifelse(!is.na(json),sum(str_detect(rjson::fromJSON(json),"\\(R\\)")),NA))
-}
-
-# Function to count total number of coauthors
 ncsl_count_coauthors <- function(json){
-  return(ifelse(!is.na(json),length(rjson::fromJSON(json)),NA))
+  if (is.na(json)) return(c(NCOAUTHORS = 0, NDEMCOAUTHORS = 0, NREPCOAUTHORS = 0))
+  v <- rjson::fromJSON(json)
+  c(NCOAUTHORS = length(v),
+    NDEMCOAUTHORS = sum(str_detect(v, "\\((D|DFL)\\)")),
+    NREPCOAUTHORS = sum(str_detect(v, "\\(R\\)")))
+}
+
+# NCSL topic label -> column; shared labels keep the schema aligned with the 2011-2024 file
+ncsl_topic_map <- c(
+  AVAPPL = "Absentee Voting - Application and Request for"
+  ,AVBDIS = "Absentee Voting - Delivering Ballots"
+  ,AVBRET = "Absentee Voting - Returning Ballots"
+  ,BACURE = "Absentee Voting - Ballot Processing, Signature Verification, Ballot Curing"
+  ,AVEVIP = "Early In-Person Voting/In-Person Absentee"
+  ,AVELIG = "Absentee Voting - Eligibility and No-Excuse Absentee Voting"
+  ,AVMIOV = "Voters - Military and Overseas Voters"
+  ,AVMISC = "Absentee Voting-Misc."
+  ,AVMOVE = "Absentee Voting-MOVE Act"
+  ,AVNOEX = "Absentee Voting - Eligibility and No-Excuse Absentee Voting"
+  ,AVPERM = "Absentee Voting-Permanent Status"
+  ,VOTEME = "Alternative Voting Methods (Ranked Choice, etc.)"
+  ,AUDITS = "Post-Election Audits"
+  ,BACAND = "Ballot Access for Candidates"
+  ,BAPART = "Ballot Access-Parties"
+  ,BALDES = "Ballots - Required Number, Format & Design"
+  ,CANQUL = "Candidates - Qualification and Running for Office, Candidate Withdrawal"
+  ,CANRTR = "Candidates-Resign to Run"
+  ,CANWDW = "Candidates - Qualification and Running for Office, Candidate Withdrawal"
+  ,CANWRI = "Candidates-Write-in"
+  ,VTRCHA = "Challenges to Voters"
+  ,CNTEST = "Election Contests (Court Challenges)"
+  ,ELCOST = "Costs and Funding for Elections"
+  ,VCOUNT = "Counting Votes and Canvassing Procedures"
+  ,CYBSEC = "Cybersecurity"
+  ,ELDATE = "Dates of Elections and Election Holidays"
+  ,PTDRES = "DREs"
+  ,CRIMES = "Election Crimes"
+  ,DATART = "Election Data and Records - Collection/Retention of"
+  ,EDHOLI = "Election Day Holiday"
+  ,EOCAMP = "Election Officials-Campaign Activities"
+  ,EOLOCA = "Election Officials - Local"
+  ,EOSTWD = "Election Officials - Statewide"
+  ,REPRES = "Election Reporting, Results and Certification"
+  ,ELEING = "Electioneering and Campaigning"
+  ,ELECOL = "Electoral College"
+  ,ECONPV = "Electoral College-National Popular Vote"
+  ,EMEDIS = "Emergencies/Disasters"
+  ,EXPOLL = "Exit Polling"
+  ,DUALFU = "Fusion/Dual-Party"
+  ,INVOTE = "Internet/Electronic Delivery or Return of Ballots"
+  ,MAILVO = "All Mail Voting"
+  ,MISCEL = "Miscellaneous"
+  ,FILING = "Offices-Method of Filling"
+  ,POLPAR = "Political Parties"
+  ,POLWAT = "Poll Watchers, Challengers, Election Observers"
+  ,PWCOMP = "Poll Workers-Compensation"
+  ,PWMISC = "Poll Workers"
+  ,PWQUAL = "Poll Workers-Selection/Qualifications of"
+  ,PWTRAI = "Poll Workers-Training"
+  ,PWYOTH = "Poll Workers-Youth"
+  ,PPPROC = "Polling Places and Election Offices - Arrangements, Procedures and Security"
+  ,PPACES = "Polling Places-Disabled Access"
+  ,PPVHRS = "Polling Places and Vote Centers - Hours and Locations"
+  ,PPLOCA = "Polling Places and Vote Centers - Hours and Locations"
+  ,PPVCEN = "Polling Places and Vote Centers - Hours and Locations"
+  ,PREDEF = "Precincts"
+  ,PRIDAT = "Primaries - State Primary Dates, Runoffs, and Misc."
+  ,PRIMIS = "Primaries - State Primary Dates, Runoffs, and Misc."
+  ,PRIPUS = "Primaries - Presidential"
+  ,PRIRNF = "Primaries - State Primary Dates, Runoffs, and Misc."
+  ,PRITYP = "Primaries - Types"
+  ,PROVOT = "Provisional Ballots"
+  ,RECALL = "Recall Elections for State Officials"
+  ,RECOUN = "Recounts"
+  ,REGDRI = "Registration Drives"
+  ,REGAPP = "Registration - Application Form/Content and Eligibility/ID Required"
+  ,REGATO = "Registration - Automatic"
+  ,REGCVL = "Registration-Statewide Voter Registration Databases"
+  ,REGDTE = "Registration - Deadlines"
+  ,REGEDY = "Registration - Election Day or Same Day"
+  ,REGELE = "Registration-Electronic"
+  ,REGIDR = "Registration-Eligibility ID Required"
+  ,REGLST = "Registration - List Maintenance"
+  ,REGMSC = "Registration-Misc."
+  ,REGONL = "Registration - Online"
+  ,REGPRE = "Registration - Preregistration for 16- and 17-year-olds"
+  ,REGSDL = "Registration - Sale/Distribution/Use of Lists"
+  ,RUNOFF = "Run-Off Elections"
+  ,SPELEC = "Special Elections"
+  ,STVOTE = "Straight Ticket Voting"
+  ,TFSCIC = "Task Forces/Study Commissions/Interim Committees"
+  ,VACNCY = "Vacancies"
+  ,VEDINF = "Voter Education/Information"
+  ,VOTRID = "Voter Identification"
+  ,VOTAFW = "Voters-Absence from Work"
+  ,VOTAGE = "Voters-Age"
+  ,VOTAST = "Voters with Disabilities or Limited English"
+  ,VOTFVR = "Voters - Incarceration and Restoration of Voting Rights"
+  ,VOTMQU = "Voters - Eligibility and Citizenship"
+  ,TECHSS = "Election Technology - Selection & Standards, Security, Storage and Testing"
+  ,VSSCST = "Election Technology - Selection & Standards, Security, Storage and Testing"
+)
+
+# Match on the re-joined string: the scraper's ", " split also splits labels containing commas
+ncsl_topic_dummies <- function(topics_json){
+  topic_str <- vapply(topics_json, \(j) str_c(str_trim(rjson::fromJSON(j)), collapse = ", "), character(1), USE.NAMES = FALSE)
+  out <- lapply(ncsl_topic_map, \(label) as.integer(str_detect(topic_str, fixed(label))))
+  as.data.frame(out)
 }
 
 ncsl_extract_bill_info <- function(curr, year) {
@@ -261,10 +351,10 @@ build_ncsl_bill_database <- function(){
   ncsl_bill_database$BILLNUM <- str_remove_all(str_sub(ncsl_bill_database$ID,4)," ")
   # Extract result
   ncsl_bill_database$BILLSTATUS <- str_squish(str_split_fixed(ncsl_bill_database$STATUS,"-",2)[,1])
-  ncsl_bill_database$BILLSTATUS <- fct_recode(as.factor(ncsl_bill_database$BILLSTATUS),
-                                              "To Executive" = "To Governor",
-                                              "To Executive" = "To Mayor",
-                                              "Enacted" = "Adopted")
+  ncsl_bill_database$BILLSTATUS <- recode_levels(ncsl_bill_database$BILLSTATUS,
+                                                 "To Executive" = "To Governor",
+                                                 "To Executive" = "To Mayor",
+                                                 "Enacted" = "Adopted")
   # Add UUID to match other dataset
   ncsl_bill_database$UUID <- sprintf("%s%i%s",ncsl_bill_database$STATE, ncsl_bill_database$YEAR, ncsl_bill_database$BILLNUM )
   
@@ -275,121 +365,22 @@ build_ncsl_bill_database <- function(){
   ncsl_bill_database$AUTHORPARTY <- str_remove_all(str_extract(ncsl_bill_database$AUTHOR,"\\([A-Z]{1,3}\\)"),"[()]")
   # Count cosponsors
   ncsl_bill_database$COAUTHORS[ncsl_bill_database$COAUTHORS=="\"NA\""] = NA
-  ncsl_bill_database$NCOAUTHORS = sapply(ncsl_bill_database$COAUTHORS,ncsl_count_coauthors)
-  ncsl_bill_database$NDEMCOAUTHORS = sapply(ncsl_bill_database$COAUTHORS,ncsl_count_dem_coauthors)
-  ncsl_bill_database$NREPCOAUTHORS = sapply(ncsl_bill_database$COAUTHORS,ncsl_count_rep_coauthors)
-  ncsl_bill_database <- ncsl_bill_database |> mutate(across(c(NCOAUTHORS, NDEMCOAUTHORS, NREPCOAUTHORS), ~replace_na(., 0)))
+  coauthor_counts <- t(sapply(ncsl_bill_database$COAUTHORS, ncsl_count_coauthors, USE.NAMES = FALSE))
+  ncsl_bill_database <- cbind(ncsl_bill_database, coauthor_counts)
   
-  # Categorize wide
-  ncsl_bill_database$AVAPPL = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Absentee Voting - Application and Request for")
-  ncsl_bill_database$AVBDIS = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Absentee Voting - Delivering Ballots")
-  ncsl_bill_database$AVBRET = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Absentee Voting - Ballot Processing, Signature Verification, Ballot Curing")
-  ncsl_bill_database$AVEVIP = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Early In-Person Voting/In-Person Absentee")
-  ncsl_bill_database$AVELIG = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Absentee Voting - Eligibility and No-Excuse Absentee Voting")
-  ncsl_bill_database$AVMIOV = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Voters - Military and Overseas Voters")
-  ncsl_bill_database$AVMISC = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Absentee Voting-Misc.")
-  ncsl_bill_database$AVMOVE = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Absentee Voting-MOVE Act")
-  ncsl_bill_database$AVNOEX = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Absentee Voting - Eligibility and No-Excuse Absentee Voting")
-  ncsl_bill_database$AVPERM = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Absentee Voting-Permanent Status")
-  ncsl_bill_database$AVBRET = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Absentee Voting - Returning Ballots")
-  ncsl_bill_database$VOTEME = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Alternative  Voting Methods (Ranked Choice, etc.)")
-  ncsl_bill_database$AUDITS = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Post-Election Audits")
-  ncsl_bill_database$BACAND = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Ballot Access for Candidates")
-  ncsl_bill_database$BAPART = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Ballot Access-Parties")
-  ncsl_bill_database$BALDES = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Ballots - Required Number, Format & Design")
-  ncsl_bill_database$CANQUL = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Candidates - Qualification and Running for Office, Candidate Withdrawal")
-  ncsl_bill_database$CANRTR = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Candidates-Resign to Run")
-  ncsl_bill_database$CANWDW = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Candidates - Qualification and Running for Office, Candidate Withdrawal")
-  ncsl_bill_database$CANWRI = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Candidates-Write-in")
-  ncsl_bill_database$VTRCHA = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Challenges to Voters")
-  ncsl_bill_database$CNTEST = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Contests (Court Challenges)")
-  ncsl_bill_database$ELCOST = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Costs and Funding for Elections")
-  ncsl_bill_database$VCOUNT = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Counting Votes and Canvassing Procedures")
-  ncsl_bill_database$CYBSEC = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Cybersecurity")
-  ncsl_bill_database$ELDATE = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Dates of Elections and Election Holidays")
-  ncsl_bill_database$PTDRES = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "DREs")
-  ncsl_bill_database$CRIMES = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Crimes")
-  ncsl_bill_database$DATART = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Data and Records - Collection/Retention of")
-  ncsl_bill_database$EDHOLI = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Day Holiday")
-  ncsl_bill_database$EOCAMP = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Officials-Campaign Activities")
-  ncsl_bill_database$EOLOCA = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Officials - Local")
-  ncsl_bill_database$EOSTWD = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Officials - Statewide")
-  ncsl_bill_database$REPRES = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Reporting, Results and Certification")
-  ncsl_bill_database$ELEING = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Electioneering and Campaigning")
-  ncsl_bill_database$ELECOL = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Electoral College")
-  ncsl_bill_database$ECONPV = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Electoral College-National Popular Vote")
-  ncsl_bill_database$EMEDIS = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Emergencies/Disasters")
-  ncsl_bill_database$EXPOLL = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Exit Polling")
-  ncsl_bill_database$DUALFU = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Fusion/Dual-Party")
-  ncsl_bill_database$INVOTE = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Internet/Electronic Delivery or Return of Ballots")
-  ncsl_bill_database$MAILVO = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "All Mail Voting")
-  ncsl_bill_database$MISCEL = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Miscellaneous")
-  ncsl_bill_database$FILING = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Offices-Method of Filling")
-  ncsl_bill_database$POLPAR = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Political Parties")
-  ncsl_bill_database$POLWAT = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Poll Watchers, Challengers, Election Observers")
-  ncsl_bill_database$PWCOMP = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Poll Workers-Compensation")
-  ncsl_bill_database$PWMISC = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Poll Workers")
-  ncsl_bill_database$PWQUAL = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Poll Workers-Selection/Qualifications of")
-  ncsl_bill_database$PWTRAI = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Poll Workers-Training")
-  ncsl_bill_database$PWYOTH = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Poll Workers-Youth")
-  ncsl_bill_database$PPPROC = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Polling Places and Election Offices - Arrangements, Procedures and Security")
-  ncsl_bill_database$PPACES = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Polling Places-Disabled Access")
-  ncsl_bill_database$PPVHRS = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Polling Places and Vote Centers - Hours and Locations")
-  ncsl_bill_database$PPLOCA = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Polling Places and Vote Centers - Hours and Locations")
-  ncsl_bill_database$PPVCEN = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Polling Places and Vote Centers - Hours and Locations")
-  ncsl_bill_database$PREDEF = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Precincts")
-  ncsl_bill_database$PRIDAT = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Primaries - State Primary Dates, Runoffs, and Misc.")
-  ncsl_bill_database$PRIMIS = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Primaries - State Primary Dates, Runoffs, and Misc.")
-  ncsl_bill_database$PRIPUS = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Primaries - Presidential")
-  ncsl_bill_database$PRIRNF = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Primaries - State Primary Dates, Runoffs, and Misc.")
-  ncsl_bill_database$PRITYP = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Primaries - Types")
-  ncsl_bill_database$PROVOT = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Provisional Ballots")
-  ncsl_bill_database$RECOUN = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Recounts")
-  ncsl_bill_database$REGDRI = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration Drives")
-  ncsl_bill_database$REGAPP = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration - Application Form/Content and Eligibility/ID Required ")
-  ncsl_bill_database$REGATO = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration - Automatic")
-  ncsl_bill_database$REGCVL = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration-Statewide Voter Registration Databases")
-  ncsl_bill_database$REGDTE = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration - Deadlines")
-  ncsl_bill_database$REGEDY = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration - Election Day or Same Day")
-  ncsl_bill_database$REGELE = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration-Electronic")
-  ncsl_bill_database$REGIDR = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration-Eligibility ID Required")
-  ncsl_bill_database$REGLST = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration - List Maintenance")
-  ncsl_bill_database$REGMSC = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration-Misc.")
-  ncsl_bill_database$REGONL = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration - Online")
-  ncsl_bill_database$REGPRE = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration - Preregistration for 16- and 17-year-olds")
-  ncsl_bill_database$REGSDL = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Registration - Sale/Distribution/Use of Lists")
-  ncsl_bill_database$RUNOFF = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Run-Off Elections")
-  ncsl_bill_database$SPELEC = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Special Elections")
-  ncsl_bill_database$STVOTE = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Straight Ticket Voting")
-  ncsl_bill_database$TFSCIC = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Task Forces/Study Commissions/Interim Committees")
-  ncsl_bill_database$VACNCY = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Vacancies")
-  ncsl_bill_database$VEDINF = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Voter Education/Information")
-  ncsl_bill_database$VOTRID = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Voter Identification")
-  ncsl_bill_database$VOTAFW = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Voters-Absence from Work")
-  ncsl_bill_database$VOTAGE = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Voters-Age")
-  ncsl_bill_database$VOTAST = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Voters-Assistance to")
-  ncsl_bill_database$VOTFVR = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Voters - Incarceration and Restoration of Voting Rights")
-  ncsl_bill_database$VOTMQU = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Voters - Eligibility and Citizenship")
-  ncsl_bill_database$TECHSS = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Technology - Selection & Standards, Security, Storage and Testing")
-  ncsl_bill_database$VSSCST = sapply(ncsl_bill_database$TOPICS, ncsl_check_topics, "Election Technology - Selection & Standards, Security, Storage and Testing")
+  ncsl_bill_database <- cbind(ncsl_bill_database, ncsl_topic_dummies(ncsl_bill_database$TOPICS))
   
-  # Better way if creating general topic cols
-  general_columns <- ncsl_bill_database |>
-    group_by(UUID) |>
-    mutate(EOGENR = max(EOCAMP,EOLOCA,EOSTWD),
-           PPGENR = max(PPPROC,PPACES,PPVHRS,PPVCEN),
-           REGGEN = max(REGAPP,REGATO,REGDRI,REGDTE,REGEDY,REGELE,REGIDR,REGMSC,REGPRE)) |>
-    ungroup() |>
-    select(UUID,EOGENR,PPGENR,REGGEN) |>
-    distinct()
+  ncsl_bill_database <- ncsl_bill_database |>
+    mutate(EOGENR = pmax(EOCAMP, EOLOCA, EOSTWD),
+           PPGENR = pmax(PPPROC, PPACES, PPVHRS, PPVCEN),
+           REGGEN = pmax(REGAPP, REGATO, REGDRI, REGDTE, REGEDY, REGELE, REGIDR, REGMSC, REGPRE))
   
-  ncsl_bill_database <- ncsl_bill_database |> left_join(general_columns,by="UUID")
-  
-  # Get columns for bill topics - helps sort these cols alphabetically 
-  topic_cols = sort(colnames(ncsl_bill_database)[21:113])
+  topic_cols <- sort(c(names(ncsl_topic_map), "EOGENR", "PPGENR", "REGGEN"))
   
   # Add urls
-  ncsl_bill_database <- ncsl_bill_database |> left_join(bill_links, by = c("YEAR","ID")) |>
+  bill_links <- bill_links |> distinct(YEAR, ID, .keep_all = TRUE)  # repeated listings would multiply rows
+  ncsl_bill_database <- ncsl_bill_database |>
+    left_join(bill_links, by = c("YEAR","ID"), relationship = "many-to-one") |>
     select(-Text) |>
     rename(BILLTEXTURL = Link)
   

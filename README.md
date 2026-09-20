@@ -3,16 +3,16 @@
 
 **Institution**: MIT
 
-**Date**: 2026-08-11
+**Date**: 2026-09-19
 
 ## DESCRIPTION
 This dataset is the product of scraping the *National Conference of State Legislature*'s "State Elections Legislation Database" and *Voting Rights Lab*'s "Legislative Tracker." The code for producing this dataset can be found in this GitHub repo: https://github.com/jloffredo2/state-elect-law-db. See the `code` subfolder for all relevant code.
 
 If you are using this dataset, please cite it and provide, NCSL and Voting Rights Lab with proper citation as follows:
 
-> National Conference of State Legislatures. 2024. *State Elections Legislation Database*. www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx (August 11, 2026).
+> National Conference of State Legislatures. 2024. *State Elections Legislation Database*. www.ncsl.org/research/elections-and-campaigns/elections-legislation-database.aspx (September 19, 2026).
 
-> Voting Rights Lab. 2024. *Legislative Tracker*. https://tracker.votingrightslab.org/pending/search (August 11, 2026).
+> Voting Rights Lab. 2024. *Legislative Tracker*. https://tracker.votingrightslab.org/pending/search (September 19, 2026).
 
 *To access tidy versions of these databases, use the following files:*
 * `output/ncsl_bill_database.csv`: NCSL "State Elections Legislation" database in `.csv` format
@@ -150,7 +150,7 @@ All datasets have a similar structure and following the column label/definitions
 * `VEDINF` 	Voter Education/Information
 * `VOTAFW` 	Voters-Absence from Work
 * `VOTAGE` 	Voters-Age
-* `VOTAST` 	Voters-Assistance to
+* `VOTAST` 	Voters-Assistance to (NCSL now labels this topic "Voters with Disabilities or Limited English")
 * `VOTEME` 	Alt Voting Methods (Ranked Choice, etc)
 * `VOTFVR` 	Voters-Felon Voting Rights
 * `VOTMQU` 	Voters-Miscellaneous Qualifications

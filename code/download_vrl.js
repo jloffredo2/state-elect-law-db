@@ -22,6 +22,7 @@ async function run() {
   }
 
   fs.mkdirSync(OUT_DIR, { recursive: true });
+  const failed = [];
 
   const browser = await chromium.launch({
     headless: false,
@@ -56,11 +57,13 @@ async function run() {
       return r.ok ? r.text() : null;
     }, url);
 
-    if (data) {
+    // A Cloudflare challenge page is HTML with status 200
+    if (data && data.trimStart().startsWith('{')) {
       fs.writeFileSync(path.join(OUT_DIR, `bills-${year}.json`), data);
       console.log(`  Saved bills-${year}.json (${data.length} chars)`);
     } else {
       console.error(`  FAILED to fetch bills-${year}.json`);
+      failed.push(`bills-${year}.json`);
     }
   }
 
@@ -71,14 +74,19 @@ async function run() {
     return r.ok ? r.text() : null;
   }, `${BASE_URL}/storage/tags.json`);
 
-  if (tagsData) {
+  if (tagsData && tagsData.trimStart().startsWith('{')) {
     fs.writeFileSync(path.join(OUT_DIR, 'tags.json'), tagsData);
     console.log(`  Saved tags.json (${tagsData.length} chars)`);
   } else {
     console.error('  FAILED to fetch tags.json');
+    failed.push('tags.json');
   }
 
   await browser.close();
+  if (failed.length) {
+    console.error(`FAILED downloads: ${failed.join(', ')}`);
+    process.exit(1);
+  }
   console.log('Done.');
 }
 

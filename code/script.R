@@ -15,6 +15,10 @@ result <- system2("node", args = "code/download_vrl.js",
                           paste0("VRL_PASSWORD=", Sys.getenv("VRL_PASSWORD"))),
                   stdout = TRUE, stderr = TRUE)
 message(paste(result, collapse = "\n"))
+# Don't rebuild from a stale cache
+if (!is.null(attr(result, "status")) && attr(result, "status") != 0) {
+  stop("VRL download failed (exit status ", attr(result, "status"), "); see output above.")
+}
 
 # load scraper fxns
 source("code/misc_fxns.R")
